@@ -1,0 +1,4 @@
+1 diagrama de classes
+2 scripts
+3 implemetacao de banco
+4 testar
