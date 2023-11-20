@@ -15,7 +15,7 @@ import com.travel.rotalocal.api.dto.HealthCheckStatus;
 public class HealthCheckController {
     
     @GetMapping
-    public ResponseEntity findAllProducts(){
+    public ResponseEntity healthcheck(){
         HealthCheckDTO apiStatus = new HealthCheckDTO();
         apiStatus.setStatus(HealthCheckStatus.OK);
         return ResponseEntity.ok(apiStatus);
