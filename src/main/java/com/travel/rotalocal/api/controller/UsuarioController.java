@@ -6,22 +6,22 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.travel.rotalocal.service.AtracaoService;
+import com.travel.rotalocal.service.UsuarioService;
 
 @RestController
-@RequestMapping(value = "/api/atracoes")
+@RequestMapping(value = "/api/usuarios")
 @CrossOrigin(origins = "*")
-public class AtracaoController {
+public class UsuarioController {
 
-    AtracaoService atracaoService;
+    UsuarioService usuarioService;
 
-    public AtracaoController(AtracaoService atracaoService) {
-        this.atracaoService = atracaoService;
+    public UsuarioController(UsuarioService usuarioService) {
+        this.usuarioService = usuarioService;
     }
     
     @GetMapping
-    public ResponseEntity listarAtracoes(){
-        return ResponseEntity.ok(atracaoService.findAll());
+    public ResponseEntity listarUsuarios(){
+        return ResponseEntity.ok(usuarioService.findAll());
     }
 
 }

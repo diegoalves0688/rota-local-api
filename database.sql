@@ -1,0 +1,91 @@
+DROP TABLE IF EXISTS avaliacao_recomendacao;
+DROP TABLE IF EXISTS recomendacao;
+DROP TABLE IF EXISTS avaliacao_atracao;
+DROP TABLE IF EXISTS atracao;
+DROP TABLE IF EXISTS usuario;
+DROP TABLE IF EXISTS localizacao;
+drop type if exists usuario_type;
+drop type if exists categoria_type;
+
+CREATE TYPE usuario_type AS ENUM('COLABORADOR', 'ADMINISTRADOR');
+CREATE TYPE categoria_type AS ENUM('PRAIAS', 'TRILHAS', 'RESTAURANTES', 'MUSEUS', 'CACHOEIRAS', 'BOATES', 'MONUMENTOS');
+
+CREATE TABLE usuario(
+   id INT GENERATED ALWAYS AS IDENTITY,
+   nome VARCHAR(255) NOT NULL,
+   email VARCHAR(255) NOT NULL,
+   senha VARCHAR(255) NOT NULL,
+   perfil usuario_type NOT NULL,
+   PRIMARY KEY(id)
+);
+
+CREATE TABLE localizacao(
+   id INT GENERATED ALWAYS AS IDENTITY,
+   pais VARCHAR(255) NOT NULL,
+   estado VARCHAR(255) NOT NULL,
+   cidade VARCHAR(255) NOT NULL,
+   PRIMARY KEY(id)
+);
+
+CREATE TABLE atracao(
+   id INT GENERATED ALWAYS AS IDENTITY,
+   nome VARCHAR(255) NOT NULL,
+   descricao VARCHAR NOT NULL,
+   foto VARCHAR NOT NULL,
+   categoria categoria_type NOT NULL,
+   usuario_id INT,
+   localizacao_id INT,
+   PRIMARY KEY(id),
+   CONSTRAINT fk_usuario FOREIGN KEY(usuario_id) REFERENCES usuario(id),
+   CONSTRAINT fk_localizacao FOREIGN KEY(localizacao_id) REFERENCES localizacao(id)
+);
+
+CREATE TABLE avaliacao_atracao(
+   id INT GENERATED ALWAYS AS IDENTITY,
+   positivo BOOLEAN NOT NULL,
+   negativo BOOLEAN NOT NULL,
+   usuario_id INT,
+   atracao_id INT,
+   PRIMARY KEY(id),
+   CONSTRAINT fk_usuario FOREIGN KEY(usuario_id) REFERENCES usuario(id),
+   CONSTRAINT fk_atracao FOREIGN KEY(atracao_id) REFERENCES atracao(id)
+);
+
+CREATE TABLE recomendacao(
+   id INT GENERATED ALWAYS AS IDENTITY,
+   conteudo VARCHAR NOT NULL,
+   usuario_id INT,
+   atracao_id INT,
+   PRIMARY KEY(id),
+   CONSTRAINT fk_usuario FOREIGN KEY(usuario_id) REFERENCES usuario(id),
+   CONSTRAINT fk_atracao FOREIGN KEY(atracao_id) REFERENCES atracao(id)
+);
+
+CREATE TABLE avaliacao_recomendacao(
+   id INT GENERATED ALWAYS AS IDENTITY,
+   positivo BOOLEAN NOT NULL,
+   negativo BOOLEAN NOT NULL,
+   usuario_id INT,
+   recomendacao_id INT,
+   PRIMARY KEY(id),
+   CONSTRAINT fk_usuario FOREIGN KEY(usuario_id) REFERENCES usuario(id),
+   CONSTRAINT fk_recomendacao FOREIGN KEY(recomendacao_id) REFERENCES recomendacao(id)
+);
+
+INSERT INTO public.usuario (nome,email,senha,perfil) VALUES
+	 ('John','mail@mail.com','123','ADMINISTRADOR');
+	
+INSERT INTO public.localizacao (pais,estado,cidade) VALUES
+	 ('Brasil','Rio de Janeiro','Macae');
+
+INSERT INTO public.atracao (nome,descricao,foto,categoria,usuario_id,localizacao_id) VALUES
+	 ('Praia das pedrinhas','Uma linda praia no litoral de tão tão distante','/foto-praia-das-pedrinhas','PRAIAS',1,1);
+
+INSERT INTO public.avaliacao_atracao (positivo,negativo,usuario_id,atracao_id) VALUES
+	 (true,false,1,1);
+	
+INSERT INTO public.recomendacao (conteudo,usuario_id,atracao_id) VALUES
+	 ('Aqui vai uma recomendação bacana sobre uma atração legal qualquer ',1,1);
+
+INSERT INTO public.avaliacao_recomendacao (positivo,negativo,usuario_id,recomendacao_id) VALUES
+	 (true,false,1,1);
