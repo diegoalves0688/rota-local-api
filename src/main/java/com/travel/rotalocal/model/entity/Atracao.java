@@ -25,6 +25,15 @@ public class Atracao {
     @Column(name = "foto", nullable = false)
     private String foto;
 
+    @Column(name = "categoria", nullable = false)
+    private String categoria;
+
+    @Column(name = "usuario_id", nullable = false)
+    private Long usuarioId;
+
+    @Column(name = "localizacao_id", nullable = false)
+    private Long localizacaoId;
+
     public Long getId() {
         return id;
     }
@@ -56,4 +65,29 @@ public class Atracao {
     public void setFoto(String foto) {
         this.foto = foto;
     }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+
+    public Long getUsuarioId() {
+        return usuarioId;
+    }
+
+    public void setUsuarioId(Long usuarioId) {
+        this.usuarioId = usuarioId;
+    }
+
+    public Long getLocalizacaoId() {
+        return localizacaoId;
+    }
+
+    public void setLocalizacaoId(Long localizacaoId) {
+        this.localizacaoId = localizacaoId;
+    }
+
 }
