@@ -38,7 +38,7 @@ CREATE TABLE atracao(
 );
 
 CREATE TABLE avaliacao_atracao(
-   id BIGINT  GENERATED ALWAYS AS IDENTITY,
+   id BIGINT GENERATED ALWAYS AS IDENTITY,
    positivo BOOLEAN NOT NULL,
    negativo BOOLEAN NOT NULL,
    usuario_id INT,
