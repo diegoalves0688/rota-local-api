@@ -22,5 +22,10 @@ public class AtracaoServiceImpl implements AtracaoService{
     public List<Atracao> findAll() {
         return atracaoRepository.findAll(Sort.by(Sort.Direction.ASC, "id"));
     }
+
+    @Override
+    public Atracao save(Atracao atracao) {
+        return atracaoRepository.save(atracao);
+    }
     
 }
