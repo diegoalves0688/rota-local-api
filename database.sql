@@ -8,7 +8,7 @@ drop type if exists usuario_type;
 drop type if exists categoria_type;
 
 CREATE TABLE usuario(
-   id BIGINT  GENERATED ALWAYS AS IDENTITY,
+   id BIGINT GENERATED ALWAYS AS IDENTITY,
    nome VARCHAR(255) NOT NULL,
    email VARCHAR(255) NOT NULL,
    senha VARCHAR(255) NOT NULL,
