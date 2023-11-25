@@ -8,4 +8,6 @@ public interface AtracaoService {
     
     public List<Atracao> findAll();
 
+    public Atracao save(Atracao atracao);
+
 }

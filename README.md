@@ -28,3 +28,11 @@ Backend project
 ou 
 
 ```git push --set-upstream origin nome-da-minha-branch```
+
+## Collection do Postman
+
+[link](https://github.com/diegoalves0688/rota-local-api/blob/main/rota_local_api.postman_collection.json)
+
+## SQL com o banco de dados
+
+[link](https://github.com/diegoalves0688/rota-local-api/blob/main/database.sql)
