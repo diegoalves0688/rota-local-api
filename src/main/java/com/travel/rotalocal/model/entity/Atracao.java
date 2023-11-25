@@ -29,7 +29,7 @@ public class Atracao {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "categoria", nullable = false)
-    private Categorias categoria;
+    private Categoria categoria;
 
     @Column(name = "usuario_id", nullable = false)
     private Long usuarioId;
@@ -69,11 +69,11 @@ public class Atracao {
         this.foto = foto;
     }
 
-    public Categorias getCategoria() {
+    public Categoria getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(Categorias categoria) {
+    public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
 

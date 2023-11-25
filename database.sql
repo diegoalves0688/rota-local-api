@@ -39,8 +39,7 @@ CREATE TABLE atracao(
 
 CREATE TABLE avaliacao_atracao(
    id BIGINT GENERATED ALWAYS AS IDENTITY,
-   positivo BOOLEAN NOT NULL,
-   negativo BOOLEAN NOT NULL,
+   avaliacao_positiva BOOLEAN NOT NULL,
    usuario_id INT,
    atracao_id INT,
    PRIMARY KEY(id),
@@ -60,8 +59,7 @@ CREATE TABLE recomendacao(
 
 CREATE TABLE avaliacao_recomendacao(
    id BIGINT GENERATED ALWAYS AS IDENTITY,
-   positivo BOOLEAN NOT NULL,
-   negativo BOOLEAN NOT NULL,
+   avaliacao_positiva BOOLEAN NOT NULL,
    usuario_id INT,
    recomendacao_id INT,
    PRIMARY KEY(id),
@@ -82,12 +80,12 @@ INSERT INTO public.atracao (nome,descricao,foto,categoria,usuario_id,localizacao
 INSERT INTO public.atracao (nome,descricao,foto,categoria,usuario_id,localizacao_id) VALUES
 	 ('Praia das palmeiras','Uma linda praia no litoral de tão tão distante','http://localhost:8080/images/banner.png','PRAIAS',1,1);
 
-INSERT INTO public.avaliacao_atracao (positivo,negativo,usuario_id,atracao_id) VALUES
-	 (true,false,1,1);
+INSERT INTO public.avaliacao_atracao (avaliacao_positiva,usuario_id,atracao_id) VALUES
+	 (true,1,1);
 	
 INSERT INTO public.recomendacao (conteudo,usuario_id,atracao_id) VALUES
 	 ('Aqui vai uma recomendação bacana sobre uma atração legal qualquer ',1,1);
 
-INSERT INTO public.avaliacao_recomendacao (positivo,negativo,usuario_id,recomendacao_id) VALUES
-	 (true,false,1,1);
+INSERT INTO public.avaliacao_recomendacao (avaliacao_positiva,usuario_id,recomendacao_id) VALUES
+	 (true,1,1);
 

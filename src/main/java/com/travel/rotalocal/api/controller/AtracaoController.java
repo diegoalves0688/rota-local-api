@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.travel.rotalocal.api.dto.AtracaoDTO;
 import com.travel.rotalocal.model.entity.Atracao;
-import com.travel.rotalocal.model.entity.Categorias;
+import com.travel.rotalocal.model.entity.Categoria;
 import com.travel.rotalocal.service.AtracaoService;
 
 @RestController
@@ -34,7 +34,7 @@ public class AtracaoController {
         try{
             Atracao atracao = new Atracao();
             atracao.setNome(atracaoDTO.getNome());
-            atracao.setCategoria(Categorias.valueOf(atracaoDTO.getCategoria()));
+            atracao.setCategoria(Categoria.valueOf(atracaoDTO.getCategoria()));
             atracao.setDescricao(atracaoDTO.getDescricao());
             atracao.setFoto(atracaoDTO.getFoto());
             atracao.setLocalizacaoId(1L);
