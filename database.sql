@@ -12,7 +12,7 @@ CREATE TABLE usuario(
    nome VARCHAR(255) NOT NULL,
    email VARCHAR(255) NOT NULL,
    senha VARCHAR(255) NOT NULL,
-   perfil VARCHAR NOT NULL,
+   perfil VARCHAR(255) NOT NULL,
    PRIMARY KEY(id)
 );
 
@@ -27,9 +27,9 @@ CREATE TABLE localizacao(
 CREATE TABLE atracao(
    id BIGINT GENERATED ALWAYS AS IDENTITY,
    nome VARCHAR(255) NOT NULL,
-   descricao VARCHAR NOT NULL,
-   foto VARCHAR NOT NULL,
-   categoria VARCHAR NOT NULL,
+   descricao VARCHAR(255) NOT NULL,
+   foto VARCHAR(255) NOT NULL,
+   categoria VARCHAR(255) NOT NULL,
    usuario_id INT,
    localizacao_id INT,
    PRIMARY KEY(id),
@@ -49,7 +49,7 @@ CREATE TABLE avaliacao_atracao(
 
 CREATE TABLE recomendacao(
    id BIGINT GENERATED ALWAYS AS IDENTITY,
-   conteudo VARCHAR NOT NULL,
+   conteudo VARCHAR(255) NOT NULL,
    usuario_id INT,
    atracao_id INT,
    PRIMARY KEY(id),
