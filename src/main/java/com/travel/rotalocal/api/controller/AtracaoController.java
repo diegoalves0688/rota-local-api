@@ -30,7 +30,7 @@ public class AtracaoController {
     }
 
     @PostMapping
-    public ResponseEntity createProduct(@RequestBody AtracaoDTO atracaoDTO){
+    public ResponseEntity criarAtracao(@RequestBody AtracaoDTO atracaoDTO){
         try{
             Atracao atracao = new Atracao();
             atracao.setNome(atracaoDTO.getNome());
