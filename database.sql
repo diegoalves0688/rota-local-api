@@ -71,7 +71,20 @@ INSERT INTO public.usuario (nome,email,senha,perfil) VALUES
 	 ('John','mail@mail.com','123','ADMINISTRADOR');
 	
 INSERT INTO public.localizacao (pais,estado,cidade) VALUES
-	 ('Brasil','Rio de Janeiro','Macae');
+	 ('Brasil','Rio de Janeiro','Macae')
+    ,("Brasil", "São Paulo", "São Paulo")
+   ,("Brasil", "Rio de Janeiro", "Rio de Janeiro")
+   ,("Brasil", "Minas Gerais", "Belo Horizonte")
+   ,("Brasil", "São Paulo", "São Paulo")
+   ,("Brasil", "Rio de Janeiro", "Rio de Janeiro")
+   ,("Brasil", "Minas Gerais", "Belo Horizonte")
+   ,("Brasil", "Bahia", "Salvador")
+   ,("Brasil", "Ceará", "Fortaleza")
+   ,("Brasil", "Paraná", "Curitiba")
+   ,("Brasil", "Rio Grande do Sul", "Porto Alegre")
+   ,("Brasil", "Pernambuco", "Recife")
+   ,("Brasil", "Amazonas", "Manaus")
+   ,("Brasil", "Distrito Federal", "Brasília");
 
 INSERT INTO public.atracao (nome,descricao,foto,categoria,usuario_id,localizacao_id) VALUES
 	 ('Praia das pedrinhas','Uma linda praia no litoral de tão tão distante','http://localhost:8080/images/banner.png','PRAIAS',1,1);
