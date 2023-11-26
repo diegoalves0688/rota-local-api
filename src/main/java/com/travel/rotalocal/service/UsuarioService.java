@@ -6,4 +6,6 @@ import com.travel.rotalocal.model.entity.Usuario;
 
 public interface UsuarioService {
     public List<Usuario> findAll();
+
+    public Usuario save(Usuario atracao);
 }

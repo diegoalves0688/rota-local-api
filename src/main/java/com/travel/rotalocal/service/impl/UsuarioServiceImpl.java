@@ -22,5 +22,10 @@ public class UsuarioServiceImpl implements UsuarioService{
     public List<Usuario> findAll() {
         return usuarioRepository.findAll(Sort.by(Sort.Direction.ASC, "id"));
     }
+
+    @Override
+    public Usuario save(Usuario atracao) {
+        return usuarioRepository.save(atracao);
+    }
     
 }
