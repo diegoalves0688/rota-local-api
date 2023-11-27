@@ -4,6 +4,7 @@ DROP TABLE IF EXISTS avaliacao_atracao;
 DROP TABLE IF EXISTS atracao;
 DROP TABLE IF EXISTS usuario;
 DROP TABLE IF EXISTS localizacao;
+DROP TABLE IF EXISTS imagem;
 drop type if exists usuario_type;
 drop type if exists categoria_type;
 
