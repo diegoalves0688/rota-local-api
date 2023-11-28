@@ -8,6 +8,8 @@ public interface AtracaoService {
     
     public List<Atracao> findAll();
 
+    public Atracao findById(Long id);
+
     public Atracao save(Atracao atracao);
 
 }
