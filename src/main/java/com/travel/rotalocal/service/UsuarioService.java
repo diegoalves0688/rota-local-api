@@ -5,7 +5,9 @@ import java.util.List;
 import com.travel.rotalocal.model.entity.Usuario;
 
 public interface UsuarioService {
-    public List<Usuario> findAll();
 
-    public Usuario save(Usuario atracao);
+    Usuario getUsuario(Long id);
+    Usuario saveUsuario(Usuario usuario);
+    void deleteUsuario(Long id);
+    List<Usuario> getUsuarios();
 }

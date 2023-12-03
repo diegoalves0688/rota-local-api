@@ -1,9 +1,19 @@
 package com.travel.rotalocal.model.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.List;
 
+import org.springframework.data.repository.CrudRepository;
 import com.travel.rotalocal.model.entity.Atracao;
+import jakarta.transaction.Transactional;
 
-public interface AtracaoRepository extends JpaRepository<Atracao, Long> {
-    
+public interface AtracaoRepository extends CrudRepository<Atracao, Long> {
+
+    List<Atracao> findByUsuarioIdAndLocalizacaoId(Long usuarioId, Long localizacaoId);
+
+    @Transactional
+    void deleteByUsuarioIdAndLocalizacaoId(Long usuarioId, Long localizacaoId);
+         
+    List<Atracao> findByUsuarioId(Long usuarioId);
+    List<Atracao> findByLocalizacaoId(Long localizacaoId);
+
 }

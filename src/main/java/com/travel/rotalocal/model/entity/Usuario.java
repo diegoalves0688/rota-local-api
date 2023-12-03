@@ -1,13 +1,17 @@
 package com.travel.rotalocal.model.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import java.util.List;
 
-@Entity
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity 
 @Table(name = "usuario", schema = "public")
 public class Usuario {
 
@@ -25,46 +29,34 @@ public class Usuario {
     @Column(name = "senha", nullable = false)
     private String senha;
 
-    @Column(name = "perfil", nullable = false)
-    private String perfil;
+    @Column(name = "foto", nullable = false)
+    private String foto;
 
-    public Long getId() {
-        return id;
-    }
+    @Column(name = "ativo", nullable = false)
+    private boolean ativo;
+    
+    @Enumerated(EnumType.STRING)
+    @Column(name = "perfil", nullable = false) 
+    private PerfilUsuario perfil;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    @JsonIgnore 
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL) 
+    private List<Atracao> atracoes;
 
-    public String getNome() {
-        return nome;
-    }
+    @JsonIgnore 
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL) 
+    private List<Imagem> imagens;
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+    @JsonIgnore 
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL) 
+    private List<RecomendacaoAtracao> recomendacoesAtracoes;
 
-    public String getEmail() {
-        return email;
-    }
+    @JsonIgnore 
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL) 
+    private List<AvaliacaoAtracao> avaliacoesAtracoes;
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    @JsonIgnore 
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL) 
+    private List<AvaliacaoRecomendacao> avaliacoesRecomendacoes;
 
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
-    public String getPerfil() {
-        return perfil;
-    }
-
-    public void setPerfil(String perfil) {
-        this.perfil = perfil;
-    } 
 }

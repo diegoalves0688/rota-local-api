@@ -44,11 +44,50 @@
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 			<version>3.0.6</version>
 		</dependency>
-
+		
+		<!-- Other dependencies -->
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-actuator</artifactId>
+			<groupId>javax.persistence</groupId>
+			<artifactId>javax.persistence-api</artifactId>
+			<version>2.2</version> <!-- or the latest version available -->
 		</dependency>
+
+		<!-- SLF4J API -->
+		<!-- <dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.32</version>
+		</dependency> -->
+
+		<!-- Logback (Logging Implementation) -->
+		<!-- <dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.2.6</version>
+		</dependency> -->
+		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.30</version>
+			<scope>provided</scope>
+		</dependency>
+
+        <!-- adicao por causa do enum do postgres 3.5.3 3.6.1-->
+		<!-- https://mvnrepository.com/artifact/io.hypersistence/hypersistence-utils-hibernate-60 -->
+		<!-- https://vladmihalcea.com/the-best-way-to-map-an-enum-type-with-jpa-and-hibernate/ -->
+		<!-- <dependency>
+			<groupId>io.hypersistence</groupId>
+			<artifactId>hypersistence-utils-hibernate-62</artifactId>
+			<version>3.6.1</version>
+		</dependency> -->
+		<!-- https://mvnrepository.com/artifact/org.hibernate.orm/hibernate-core -->
+        <!-- <dependency>
+            <groupId>org.hibernate.orm</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>6.3.1.Final</version>
+        </dependency> -->
+
 
 	</dependencies>
 
@@ -63,6 +102,17 @@
 					</image>
 				</configuration>
 			</plugin>
+
+		 <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.11.0</version> <!-- Use a version that supports your Java version -->
+            <!--<configuration>-->
+                <!--<source>21</source>  Set the Java source version -->
+                <!--<target>21</target>  Set the Java target version -->
+           <!-- </configuration>-->
+        </plugin>
+
 		</plugins>
 	</build>
 
