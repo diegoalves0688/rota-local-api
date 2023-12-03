@@ -5,9 +5,10 @@ import java.util.List;
 import com.travel.rotalocal.model.entity.Localizacao;
 
 public interface LocalizacaoService {
-    
-    public List<Localizacao> findAll();
 
-    public Localizacao save(Localizacao atracao);
+    Localizacao getLocalizacao(Long id);
+    Localizacao saveLocalizacao(Localizacao localizacao);
+    void deleteLocalizacao(Long id);
+    List<Localizacao> getLocalizacoes();
 
 }

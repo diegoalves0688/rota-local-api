@@ -6,10 +6,13 @@ import com.travel.rotalocal.model.entity.Atracao;
 
 public interface AtracaoService {
     
-    public List<Atracao> findAll();
+    List<Atracao> getAtracao(Long usuarioId, Long localizacaoId);
 
-    public Atracao findById(Long id);
-
-    public Atracao save(Atracao atracao);
-
+    Atracao saveAtracao(Atracao atracao, Long usuarioId, Long localizacaoId);
+    //TODO - updateAtracao
+    void deleteAtracao(Long usuarioId, Long localizacaoId);
+    
+    List<Atracao> getUsuarioAtracoes(Long usuarioId);
+    List<Atracao> getLocalizacaoAtracoes(Long localizacaoId);
+    List<Atracao> getAllAtracoes();
 }

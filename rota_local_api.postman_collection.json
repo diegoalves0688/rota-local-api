@@ -1,161 +1,876 @@
 {
 	"info": {
-		"_postman_id": "ca434682-14c7-4c24-800c-53537c9bb824",
-		"name": "Rota local api",
+		"_postman_id": "6d943fd4-b756-417b-9a37-8e7d3f42d3c1",
+		"name": "Lud-rota",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "27022140"
+		"_exporter_id": "31469487"
 	},
 	"item": [
 		{
-			"name": "healthcheck",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://127.0.0.1:8080/api/healthcheck",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"healthcheck"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "atracoes",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/api/atracoes",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"atracoes"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "nova atracao",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"nome\": \"nome\",\r\n    \"categoria\": \"PRAIAS\",\r\n    \"pais\": \"pais\",\r\n    \"estado\": \"estado\",\r\n    \"cidade\": \"cidade\",\r\n    \"descricao\": \"descricao\",\r\n    \"foto\": \"http://localhost:8080/images/banner.png\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "atracao",
+			"item": [
+				{
+					"name": "atracao  all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/atracao",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"atracao"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://localhost:8080/api/atracoes",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"atracoes"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "upload de imagem",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "file",
-							"type": "file",
-							"src": "/C:/Users/diego/Downloads/state.drawio.png"
+				{
+					"name": "atracao por usuario e localizacao BUG FIXED",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/atracao/usuario/1/localizacao/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"atracao",
+								"usuario",
+								"1",
+								"localizacao",
+								"1"
+							]
 						}
-					]
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://localhost:8080/images/uploadfile",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"images",
-						"uploadfile"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "usuarios",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/api/usuarios",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"usuarios"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "novo usuario",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"nome\": \"jane\",\r\n    \"email\": \"jane@mail.com\",\r\n    \"senha\": \"123\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "atracao por usuario",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/atracao/usuario/3",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"atracao",
+								"usuario",
+								"3"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://localhost:8080/api/usuarios",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"usuarios"
-					]
+				{
+					"name": "atracao por localizacao",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/atracao/localizacao/3",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"atracao",
+								"localizacao",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "atracao cadastro",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"teste-nm-del\",\r\n    \"descricao\": \"descr-teste-del\",\r\n    \"ativo\": true,\r\n    \"categoria\": \"CACHOEIRAS\",\r\n    \"status\": \"PUBLICO\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/atracao/usuario/3/localizacao/13",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"atracao",
+								"usuario",
+								"3",
+								"localizacao",
+								"13"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "atracao exclusao",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:8080/api/atracao/usuario/3/localizacao/13",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"atracao",
+								"usuario",
+								"3",
+								"localizacao",
+								"13"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
+		},
+		{
+			"name": "avaliacao de atracao",
+			"item": [
+				{
+					"name": "avaliacao de atracao all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/avaliacao-atracao",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"avaliacao-atracao"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "avaliacao de atracao por atracao",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/avaliacao-atracao/atracao/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"avaliacao-atracao",
+								"atracao",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "avaliacao de atracao por usuario e atracao",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/avaliacao-atracao/usuario/1/atracao/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"avaliacao-atracao",
+								"usuario",
+								"1",
+								"atracao",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "avaliacao de atracao por usuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"avaliacao_positiva\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/avaliacao-atracao/usuario/2/atracao/4",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"avaliacao-atracao",
+								"usuario",
+								"2",
+								"atracao",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "avaliacao de atracao exclusao",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/avaliacao-atracao/usuario/2/atracao/4",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"avaliacao-atracao",
+								"usuario",
+								"2",
+								"atracao",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "avaliacao de recomendacao",
+			"item": [
+				{
+					"name": "avaliacao de recomendacao all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/avaliacao-recomendacao",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"avaliacao-recomendacao"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "avaliacao de recomendacao por usuario",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/avaliacao-recomendacao/usuario/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"avaliacao-recomendacao",
+								"usuario",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "avaliacao de recomendacao por id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/avaliacao-recomendacao/recomendacao/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"avaliacao-recomendacao",
+								"recomendacao",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "avaliacao de recomendacao por usuario e recom id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/avaliacao-recomendacao/usuario/1/recomendacao/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"avaliacao-recomendacao",
+								"usuario",
+								"1",
+								"recomendacao",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "avaliacao recomendacao cadastro",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \r\n    \"avaliacao_positiva\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/avaliacao-recomendacao/usuario/2/recomendacao/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"avaliacao-recomendacao",
+								"usuario",
+								"2",
+								"recomendacao",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "avaliacao recomendacao exclusao",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/avaliacao-recomendacao/usuario/2/recomendacao/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"avaliacao-recomendacao",
+								"usuario",
+								"2",
+								"recomendacao",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "imagem",
+			"item": [
+				{
+					"name": "imagem all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/imagem",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"imagem"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "imagem por usuario",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/imagem/usuario/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"imagem",
+								"usuario",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "imagem por usuario e atracao",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/imagem/usuario/1/atracao/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"imagem",
+								"usuario",
+								"1",
+								"atracao",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "imagem cadastro",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"foto-nome-teste2\",\r\n    \"urlCaminho\": \"foto-url-path2\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/imagem/usuario/1/atracao/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"imagem",
+								"usuario",
+								"1",
+								"atracao",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "imagem exclusao \"tudo\"",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/imagem/usuario/1/atracao/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"imagem",
+								"usuario",
+								"1",
+								"atracao",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "localizacao",
+			"item": [
+				{
+					"name": "localizacao all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/localizacao",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"localizacao"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localizacao por id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/localizacao/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"localizacao",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localizacao cadastro",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"pais\": \"pais-teste\",\r\n    \"estado\": \"estado-teste\",\r\n    \"cidade\": \"cidade-123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/localizacao",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"localizacao"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localizacao exclusao",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/localizacao/15",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"localizacao",
+								"15"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "recomendacao de atracao",
+			"item": [
+				{
+					"name": "recomendacao atracao all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/recomendacao-atracao",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"recomendacao-atracao"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "recomendacao atracao por usuario",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/recomendacao-atracao/usuario/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"recomendacao-atracao",
+								"usuario",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "recomendacao atracao por atracao",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/recomendacao-atracao/atracao/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"recomendacao-atracao",
+								"atracao",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "recomendacao atracao por usuario e atracao",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/recomendacao-atracao/usuario/1/atracao/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"recomendacao-atracao",
+								"usuario",
+								"1",
+								"atracao",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "recomendacao atracao cadastro",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"recomendacao\": \"blablabalbalab\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/recomendacao-atracao/usuario/2/atracao/3",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"recomendacao-atracao",
+								"usuario",
+								"2",
+								"atracao",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "recomendacao atracao exclusao",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/recomendacao-atracao/usuario/1/atracao/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"recomendacao-atracao",
+								"usuario",
+								"1",
+								"atracao",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "usuario",
+			"item": [
+				{
+					"name": "usuario all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/usuario",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"usuario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "usuario por id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/usuario/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"usuario",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "usuario cadastro",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"wolverine\",\r\n    \"email\": \"wolv@gmail.com\",\r\n    \"senha\": \"wolv-123\",\r\n    \"foto\": \"foto-wolv\",\r\n    \"ativo\": true,\r\n    \"perfil\": \"COLABORADOR\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/usuario",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"usuario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "usuario exclusao por id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/usuario/5",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"usuario",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }

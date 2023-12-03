@@ -1,20 +1,23 @@
 package com.travel.rotalocal.model.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
-@Table(name = "atracao", schema = "public")
+@Table(name = "atracao",
+        uniqueConstraints = { @UniqueConstraint(columnNames = {"usuario_id", "localizacao_id"})},
+        schema = "public")
 public class Atracao {
 
     @Id
-    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -24,73 +27,35 @@ public class Atracao {
     @Column(name = "descricao", nullable = false)
     private String descricao;
 
-    @Column(name = "foto", nullable = false)
-    private String foto;
+    @Column(name = "ativo", nullable = false)
+    private boolean ativo;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "categoria", nullable = false)
-    private Categoria categoria;
+    private CategoriaAtracao categoria;
 
-    @Column(name = "usuario_id", nullable = false)
-    private Long usuarioId;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false)
+    private StatusAtracao status;
 
-    @Column(name = "localizacao_id", nullable = false)
-    private Long localizacaoId;
+    @ManyToOne(optional = false)  
+    @JoinColumn(name = "usuario_id", referencedColumnName = "id") 
+    private Usuario usuario;
 
-    public Long getId() {
-        return id;
-    }
+    @ManyToOne(optional = false)  
+    @JoinColumn(name = "localizacao_id", referencedColumnName = "id") 
+    private Localizacao localizacao;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    @JsonIgnore 
+    @OneToMany(mappedBy = "atracao", cascade = CascadeType.ALL) 
+    private List<Imagem> imagens;
 
-    public String getNome() {
-        return nome;
-    }
+    @JsonIgnore
+    @OneToMany(mappedBy = "atracao", cascade = CascadeType.ALL) 
+    private List<RecomendacaoAtracao> recomendacoesAtracoes;
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
-    public String getFoto() {
-        return foto;
-    }
-
-    public void setFoto(String foto) {
-        this.foto = foto;
-    }
-
-    public Categoria getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
-    }
-
-    public Long getUsuarioId() {
-        return usuarioId;
-    }
-
-    public void setUsuarioId(Long usuarioId) {
-        this.usuarioId = usuarioId;
-    }
-
-    public Long getLocalizacaoId() {
-        return localizacaoId;
-    }
-
-    public void setLocalizacaoId(Long localizacaoId) {
-        this.localizacaoId = localizacaoId;
-    }
+    @JsonIgnore 
+    @OneToMany(mappedBy = "atracao", cascade = CascadeType.ALL) 
+    private List<AvaliacaoAtracao> avaliacoesAtracoes;
 
 }
