@@ -30,10 +30,11 @@ public class ImagemServiceImpl implements ImagemService {
 
 
     @Override
-    public Imagem getImagem(Long usuarioId, Long atracaoId) {
-        Optional<Imagem> imagem = imagemRepository.findByUsuarioIdAndAtracaoId(usuarioId, atracaoId);
-        return unwrapImagem(imagem, usuarioId, atracaoId);
+    public List<Imagem> getImagens(Long usuarioId, Long atracaoId) {
+    List<Imagem> imagens = imagemRepository.findByUsuarioIdAndAtracaoId(usuarioId, atracaoId);
+    return imagens;
     }
+
 
     @Override
     public Imagem saveImagem(Imagem imagem, Long usuarioId, Long atracaoId) {
