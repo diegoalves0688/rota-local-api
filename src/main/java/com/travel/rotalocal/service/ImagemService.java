@@ -6,7 +6,7 @@ import com.travel.rotalocal.model.entity.Imagem;
 
 public interface ImagemService {
 
-    List<Imagem> getImagens(Long usuarioId, Long atracaoId);
+    List<Imagem> getImagens(Long usuarioId, Long atracaoId); 
     
     Imagem saveImagem(Imagem imagem, Long usuarioId, Long atracaoId);
     //TODO - updateImagem

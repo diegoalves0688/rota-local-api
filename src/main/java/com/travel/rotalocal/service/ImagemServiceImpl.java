@@ -34,7 +34,7 @@ public class ImagemServiceImpl implements ImagemService {
     List<Imagem> imagens = imagemRepository.findByUsuarioIdAndAtracaoId(usuarioId, atracaoId);
     return imagens;
     }
-
+   
 
     @Override
     public Imagem saveImagem(Imagem imagem, Long usuarioId, Long atracaoId) {
