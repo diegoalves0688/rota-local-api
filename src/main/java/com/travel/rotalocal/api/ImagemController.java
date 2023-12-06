@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import com.travel.rotalocal.model.entity.Imagem;
 import com.travel.rotalocal.service.ImagemService;
 
+import java.util.Optional;
 import java.util.List;
 import lombok.AllArgsConstructor;
 
@@ -26,9 +27,11 @@ public class ImagemController {
 
     //VALIDADO POSTMAN
     @GetMapping("usuario/{usuarioId}/atracao/{atracaoId}")
-    public ResponseEntity<Imagem> getImagem(@PathVariable Long usuarioId, @PathVariable Long atracaoId) {
-        return new ResponseEntity<>(imagemService.getImagem(usuarioId, atracaoId), HttpStatus.OK);
+    public ResponseEntity<List<Imagem>> getImagens(@PathVariable Long usuarioId, @PathVariable Long atracaoId) {
+    List<Imagem> imagens = imagemService.getImagens(usuarioId, atracaoId);
+    return new ResponseEntity<>(imagens, HttpStatus.OK);
     }
+
 
     //VALIDADO POSTMAN
     @GetMapping("/usuario/{usuarioId}")

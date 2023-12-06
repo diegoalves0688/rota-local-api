@@ -3,6 +3,7 @@ package com.travel.rotalocal.service;
 
 import org.springframework.stereotype.Service;
 
+import com.travel.rotalocal.exception.EmailAlreadyRegisteredException;
 import com.travel.rotalocal.exception.UsuarioNotFoundException;
 import com.travel.rotalocal.model.entity.Usuario;
 import com.travel.rotalocal.model.repository.UsuarioRepository;
@@ -42,5 +43,12 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     public List<Usuario> getUsuarios() {
         return (List<Usuario>)usuarioRepository.findAll();
+    }
+
+    public void registerUsuario(Usuario usuario) {
+        if (usuarioRepository.existsByEmail(usuario.getEmail())) {
+            throw new EmailAlreadyRegisteredException(usuario.getEmail());
+        }
+        usuarioRepository.save(usuario);
     }
 }
