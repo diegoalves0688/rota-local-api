@@ -10,4 +10,8 @@ public interface UsuarioService {
     Usuario saveUsuario(Usuario usuario);
     void deleteUsuario(Long id);
     List<Usuario> getUsuarios();
+
+    //regra de negocio
+    void registerUsuario(Usuario usuario);
+
 }
