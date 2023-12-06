@@ -8,7 +8,7 @@ public interface ImagemService {
 
     List<Imagem> getImagens(Long usuarioId, Long atracaoId); 
     
-    Imagem saveImagem(Imagem imagem, Long usuarioId, Long atracaoId);
+    List<Imagem> saveImagens(List<Imagem> imagens, Long usuarioId, Long atracaoId); //Imagem saveImagem(Imagem imagem, Long usuarioId, Long atracaoId);
     //TODO - updateImagem
     //Imagem updateImagem();
     void deleteImagem(Long usuarioId, Long atracaoId);
