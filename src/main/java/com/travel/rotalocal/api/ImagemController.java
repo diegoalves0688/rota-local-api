@@ -40,15 +40,15 @@ public class ImagemController {
         return new ResponseEntity<>(imagens, HttpStatus.OK);
     }
 
-    //VALIDADO POSTMAN
+    //VALIDADO POSTMAN para 1 - bug com n 
     @PostMapping("usuario/{usuarioId}/atracao/{atracaoId}")
-    public ResponseEntity<Imagem> createImagem(
-            @RequestBody Imagem imagem,
+    public ResponseEntity<List<Imagem>> createImagem(
+            @RequestBody List<Imagem> imagens,//Imagem imagem,
             @PathVariable Long usuarioId,
             @PathVariable Long atracaoId
     ) {
-        Imagem savedImagem = imagemService.saveImagem(imagem, usuarioId, atracaoId);
-        return new ResponseEntity<>(savedImagem, HttpStatus.CREATED);
+        List<Imagem> savedImagens = imagemService.saveImagens(imagens, usuarioId, atracaoId);//Imagem savedImagem = imagemService.saveImagem(imagem, usuarioId, atracaoId);
+        return new ResponseEntity<>(savedImagens, HttpStatus.CREATED); // return new ResponseEntity<>(savedImagem, HttpStatus.CREATED);
     }
 
     //VALIDADO POSTMAN - vai deletar tudo da combinacao [atracao + usuario]

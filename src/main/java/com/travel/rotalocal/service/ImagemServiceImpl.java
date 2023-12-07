@@ -10,6 +10,7 @@ import com.travel.rotalocal.model.repository.AtracaoRepository;
 import com.travel.rotalocal.model.repository.ImagemRepository;
 import com.travel.rotalocal.model.repository.UsuarioRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import lombok.AllArgsConstructor;
@@ -37,13 +38,19 @@ public class ImagemServiceImpl implements ImagemService {
    
 
     @Override
-    public Imagem saveImagem(Imagem imagem, Long usuarioId, Long atracaoId) {
+    public List<Imagem> saveImagens(List<Imagem> imagens, Long usuarioId, Long atracaoId) {
         Usuario usuario = UsuarioServiceImpl.unwrapUsuario(usuarioRepository.findById(usuarioId), usuarioId);
         Atracao atracao = AtracaoServiceImpl.unwrapAtracao(atracaoRepository.findById(atracaoId), usuarioId, atracaoId);
-        imagem.setUsuario(usuario);
-        imagem.setAtracao(atracao);
-        return imagemRepository.save(imagem);
 
+        List<Imagem> savedImagens = new ArrayList<>();
+
+        for (Imagem imagem : imagens) {
+            imagem.setUsuario(usuario);
+            imagem.setAtracao(atracao);
+            savedImagens.add(imagemRepository.save(imagem));
+        }
+
+        return savedImagens;
     }
     
     //TODO - updateImagen
