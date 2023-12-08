@@ -13,7 +13,6 @@ import lombok.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "atracao",
-        // uniqueConstraints = { @UniqueConstraint(columnNames = {"usuario_id", "localizacao_id"})},
         schema = "public")
 public class Atracao {
 
