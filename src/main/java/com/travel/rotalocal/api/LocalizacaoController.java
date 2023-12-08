@@ -1,5 +1,6 @@
 package com.travel.rotalocal.api;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,10 +31,16 @@ public class LocalizacaoController {
     }
 
     // VALIDADO POSTMAN
-    @PostMapping
-    public ResponseEntity<Localizacao> saveLocalizacao(@RequestBody Localizacao localizacao) {
-        return new ResponseEntity<>(localizacaoService.saveLocalizacao(localizacao), HttpStatus.CREATED);
+    @PostMapping //regra negocio
+        public ResponseEntity<?> saveLocalizacao(@RequestBody Localizacao localizacao) {
+        try {
+            localizacaoService.saveLocalizacao(localizacao);
+            return ResponseEntity.status(HttpStatus.CREATED).build();
+        } catch (DataIntegrityViolationException e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("esta localizacao ja existe....");
+        }
     }
+    
     
     // VALIDADO POSTMAN
     @DeleteMapping("/{id}")
