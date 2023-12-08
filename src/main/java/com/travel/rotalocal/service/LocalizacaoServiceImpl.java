@@ -1,10 +1,12 @@
 package com.travel.rotalocal.service;
 
 import org.springframework.stereotype.Service;
-
+import org.springframework.dao.DataIntegrityViolationException;
 import com.travel.rotalocal.exception.LocalizacaoNotFoundException;
 import com.travel.rotalocal.model.entity.Localizacao;
 import com.travel.rotalocal.model.repository.LocalizacaoRepository;
+
+import jakarta.transaction.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -28,9 +30,14 @@ public class LocalizacaoServiceImpl implements LocalizacaoService {
         return unwrapLocalizacao(localizacao, id);
     }
 
-    @Override
-    public Localizacao saveLocalizacao(Localizacao localizacao) {
-        return localizacaoRepository.save(localizacao);
+    @Transactional // regra de negocio
+    public void saveLocalizacao(Localizacao localizacao) {
+        Optional<Localizacao> existingLocalizacao = localizacaoRepository
+                .findByPaisAndEstadoAndCidade(localizacao.getPais(), localizacao.getEstado(), localizacao.getCidade());
+        if (existingLocalizacao.isPresent()) {
+            throw new DataIntegrityViolationException("esta localizacao ja existe....");
+        }
+        localizacaoRepository.save(localizacao);
     }
 
     @Override

@@ -7,8 +7,9 @@ import com.travel.rotalocal.model.entity.Localizacao;
 public interface LocalizacaoService {
 
     Localizacao getLocalizacao(Long id);
-    Localizacao saveLocalizacao(Localizacao localizacao);
+    void saveLocalizacao(Localizacao localizacao); //regra de negocio
     void deleteLocalizacao(Long id);
     List<Localizacao> getLocalizacoes();
+    
 
 }
