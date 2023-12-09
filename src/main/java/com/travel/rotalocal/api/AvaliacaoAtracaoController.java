@@ -58,7 +58,7 @@ public class AvaliacaoAtracaoController {
     ) {
         try {
             AvaliacaoAtracao savedAvaliacao = avaliacaoAtracaoService.saveAvaliacaoAtracao(avaliacaoAtracao, usuarioId, atracaoId);
-            return new ResponseEntity<>("Avaliacao registrada com sucesso", HttpStatus.OK);
+            return new ResponseEntity<>("avaliacao registrada com sucesso", HttpStatus.OK);
         } catch (AvaliacaoAtracaoDuplicatedException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
