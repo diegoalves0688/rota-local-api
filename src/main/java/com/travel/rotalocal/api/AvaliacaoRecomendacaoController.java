@@ -5,7 +5,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.travel.rotalocal.exception.AvaliacaoRecomendacaoDuplicatedException;
-import com.travel.rotalocal.model.entity.AvaliacaoAtracao;
 import com.travel.rotalocal.model.entity.AvaliacaoRecomendacao;
 import com.travel.rotalocal.service.AvaliacaoRecomendacaoService;
 

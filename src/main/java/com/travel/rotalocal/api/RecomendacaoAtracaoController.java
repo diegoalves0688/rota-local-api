@@ -4,6 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.travel.rotalocal.exception.RecomendacaoAtracaoDuplicatedException;
 import com.travel.rotalocal.model.entity.RecomendacaoAtracao;
 import com.travel.rotalocal.service.RecomendacaoAtracaoService;
 
@@ -52,15 +53,19 @@ public class RecomendacaoAtracaoController {
         }
     }
 
-    //VALIDADO POSTMAN
+    //VALIDADO POSTMAN COM TRAVA
     @PostMapping("usuario/{usuarioId}/atracao/{atracaoId}")
-    public ResponseEntity<RecomendacaoAtracao> saveRecomendacaoAtracao(
+    public ResponseEntity<String> saveRecomendacaoAtracao(
             @RequestBody RecomendacaoAtracao recomendacaoAtracao,
             @PathVariable Long usuarioId,
             @PathVariable Long atracaoId
     ) {
-        RecomendacaoAtracao savedRecomendacaoAtracao = recomendacaoAtracaoService.saveRecomendacaoAtracao(recomendacaoAtracao, usuarioId, atracaoId);
-        return new ResponseEntity<>(savedRecomendacaoAtracao, HttpStatus.CREATED);
+        try {
+            RecomendacaoAtracao savedRecomendacaoAtracao = recomendacaoAtracaoService.saveRecomendacaoAtracao(recomendacaoAtracao, usuarioId, atracaoId);
+            return new ResponseEntity<>("recomendacao registrada com sucesso", HttpStatus.CREATED);
+        } catch (RecomendacaoAtracaoDuplicatedException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
 
     //VALIDADO POSTMAN

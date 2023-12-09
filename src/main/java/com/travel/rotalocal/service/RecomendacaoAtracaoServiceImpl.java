@@ -2,6 +2,7 @@ package com.travel.rotalocal.service;
 
 import org.springframework.stereotype.Service;
 
+import com.travel.rotalocal.exception.RecomendacaoAtracaoDuplicatedException;
 import com.travel.rotalocal.exception.RecomendacaoAtracaoNotFoundException;
 import com.travel.rotalocal.model.entity.Atracao;
 import com.travel.rotalocal.model.entity.RecomendacaoAtracao;
@@ -37,12 +38,17 @@ public class RecomendacaoAtracaoServiceImpl implements RecomendacaoAtracaoServic
 
     @Override
     public RecomendacaoAtracao saveRecomendacaoAtracao(RecomendacaoAtracao recomendacaoAtracao, Long usuarioId, Long atracaoId) {
+	Optional<RecomendacaoAtracao> existingRecomendacao = recomendacaoAtracaoRepository.findByUsuarioIdAndAtracaoId(usuarioId, atracaoId);
+        if (existingRecomendacao.isPresent()) {
+        throw new RecomendacaoAtracaoDuplicatedException(usuarioId, atracaoId);
+
+    } else {
         Usuario usuario = UsuarioServiceImpl.unwrapUsuario(usuarioRepository.findById(usuarioId), usuarioId);
         Atracao atracao = AtracaoServiceImpl.unwrapAtracao(atracaoRepository.findById(atracaoId), usuarioId, atracaoId);
         recomendacaoAtracao.setUsuario(usuario);
         recomendacaoAtracao.setAtracao(atracao);
         return recomendacaoAtracaoRepository.save(recomendacaoAtracao);
-
+    }
     }
     
     //TODO - update
