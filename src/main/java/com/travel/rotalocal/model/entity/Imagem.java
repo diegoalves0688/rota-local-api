@@ -9,7 +9,6 @@ import lombok.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "imagem",
-        uniqueConstraints = { @UniqueConstraint(columnNames = {"usuario_id", "atracao_id"})},
         schema = "public")
 public class Imagem {
 

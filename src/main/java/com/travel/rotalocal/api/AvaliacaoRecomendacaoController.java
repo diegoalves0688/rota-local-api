@@ -4,6 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.travel.rotalocal.exception.AvaliacaoRecomendacaoDuplicatedException;
 import com.travel.rotalocal.model.entity.AvaliacaoRecomendacao;
 import com.travel.rotalocal.service.AvaliacaoRecomendacaoService;
 
@@ -48,15 +49,19 @@ public class AvaliacaoRecomendacaoController {
         return new ResponseEntity<>(avaliacaoRecomendacao, HttpStatus.OK);
     }
 
-    //VALIDADO POSTMAN
+    //VALIDADO POSTMAN COM TRAVA
     @PostMapping("usuario/{usuarioId}/recomendacao/{recomendacaoId}")
-    public ResponseEntity<AvaliacaoRecomendacao> saveAvaliacaoRecomendacao(
+    public ResponseEntity<String> saveAvaliacaoRecomendacao(
             @RequestBody AvaliacaoRecomendacao avaliacaoRecomendacao,
             @PathVariable Long usuarioId,
             @PathVariable Long recomendacaoId
     ) {
-        AvaliacaoRecomendacao savedAvaliacao = avaliacaoRecomendacaoService.saveAvaliacaoRecomendacao(avaliacaoRecomendacao, usuarioId, recomendacaoId);
-        return new ResponseEntity<>(savedAvaliacao, HttpStatus.CREATED);
+        try {
+            AvaliacaoRecomendacao savedAvaliacao = avaliacaoRecomendacaoService.saveAvaliacaoRecomendacao(avaliacaoRecomendacao, usuarioId, recomendacaoId);
+            return new ResponseEntity<>("avaliacao de recomencadacao registrada com sucesso", HttpStatus.OK);
+        } catch (AvaliacaoRecomendacaoDuplicatedException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
     
     //VALIDADO POSTMAN

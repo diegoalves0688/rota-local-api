@@ -4,6 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.travel.rotalocal.exception.AvaliacaoAtracaoDuplicatedException;
 import com.travel.rotalocal.model.entity.AvaliacaoAtracao;
 import com.travel.rotalocal.service.AvaliacaoAtracaoService;
 
@@ -48,15 +49,19 @@ public class AvaliacaoAtracaoController {
         return new ResponseEntity<>(avaliacoes, HttpStatus.OK);
     }
 
-    //VALIDADO POSTMAN
+    //VALIDADO POSTMAN COM TRAVA
     @PostMapping("usuario/{usuarioId}/atracao/{atracaoId}")
-    public ResponseEntity<AvaliacaoAtracao> saveAvaliacaoAtracao(
+    public ResponseEntity<String> saveAvaliacaoAtracao(
             @RequestBody AvaliacaoAtracao avaliacaoAtracao,
             @PathVariable Long usuarioId,
             @PathVariable Long atracaoId
     ) {
-        AvaliacaoAtracao savedAvaliacao = avaliacaoAtracaoService.saveAvaliacaoAtracao(avaliacaoAtracao, usuarioId, atracaoId);
-        return new ResponseEntity<>(savedAvaliacao, HttpStatus.CREATED);
+        try {
+            AvaliacaoAtracao savedAvaliacao = avaliacaoAtracaoService.saveAvaliacaoAtracao(avaliacaoAtracao, usuarioId, atracaoId);
+            return new ResponseEntity<>("avaliacao registrada com sucesso", HttpStatus.OK);
+        } catch (AvaliacaoAtracaoDuplicatedException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
     
     //VALIDADO POSTMAN

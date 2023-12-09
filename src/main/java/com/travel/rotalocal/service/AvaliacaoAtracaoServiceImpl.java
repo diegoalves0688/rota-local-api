@@ -2,6 +2,7 @@ package com.travel.rotalocal.service;
 
 import org.springframework.stereotype.Service;
 
+import com.travel.rotalocal.exception.AvaliacaoAtracaoDuplicatedException;
 import com.travel.rotalocal.exception.AvaliacaoAtracaoNotFoundException;
 import com.travel.rotalocal.model.entity.Atracao;
 import com.travel.rotalocal.model.entity.AvaliacaoAtracao;
@@ -37,12 +38,17 @@ public class AvaliacaoAtracaoServiceImpl implements AvaliacaoAtracaoService {
 
     @Override
     public AvaliacaoAtracao saveAvaliacaoAtracao(AvaliacaoAtracao avaliacaoAtracao, Long usuarioId, Long atracaoId) {
-        Usuario usuario = UsuarioServiceImpl.unwrapUsuario(usuarioRepository.findById(usuarioId), usuarioId);
-        Atracao atracao = AtracaoServiceImpl.unwrapAtracao(atracaoRepository.findById(atracaoId), usuarioId, atracaoId);
-        avaliacaoAtracao.setUsuario(usuario);
-        avaliacaoAtracao.setAtracao(atracao);
-        return avaliacaoAtracaoRepository.save(avaliacaoAtracao);
+        Optional<AvaliacaoAtracao> existingAvaliacao = avaliacaoAtracaoRepository.findByUsuarioIdAndAtracaoId(usuarioId, atracaoId);
+            if (existingAvaliacao.isPresent()) {
+            throw new AvaliacaoAtracaoDuplicatedException(usuarioId, atracaoId);
 
+        } else {
+            Usuario usuario = UsuarioServiceImpl.unwrapUsuario(usuarioRepository.findById(usuarioId), usuarioId);
+            Atracao atracao = AtracaoServiceImpl.unwrapAtracao(atracaoRepository.findById(atracaoId), usuarioId, atracaoId);
+            avaliacaoAtracao.setUsuario(usuario);
+            avaliacaoAtracao.setAtracao(atracao);
+            return avaliacaoAtracaoRepository.save(avaliacaoAtracao);
+        }
     }
     
     //TODO - updateImagem
