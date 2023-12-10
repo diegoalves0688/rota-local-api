@@ -23,7 +23,7 @@ public class AvaliacaoRecomendacaoServiceImpl implements AvaliacaoRecomendacaoSe
     RecomendacaoAtracaoRepository recomendacaoAtracaoRepository;
     UsuarioRepository usuarioRepository;
 
-    //metodo auxiliar
+    //METODO AUXILIAR
         static AvaliacaoRecomendacao unwrapAvaliacaoRecomendacao(Optional<AvaliacaoRecomendacao> entity, Long usuarioId, Long atracaoId) {
         if (entity.isPresent()) return entity.get();
         else throw new AvaliacaoRecomendacaoNotFoundException(usuarioId, atracaoId);

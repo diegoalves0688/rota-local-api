@@ -23,7 +23,7 @@ public class ImagemServiceImpl implements ImagemService {
     AtracaoRepository atracaoRepository;
     UsuarioRepository usuarioRepository;
 
-    //metodo auxiliar
+    //METODO AUXILIAR
         static Imagem unwrapImagem(Optional<Imagem> entity, Long usuarioId, Long atracaoId) {
         if (entity.isPresent()) return entity.get();
         else throw new ImagemNotFoundException(usuarioId, atracaoId);

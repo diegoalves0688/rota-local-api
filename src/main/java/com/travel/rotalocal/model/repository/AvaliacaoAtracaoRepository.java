@@ -8,12 +8,12 @@ import com.travel.rotalocal.model.entity.AvaliacaoAtracao;
 import jakarta.transaction.Transactional;
 
 public interface AvaliacaoAtracaoRepository extends CrudRepository<AvaliacaoAtracao, Long> {
-    
+             
+    List<AvaliacaoAtracao> findByUsuarioId(Long usuarioId);
+    List<AvaliacaoAtracao> findByAtracaoId(Long atracaoId);
     Optional<AvaliacaoAtracao> findByUsuarioIdAndAtracaoId(Long usuarioId, Long atracaoId);
 
     @Transactional
     void deleteByUsuarioIdAndAtracaoId(Long usuarioId, Long atracaoId);
-         
-    List<AvaliacaoAtracao> findByUsuarioId(Long usuarioId);
-    List<AvaliacaoAtracao> findByAtracaoId(Long atracaoId);
+
 }

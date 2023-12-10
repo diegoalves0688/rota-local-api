@@ -23,7 +23,7 @@ public class RecomendacaoAtracaoServiceImpl implements RecomendacaoAtracaoServic
     AtracaoRepository atracaoRepository;
     UsuarioRepository usuarioRepository;
 
-    //metodo auxiliar
+    //METODO AUXILIAR
         static RecomendacaoAtracao unwrapRecomendacaoAtracao(Optional<RecomendacaoAtracao> entity, Long usuarioId, Long atracaoId) {
         if (entity.isPresent()) return entity.get();
         else throw new RecomendacaoAtracaoNotFoundException(usuarioId, atracaoId);

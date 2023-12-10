@@ -18,7 +18,7 @@ public class LocalizacaoServiceImpl implements LocalizacaoService {
 
     LocalizacaoRepository localizacaoRepository;
 
-    // metodo de auxiliar
+    // METODO AUXILAR
     static Localizacao unwrapLocalizacao(Optional<Localizacao> entity, Long id) {
         if (entity.isPresent()) return entity.get();
         else throw new LocalizacaoNotFoundException(id);

@@ -6,9 +6,13 @@ import org.springframework.web.bind.annotation.*;
 
 import com.travel.rotalocal.dto.AtracaoDTO;
 import com.travel.rotalocal.dto.ImagemDTO;
+import com.travel.rotalocal.dto.LocalizacaoDTO;
+import com.travel.rotalocal.dto.UsuarioDTO;
 import com.travel.rotalocal.exception.AtracaoNotFoundException;
 import com.travel.rotalocal.model.entity.Atracao;
 import com.travel.rotalocal.model.entity.Imagem;
+import com.travel.rotalocal.model.entity.Localizacao;
+import com.travel.rotalocal.model.entity.Usuario;
 import com.travel.rotalocal.service.AtracaoService;
 
 import java.util.List;
@@ -25,31 +29,27 @@ public class AtracaoController {
 
     //VALIDADO POSTMAN
     @GetMapping
-    public ResponseEntity<List<AtracaoDTO>> getAllAtracoesWithDetails() {
-        List<Atracao> atracoes = atracaoService.getAllAtracoes();
-        List<AtracaoDTO> atracoesWithDetails = atracoes.stream()
-                .map(this::converteParaAtracaoDTO)
-                .collect(Collectors.toList());
-        return new ResponseEntity<>(atracoesWithDetails, HttpStatus.OK);
+    public ResponseEntity<List<AtracaoDTO>> getAllAtracoesWithRanking() {
+        try {
+            List<AtracaoDTO> atracoes = atracaoService.getAllAtracoesWithRanking();
+            return ResponseEntity.ok(atracoes);
+        } catch (Exception e) {
+            return ResponseEntity.status(500).build();
+        }
     }
-
+    
     //VALIDADO POSTMAN
     @GetMapping("/{atracaoId}")
-    public ResponseEntity<AtracaoDTO> getAtracaoById(@PathVariable Long atracaoId) {
+    public ResponseEntity<AtracaoDTO> getAtracaoWithRankingById(@PathVariable Long atracaoId) {
         try {
-            Atracao atracao = atracaoService.getAtracaoById(atracaoId);
-
-            if (atracao != null) {
-                AtracaoDTO atracaoDTO = converteParaAtracaoDTO(atracao);
-                return new ResponseEntity<>(atracaoDTO, HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }
+            AtracaoDTO atracao = atracaoService.getAtracaoWithRankingById(atracaoId);
+            return ResponseEntity.ok(atracao);
+        } catch (AtracaoNotFoundException e) {
+            return ResponseEntity.notFound().build();
         } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return ResponseEntity.status(500).build();
+                }
         }
-    }   
 
     //VALIDADO POSTMAN
     //BUG INVESTIGACAO
@@ -83,15 +83,19 @@ public class AtracaoController {
         return new ResponseEntity<>(atracoes, HttpStatus.OK);
     }
 
-    //VALIDADO POSTMAN
+    //QUEBRADO - TO BE FIXED
     @PostMapping("usuario/{usuarioId}/localizacao/{localizacaoId}")
-    public ResponseEntity<Atracao> saveAtracao(
-            @RequestBody Atracao atracao,
+    public ResponseEntity<AtracaoDTO> saveAtracao(
+            @RequestBody AtracaoDTO atracaoDTO,
             @PathVariable Long usuarioId,
             @PathVariable Long localizacaoId
     ) {
+
+        Atracao atracao = converteParaAtracaoEntity(atracaoDTO);
         Atracao savedAtracao = atracaoService.saveAtracao(atracao, usuarioId, localizacaoId);
-        return new ResponseEntity<>(savedAtracao, HttpStatus.CREATED);
+
+        AtracaoDTO savedAtracaoDTO = converteParaAtracaoDTO(savedAtracao);
+        return new ResponseEntity<>(savedAtracaoDTO, HttpStatus.CREATED);
     }
 
     //TODO - REVER LOGICA DE DEL
@@ -114,9 +118,9 @@ public class AtracaoController {
         atracaoDTO.setAtivo(atracao.isAtivo());
         atracaoDTO.setCategoria(atracao.getCategoria());
         atracaoDTO.setStatus(atracao.getStatus());
-        atracaoDTO.setUsuario(atracao.getUsuario());
-        atracaoDTO.setLocalizacao(atracao.getLocalizacao());
-    
+        atracaoDTO.setUsuario(converteParaUsuarioDTO(atracao.getUsuario()));
+        atracaoDTO.setLocalizacao(converteParaLocalizacaoDTO(atracao.getLocalizacao()));
+   
         List<ImagemDTO> imagemDTOs = atracao.getImagens().stream()
                 .map(this::converteParaImagemDTO)
                 .collect(Collectors.toList());
@@ -134,6 +138,69 @@ public class AtracaoController {
     
         return imagemDTO;
     }
+
+    // METODO AUXILIAR
+    private UsuarioDTO converteParaUsuarioDTO(Usuario usuario) {
+        UsuarioDTO usuarioDTO = new UsuarioDTO();
+        usuarioDTO.setId(usuario.getId());
+        usuarioDTO.setNome(usuario.getNome());
+        usuarioDTO.setEmail(usuario.getEmail());
+        usuarioDTO.setSenha(usuario.getSenha());
+        usuarioDTO.setFoto(usuario.getFoto());
+        usuarioDTO.setAtivo(usuario.isAtivo());
+        usuarioDTO.setPerfil(usuario.getPerfil());
     
+        return usuarioDTO;
+    }
+
+    // METODO AUXILIAR
+    private LocalizacaoDTO converteParaLocalizacaoDTO(Localizacao localizacao) {
+
+        LocalizacaoDTO localizacaoDTO = new LocalizacaoDTO();
+        localizacaoDTO.setId(localizacaoDTO.getId());
+        localizacaoDTO.setPais(localizacaoDTO.getPais());
+        localizacaoDTO.setEstado(localizacaoDTO.getEstado());
+        localizacaoDTO.setCidade(localizacaoDTO.getCidade());
+
+        return localizacaoDTO;
+    }
+
+    // METODO AUXILIAR
+    private Atracao converteParaAtracaoEntity(AtracaoDTO atracaoDTO) {
+        Atracao atracao = new Atracao();
+        // Map AtracaoDTO properties to Atracao entity
+        atracao.setId(atracaoDTO.getId());
+        atracao.setNome(atracaoDTO.getNome());
+        atracao.setDescricao(atracaoDTO.getDescricao());
+        atracao.setAtivo(atracaoDTO.isAtivo());
+        atracao.setCategoria(atracaoDTO.getCategoria());
+        atracao.setStatus(atracaoDTO.getStatus());
+        atracao.setUsuario(converteParaUsuarioEntity(atracaoDTO.getUsuario()));
+        atracao.setLocalizacao(converteParaLocalizacaoEntity(atracaoDTO.getLocalizacao()));
+    
+        return atracao;
+    }
+
+    // METODO AUXILIAR
+    private Usuario converteParaUsuarioEntity(UsuarioDTO usuarioDTO) {
+        Usuario usuario = new Usuario();
+        usuario.setId(usuarioDTO.getId());
+        usuario.setNome(usuarioDTO.getNome());
+        usuario.setEmail(usuarioDTO.getEmail());
+
+        return usuario;
+    }
+
+    // METODO AUXILIAR
+    private Localizacao converteParaLocalizacaoEntity(LocalizacaoDTO localizacaoDTO) {
+        Localizacao localizacao = new Localizacao();
+        localizacao.setId(localizacaoDTO.getId());
+        localizacao.setPais(localizacaoDTO.getPais());
+        localizacao.setEstado(localizacaoDTO.getEstado());
+        localizacao.setCidade(localizacaoDTO.getCidade());
+
+        return localizacao;
+    }
+   
 }
 

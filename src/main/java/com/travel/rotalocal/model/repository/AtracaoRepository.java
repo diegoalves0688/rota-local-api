@@ -8,12 +8,11 @@ import jakarta.transaction.Transactional;
 
 public interface AtracaoRepository extends CrudRepository<Atracao, Long> {
 
+    List<Atracao> findByUsuarioId(Long usuarioId);
+    List<Atracao> findByLocalizacaoId(Long localizacaoId);
     List<Atracao> findByUsuarioIdAndLocalizacaoId(Long usuarioId, Long localizacaoId);
 
     @Transactional
     void deleteByUsuarioIdAndLocalizacaoId(Long usuarioId, Long localizacaoId);
-         
-    List<Atracao> findByUsuarioId(Long usuarioId);
-    List<Atracao> findByLocalizacaoId(Long localizacaoId);
 
 }

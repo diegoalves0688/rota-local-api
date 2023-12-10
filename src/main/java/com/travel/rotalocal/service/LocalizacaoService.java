@@ -10,6 +10,5 @@ public interface LocalizacaoService {
     void saveLocalizacao(Localizacao localizacao); //regra de negocio
     void deleteLocalizacao(Long id);
     List<Localizacao> getLocalizacoes();
-    
 
 }

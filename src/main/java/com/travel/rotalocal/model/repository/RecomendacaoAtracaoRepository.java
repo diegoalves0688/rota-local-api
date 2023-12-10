@@ -9,12 +9,11 @@ import jakarta.transaction.Transactional;
 
 public interface RecomendacaoAtracaoRepository extends CrudRepository<RecomendacaoAtracao, Long> {
 
+    List<RecomendacaoAtracao> findByUsuarioId(Long usuarioId);
+    List<RecomendacaoAtracao> findByAtracaoId(Long atracaoId);
     Optional<RecomendacaoAtracao> findByUsuarioIdAndAtracaoId(Long usuarioId, Long atracaoId);
 
     @Transactional
     void deleteByUsuarioIdAndAtracaoId(Long usuarioId, Long atracaoId);
          
-    List<RecomendacaoAtracao> findByUsuarioId(Long usuarioId);
-    List<RecomendacaoAtracao> findByAtracaoId(Long atracaoId);
-    
 }
