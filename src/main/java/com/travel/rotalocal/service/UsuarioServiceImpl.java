@@ -18,7 +18,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     UsuarioRepository usuarioRepository;
 
-    // metodo de apoio para tratar null
+    // METODO AUXILIAR
     static Usuario unwrapUsuario(Optional<Usuario> entity, Long id) {
         if (entity.isPresent()) return entity.get();
         else throw new UsuarioNotFoundException(id);

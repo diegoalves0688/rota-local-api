@@ -3,9 +3,7 @@ package com.travel.rotalocal.dto;
 import java.util.List;
 
 import com.travel.rotalocal.model.entity.CategoriaAtracao;
-import com.travel.rotalocal.model.entity.Localizacao;
 import com.travel.rotalocal.model.entity.StatusAtracao;
-import com.travel.rotalocal.model.entity.Usuario;
 
 public class AtracaoDTO {
 
@@ -15,9 +13,13 @@ public class AtracaoDTO {
     private boolean ativo;
     private CategoriaAtracao categoria;
     private StatusAtracao status;
-    private Usuario usuario;
-    private Localizacao localizacao;
+    private UsuarioDTO usuario;
+    private LocalizacaoDTO localizacao;
     private List<ImagemDTO> imagens;
+    
+    private List<AvaliacaoAtracaoDTO> avaliacoesAtracoes;
+    private int avaliacaoSaldoPontos;
+    private int atracaoRanking;
 
     public Long getId() {
         return this.id;
@@ -71,19 +73,19 @@ public class AtracaoDTO {
         this.status = status;
     }
 
-    public Usuario getUsuario() {
+    public UsuarioDTO getUsuario() {
         return this.usuario;
     }
 
-    public void setUsuario(Usuario usuario) {
+    public void setUsuario(UsuarioDTO usuario) {
         this.usuario = usuario;
     }
 
-    public Localizacao getLocalizacao() {
+    public LocalizacaoDTO getLocalizacao() {
         return this.localizacao;
     }
 
-    public void setLocalizacao(Localizacao localizacao) {
+    public void setLocalizacao(LocalizacaoDTO localizacao) {
         this.localizacao = localizacao;
     }
 
@@ -93,6 +95,30 @@ public class AtracaoDTO {
 
     public void setImagens(List<ImagemDTO> imagens) {
         this.imagens = imagens;
+    }
+
+    public List<AvaliacaoAtracaoDTO> getAvaliacoesAtracoes() {
+        return avaliacoesAtracoes;
+    }
+
+    public void setAvaliacoesAtracoes(List<AvaliacaoAtracaoDTO> avaliacoesAtracoes) {
+        this.avaliacoesAtracoes = avaliacoesAtracoes;
+    }
+
+    public int getAvaliacaoSaldoPontos() {
+        return avaliacaoSaldoPontos;
+    }
+
+    public void setAvaliacaoSaldoPontos(int avaliacaoSaldoPontos) {
+        this.avaliacaoSaldoPontos = avaliacaoSaldoPontos;
+    }
+
+    public int getAtracaoRanking() {
+        return atracaoRanking;
+    }
+
+    public void setAtracaoRanking(int atracaoRanking) {
+        this.atracaoRanking = atracaoRanking;
     }
 
 }
