@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.travel.rotalocal.model.entity.Imagem;
+import com.travel.rotalocal.model.entity.Localizacao;
 import com.travel.rotalocal.service.ImagemService;
 
 import java.util.Optional;
@@ -24,6 +25,12 @@ public class ImagemController {
         List<Imagem> imagens = imagemService.getAllImagens();
         return new ResponseEntity<>(imagens, HttpStatus.OK);
     }
+    
+    //VALIDADO POSTMAN
+    @GetMapping("/{id}")
+    public ResponseEntity<Imagem> getImagem(@PathVariable Long id) {
+        return new ResponseEntity<>(imagemService.getImagem(id), HttpStatus.OK);
+    }
 
     //VALIDADO POSTMAN
     @GetMapping("usuario/{usuarioId}/atracao/{atracaoId}")
@@ -31,7 +38,6 @@ public class ImagemController {
     List<Imagem> imagens = imagemService.getImagens(usuarioId, atracaoId);
     return new ResponseEntity<>(imagens, HttpStatus.OK);
     }
-
 
     //VALIDADO POSTMAN
     @GetMapping("/usuario/{usuarioId}")

@@ -36,6 +36,11 @@ public class AtracaoServiceImpl implements AtracaoService {
     
         return atracoes;
     }
+
+    @Override
+    public Atracao getAtracaoById(Long atracaoId) {
+        return atracaoRepository.findById(atracaoId).orElse(null);
+    }
     
     @Override
     public Atracao saveAtracao(Atracao atracao, Long usuarioId, Long localizacaoId) {

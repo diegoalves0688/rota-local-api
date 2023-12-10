@@ -5,6 +5,8 @@ import java.util.List;
 import com.travel.rotalocal.model.entity.Atracao;
 
 public interface AtracaoService {
+
+    Atracao getAtracaoById(Long atracaoId);
     
     List<Atracao> getAtracao(Long usuarioId, Long localizacaoId);
 
