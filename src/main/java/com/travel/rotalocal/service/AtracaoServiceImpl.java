@@ -67,5 +67,10 @@ public class AtracaoServiceImpl implements AtracaoService {
     public List<Atracao> getAllAtracoes() {
         return (List<Atracao>)atracaoRepository.findAll();
     }
+
+    @Override
+    public Atracao getAtracaoById(Long atracaoId) {
+        return atracaoRepository.findById(atracaoId).get();
+    }
 }
 

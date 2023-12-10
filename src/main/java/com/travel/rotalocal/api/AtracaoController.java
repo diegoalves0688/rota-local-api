@@ -4,10 +4,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.travel.rotalocal.api.dto.AtracaoDTO;
 import com.travel.rotalocal.exception.AtracaoNotFoundException;
 import com.travel.rotalocal.model.entity.Atracao;
+import com.travel.rotalocal.model.entity.Imagem;
 import com.travel.rotalocal.service.AtracaoService;
+import com.travel.rotalocal.service.ImagemService;
 
+import java.util.ArrayList;
 import java.util.List;
 import lombok.AllArgsConstructor;
 
@@ -17,12 +21,22 @@ import lombok.AllArgsConstructor;
 public class AtracaoController {
 
     AtracaoService atracaoService;
+    ImagemService imagemService;
 
     //VALIDADO POSTMAN
     @GetMapping
-    public ResponseEntity<List<Atracao>> getAllAtracoes() {
+    public ResponseEntity getAllAtracoes() {
         List<Atracao> atracoes = atracaoService.getAllAtracoes();
-        return new ResponseEntity<>(atracoes, HttpStatus.OK);
+        List<AtracaoDTO> resultList = new ArrayList();
+
+        for (Atracao atracao : atracoes) {
+            List<Imagem> imagemList = imagemService.getAtracaoImagens(atracao.getId());
+            AtracaoDTO item = new AtracaoDTO(atracao.getId(), atracao.getNome(), atracao.getDescricao(), true,
+            atracao.getCategoria(), atracao.getStatus(), atracao.getUsuario(), atracao.getLocalizacao(), imagemList);
+            resultList.add(item);
+        }
+
+        return ResponseEntity.ok(resultList);
     }
 
     //VALIDADO POSTMAN
@@ -79,5 +93,14 @@ public class AtracaoController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
     
+    @GetMapping("/{atracaoId}")
+    public ResponseEntity getAtracaoById(@PathVariable Long atracaoId) {
+        Atracao atracao = atracaoService.getAtracaoById(atracaoId);
+        List<Imagem> imagemList = imagemService.getAtracaoImagens(atracao.getId());
+        AtracaoDTO result = new AtracaoDTO(atracao.getId(), atracao.getNome(), atracao.getDescricao(), true,
+         atracao.getCategoria(), atracao.getStatus(), atracao.getUsuario(), atracao.getLocalizacao(), imagemList);
+        return ResponseEntity.ok(result);
+    }
+
 }
 
