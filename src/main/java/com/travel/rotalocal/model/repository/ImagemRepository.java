@@ -9,12 +9,11 @@ import jakarta.transaction.Transactional;
 
 public interface ImagemRepository extends CrudRepository<Imagem, Long> {
 
+    List<Imagem> findByUsuarioId(Long usuarioId);
+    List<Imagem> findByAtracaoId(Long atracaoId);
     List<Imagem> findByUsuarioIdAndAtracaoId(Long usuarioId, Long atracaoId);
 
     @Transactional
     void deleteByUsuarioIdAndAtracaoId(Long usuarioId, Long atracaoId);
          
-    List<Imagem> findByUsuarioId(Long usuarioId);
-    List<Imagem> findByAtracaoId(Long atracaoId);
-    
 }

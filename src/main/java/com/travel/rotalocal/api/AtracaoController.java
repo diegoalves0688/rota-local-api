@@ -83,6 +83,7 @@ public class AtracaoController {
         return new ResponseEntity<>(atracoes, HttpStatus.OK);
     }
 
+    //QUEBRADO - TO BE FIXED
     @PostMapping("usuario/{usuarioId}/localizacao/{localizacaoId}")
     public ResponseEntity<AtracaoDTO> saveAtracao(
             @RequestBody AtracaoDTO atracaoDTO,
