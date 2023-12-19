@@ -1,8 +1,10 @@
 package com.travel.rotalocal.api;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.travel.rotalocal.dto.AtracaoDTO;
 import com.travel.rotalocal.dto.ImagemDTO;
@@ -12,11 +14,14 @@ import com.travel.rotalocal.exception.AtracaoNotFoundException;
 import com.travel.rotalocal.model.entity.Atracao;
 import com.travel.rotalocal.model.entity.Imagem;
 import com.travel.rotalocal.model.entity.Localizacao;
+import com.travel.rotalocal.model.entity.StatusAtracao;
 import com.travel.rotalocal.model.entity.Usuario;
 import com.travel.rotalocal.service.AtracaoService;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+
 
 import lombok.AllArgsConstructor;
 
@@ -36,6 +41,19 @@ public class AtracaoController {
         } catch (Exception e) {
             return ResponseEntity.status(500).build();
         }
+    }
+
+    @PostMapping
+    public ResponseEntity novaAtracao(@RequestBody AtracaoDTO atracaoDTO){
+
+        Atracao atracao = new Atracao();
+        atracao.setNome(atracaoDTO.getNome());
+        atracao.setDescricao(atracaoDTO.getDescricao());
+        atracao.setAtivo(true);
+        atracao.setCategoria(atracaoDTO.getCategoria());
+        atracao.setStatus(StatusAtracao.PUBLICO);
+
+        return ResponseEntity.ok(atracaoService.saveAtracao(atracao, atracaoDTO.getUsuario().getId(), atracaoDTO.getLocalizacao().getId()));
     }
     
     //VALIDADO POSTMAN

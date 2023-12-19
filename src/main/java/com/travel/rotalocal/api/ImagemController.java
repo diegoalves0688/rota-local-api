@@ -1,21 +1,31 @@
 package com.travel.rotalocal.api;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.travel.rotalocal.dto.ImagemDTO;
 import com.travel.rotalocal.model.entity.Imagem;
 import com.travel.rotalocal.model.entity.Localizacao;
 import com.travel.rotalocal.service.ImagemService;
 
+import jakarta.servlet.http.HttpServletRequest;
+
 import java.util.Optional;
+import java.io.File;
 import java.util.List;
 import lombok.AllArgsConstructor;
+
 
 @AllArgsConstructor
 @RestController
 @RequestMapping("/api/imagem")
 public class ImagemController {
+
+    @Autowired
+    private HttpServletRequest request;
 
     private ImagemService imagemService;
 
@@ -65,5 +75,30 @@ public class ImagemController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+
+    @PostMapping
+    public ResponseEntity handleFileUpload(@RequestParam("file") MultipartFile file) {
+
+        String fileName = "";
+
+        if (!file.isEmpty()) {
+            try {
+                String uploadsDir = "/images/";
+                String realPathtoUploads =  request.getServletContext().getRealPath(uploadsDir);
+                if(! new File(realPathtoUploads).exists())
+                {
+                    new File(realPathtoUploads).mkdir();
+                }
+                fileName = file.getOriginalFilename();
+                String filePath = realPathtoUploads + fileName;
+                File dest = new File(filePath);
+                file.transferTo(dest);
+            }catch(Exception e){}
+        }
+
+        imagemService.saveImagens(null, null, null);
+
+        return ResponseEntity.ok(new ImagemDTO(fileName));
+    }
 
 }

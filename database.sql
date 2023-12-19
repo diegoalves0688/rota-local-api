@@ -148,7 +148,7 @@ VALUES ('lud', 'lud@mail.com', 'senha-123', 'foto-lud', true, 'COLABORADOR');
 INSERT INTO public.usuario (nome, email, senha, foto, ativo, perfil)
 VALUES ('mary', 'mary@mail.com', 'senha-123', 'foto-mary', true, 'COLABORADOR');
 
-INSERT INTO public.atracao (nome,descricao,ativo,categoria,status, usuario_id,localizacao_id) VALUES
+INSERT INTO public.atracao (nome,descricao,ativo,categoria, status, usuario_id, localizacao_id) VALUES
 	 --('Praia das pedrinhas','descricao pedrinhas', true,'PRAIAS'::categoria_atracao ,'PUBLICO'::status_atracao,1,1);
 	 	 ('Praia das pedrinhas','descricao pedrinhas', true,'PRAIAS' ,'PUBLICO',1,1);
 	 

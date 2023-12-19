@@ -6,6 +6,12 @@ public class ImagemDTO {
     private String nome;
     private String urlCaminho;
 
+    public ImagemDTO() {}
+
+    public ImagemDTO(String nome) {
+        this.nome = nome;
+    }
+
     public Long getId() {
         return this.id;
     }
@@ -23,7 +29,7 @@ public class ImagemDTO {
     }
 
     public String getUrlCaminho() {
-        return this.urlCaminho;
+        return "http://localhost:8080/images/" + this.nome;
     }
 
     public void setUrlCaminho(String urlCaminho) {
