@@ -65,7 +65,7 @@ CREATE TABLE localizacao(
 CREATE TABLE atracao(
    id BIGINT GENERATED ALWAYS AS IDENTITY,
    nome VARCHAR(255) NOT NULL,
-   descricao VARCHAR(255) NOT NULL,
+   descricao text NOT NULL,
    ativo boolean NOT NULL,
    categoria VARCHAR(255) NOT NULL, --categoria categoria_atracao,
    status VARCHAR(255) NOT NULL, --status status_atracao,
@@ -100,7 +100,7 @@ CREATE TABLE avaliacao_atracao(
 
 CREATE TABLE recomendacao_atracao(
    id BIGINT GENERATED ALWAYS AS IDENTITY,
-   recomendacao VARCHAR(255) NOT NULL,
+   recomendacao text NOT NULL,
    usuario_id BIGINT,
    atracao_id BIGINT,
    PRIMARY KEY(id),
