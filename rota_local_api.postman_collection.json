@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "6d943fd4-b756-417b-9a37-8e7d3f42d3c1",
+		"_postman_id": "c0259208-da8c-495b-94ce-3c1607b63417",
 		"name": "Lud-rota",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "31469487"
+		"_exporter_id": "27022140"
 	},
 	"item": [
 		{
@@ -127,6 +127,38 @@
 				},
 				{
 					"name": "atracao cadastro QUEBROU - TO BE FIXED",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"batcaverna-teste2\",\r\n    \"descricao\": \"cafofo do batman2\",\r\n    \"ativo\": true,\r\n    \"categoria\": \"MONUMENTOS\",\r\n    \"status\": \"PUBLICO\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/atracao/usuario/4/localizacao/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"atracao",
+								"usuario",
+								"4",
+								"localizacao",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "atracao cadastro",
 					"request": {
 						"method": "POST",
 						"header": [],
