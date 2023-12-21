@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "c0259208-da8c-495b-94ce-3c1607b63417",
-		"name": "Lud-rota",
+		"_postman_id": "bce2fa69-e60b-4c32-bcbc-6d9d97e2c87c",
+		"name": "projeto-rota",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "27022140"
+		"_exporter_id": "31469487"
 	},
 	"item": [
 		{
@@ -23,6 +23,31 @@
 							"path": [
 								"api",
 								"atracao"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "atracao all COM FILTRO CATEGORIA",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/atracao?categoria=MONUMENTOS",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"atracao"
+							],
+							"query": [
+								{
+									"key": "categoria",
+									"value": "MONUMENTOS"
+								}
 							]
 						}
 					},
