@@ -18,6 +18,7 @@ import com.travel.rotalocal.model.entity.StatusAtracao;
 import com.travel.rotalocal.model.entity.Usuario;
 import com.travel.rotalocal.service.AtracaoService;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,6 +38,7 @@ public class AtracaoController {
     public ResponseEntity<List<AtracaoDTO>> getAllAtracoesWithRanking() {
         try {
             List<AtracaoDTO> atracoes = atracaoService.getAllAtracoesWithRanking();
+            atracoes.sort(Comparator.comparing(AtracaoDTO::getAtracaoRanking));
             return ResponseEntity.ok(atracoes);
         } catch (Exception e) {
             return ResponseEntity.status(500).build();
