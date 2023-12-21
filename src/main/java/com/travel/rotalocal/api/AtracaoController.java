@@ -22,8 +22,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
-
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
@@ -33,11 +31,28 @@ public class AtracaoController {
 
     AtracaoService atracaoService;
 
-    //VALIDADO POSTMAN
-    @GetMapping
-    public ResponseEntity<List<AtracaoDTO>> getAllAtracoesWithRanking() {
+    // VALIDADO POSTMAN
+    // @GetMapping
+    // public ResponseEntity<List<AtracaoDTO>> getAllAtracoesWithRanking() {
+    //     try {
+    //         List<AtracaoDTO> atracoes = atracaoService.getAllAtracoesWithRanking();
+    //         atracoes.sort(Comparator.comparing(AtracaoDTO::getAtracaoRanking));
+    //         return ResponseEntity.ok(atracoes);
+    //     } catch (Exception e) {
+    //         return ResponseEntity.status(500).build();
+    //     }
+    // }
+
+    @GetMapping // filtrar assim /api/atracao?categoria=PRAIAS
+    public ResponseEntity<List<AtracaoDTO>> getAllAtracoesWithRanking(
+            @RequestParam(required = false) String categoria) {
         try {
             List<AtracaoDTO> atracoes = atracaoService.getAllAtracoesWithRanking();
+            if (categoria != null && !categoria.isEmpty()) {
+                atracoes = atracoes.stream()
+                        .filter(atracao -> categoria.equals(atracao.getCategoria()))
+                        .collect(Collectors.toList());
+            }
             atracoes.sort(Comparator.comparing(AtracaoDTO::getAtracaoRanking));
             return ResponseEntity.ok(atracoes);
         } catch (Exception e) {
@@ -46,7 +61,7 @@ public class AtracaoController {
     }
 
     @PostMapping
-    public ResponseEntity novaAtracao(@RequestBody AtracaoDTO atracaoDTO){
+    public ResponseEntity novaAtracao(@RequestBody AtracaoDTO atracaoDTO) {
 
         Atracao atracao = new Atracao();
         atracao.setNome(atracaoDTO.getNome());
@@ -55,10 +70,11 @@ public class AtracaoController {
         atracao.setCategoria(atracaoDTO.getCategoria());
         atracao.setStatus(StatusAtracao.PUBLICO);
 
-        return ResponseEntity.ok(atracaoService.saveAtracao(atracao, atracaoDTO.getUsuario().getId(), atracaoDTO.getLocalizacao().getId()));
+        return ResponseEntity.ok(atracaoService.saveAtracao(atracao, atracaoDTO.getUsuario().getId(),
+                atracaoDTO.getLocalizacao().getId()));
     }
-    
-    //VALIDADO POSTMAN
+
+    // VALIDADO POSTMAN
     @GetMapping("/{atracaoId}")
     public ResponseEntity<AtracaoDTO> getAtracaoWithRankingById(@PathVariable Long atracaoId) {
         try {
@@ -68,16 +84,15 @@ public class AtracaoController {
             return ResponseEntity.notFound().build();
         } catch (Exception e) {
             return ResponseEntity.status(500).build();
-                }
         }
+    }
 
-    //VALIDADO POSTMAN
-    //BUG INVESTIGACAO
+    // VALIDADO POSTMAN
+    // BUG INVESTIGACAO
     @GetMapping("usuario/{usuarioId}/localizacao/{localizacaoId}")
     public ResponseEntity<List<Atracao>> getAtracao(
             @PathVariable Long usuarioId,
-            @PathVariable Long localizacaoId
-    ) {
+            @PathVariable Long localizacaoId) {
         try {
             List<Atracao> atracoes = atracaoService.getAtracao(usuarioId, localizacaoId);
             return new ResponseEntity<>(atracoes, HttpStatus.OK);
@@ -89,27 +104,26 @@ public class AtracaoController {
         }
     }
 
-    //VALIDADO POSTMAN
+    // VALIDADO POSTMAN
     @GetMapping("/usuario/{usuarioId}")
     public ResponseEntity<List<Atracao>> getUsuarioAtracoes(@PathVariable Long usuarioId) {
         List<Atracao> atracoes = atracaoService.getUsuarioAtracoes(usuarioId);
         return new ResponseEntity<>(atracoes, HttpStatus.OK);
     }
 
-    //VALIDADO POSTMAN
+    // VALIDADO POSTMAN
     @GetMapping("/localizacao/{localizacaoId}")
     public ResponseEntity<List<Atracao>> getLocalizacaoAtracoes(@PathVariable Long localizacaoId) {
         List<Atracao> atracoes = atracaoService.getLocalizacaoAtracoes(localizacaoId);
         return new ResponseEntity<>(atracoes, HttpStatus.OK);
     }
 
-    //QUEBRADO - TO BE FIXED
+    // QUEBRADO - TO BE FIXED
     @PostMapping("usuario/{usuarioId}/localizacao/{localizacaoId}")
     public ResponseEntity<AtracaoDTO> saveAtracao(
             @RequestBody AtracaoDTO atracaoDTO,
             @PathVariable Long usuarioId,
-            @PathVariable Long localizacaoId
-    ) {
+            @PathVariable Long localizacaoId) {
 
         Atracao atracao = converteParaAtracaoEntity(atracaoDTO);
         Atracao savedAtracao = atracaoService.saveAtracao(atracao, usuarioId, localizacaoId);
@@ -118,18 +132,17 @@ public class AtracaoController {
         return new ResponseEntity<>(savedAtracaoDTO, HttpStatus.CREATED);
     }
 
-    //TODO - REVER LOGICA DE DEL
-    //VALIDADO POSTMAN - VAI DELETAR TUDO DA COMBINACAO [USUARIO + LOCALIZACAO]
+    // TODO - REVER LOGICA DE DEL
+    // VALIDADO POSTMAN - VAI DELETAR TUDO DA COMBINACAO [USUARIO + LOCALIZACAO]
     @DeleteMapping("usuario/{usuarioId}/localizacao/{localizacaoId}")
     public ResponseEntity<Void> deleteAtracao(
             @PathVariable Long usuarioId,
-            @PathVariable Long localizacaoId
-    ) {
+            @PathVariable Long localizacaoId) {
         atracaoService.deleteAtracao(usuarioId, localizacaoId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    //METODO AUXILIAR
+    // METODO AUXILIAR
     private AtracaoDTO converteParaAtracaoDTO(Atracao atracao) {
         AtracaoDTO atracaoDTO = new AtracaoDTO();
         atracaoDTO.setId(atracao.getId());
@@ -140,22 +153,22 @@ public class AtracaoController {
         atracaoDTO.setStatus(atracao.getStatus());
         atracaoDTO.setUsuario(converteParaUsuarioDTO(atracao.getUsuario()));
         atracaoDTO.setLocalizacao(converteParaLocalizacaoDTO(atracao.getLocalizacao()));
-   
+
         List<ImagemDTO> imagemDTOs = atracao.getImagens().stream()
                 .map(this::converteParaImagemDTO)
                 .collect(Collectors.toList());
         atracaoDTO.setImagens(imagemDTOs);
-    
+
         return atracaoDTO;
     }
 
-    //METODO AUXILIAR
+    // METODO AUXILIAR
     private ImagemDTO converteParaImagemDTO(Imagem imagem) {
         ImagemDTO imagemDTO = new ImagemDTO();
         imagemDTO.setId(imagem.getId());
         imagemDTO.setNome(imagem.getNome());
         imagemDTO.setUrlCaminho(imagem.getUrlCaminho());
-    
+
         return imagemDTO;
     }
 
@@ -169,7 +182,7 @@ public class AtracaoController {
         usuarioDTO.setFoto(usuario.getFoto());
         usuarioDTO.setAtivo(usuario.isAtivo());
         usuarioDTO.setPerfil(usuario.getPerfil());
-    
+
         return usuarioDTO;
     }
 
@@ -197,7 +210,7 @@ public class AtracaoController {
         atracao.setStatus(atracaoDTO.getStatus());
         atracao.setUsuario(converteParaUsuarioEntity(atracaoDTO.getUsuario()));
         atracao.setLocalizacao(converteParaLocalizacaoEntity(atracaoDTO.getLocalizacao()));
-    
+
         return atracao;
     }
 
@@ -221,6 +234,5 @@ public class AtracaoController {
 
         return localizacao;
     }
-   
-}
 
+}
