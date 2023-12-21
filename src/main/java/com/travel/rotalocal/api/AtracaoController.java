@@ -1,17 +1,15 @@
 package com.travel.rotalocal.api;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-
 import com.travel.rotalocal.dto.AtracaoDTO;
 import com.travel.rotalocal.dto.ImagemDTO;
 import com.travel.rotalocal.dto.LocalizacaoDTO;
 import com.travel.rotalocal.dto.UsuarioDTO;
 import com.travel.rotalocal.exception.AtracaoNotFoundException;
 import com.travel.rotalocal.model.entity.Atracao;
+import com.travel.rotalocal.model.entity.CategoriaAtracao;
 import com.travel.rotalocal.model.entity.Imagem;
 import com.travel.rotalocal.model.entity.Localizacao;
 import com.travel.rotalocal.model.entity.StatusAtracao;
@@ -32,23 +30,12 @@ public class AtracaoController {
     AtracaoService atracaoService;
 
     // VALIDADO POSTMAN
-    // @GetMapping
-    // public ResponseEntity<List<AtracaoDTO>> getAllAtracoesWithRanking() {
-    //     try {
-    //         List<AtracaoDTO> atracoes = atracaoService.getAllAtracoesWithRanking();
-    //         atracoes.sort(Comparator.comparing(AtracaoDTO::getAtracaoRanking));
-    //         return ResponseEntity.ok(atracoes);
-    //     } catch (Exception e) {
-    //         return ResponseEntity.status(500).build();
-    //     }
-    // }
-
-    @GetMapping // filtrar assim /api/atracao?categoria=PRAIAS
+    @GetMapping
     public ResponseEntity<List<AtracaoDTO>> getAllAtracoesWithRanking(
-            @RequestParam(required = false) String categoria) {
+            @RequestParam(required = false) CategoriaAtracao categoria) {
         try {
             List<AtracaoDTO> atracoes = atracaoService.getAllAtracoesWithRanking();
-            if (categoria != null && !categoria.isEmpty()) {
+            if (categoria != null) {
                 atracoes = atracoes.stream()
                         .filter(atracao -> categoria.equals(atracao.getCategoria()))
                         .collect(Collectors.toList());
