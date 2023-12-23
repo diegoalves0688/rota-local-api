@@ -7,11 +7,16 @@ import com.travel.rotalocal.model.entity.Usuario;
 public interface UsuarioService {
 
     Usuario getUsuario(Long id);
-    Usuario saveUsuario(Usuario usuario);
-    void deleteUsuario(Long id);
+
     List<Usuario> getUsuarios();
 
-    //regra de negocio
+    Usuario saveUsuario(Usuario usuario);
+
+    void deleteUsuario(Long id);
+
+    Usuario updateUsuario(Long id, Usuario updatedUsuario);
+
+    // regra de negocio
     void registerUsuario(Usuario usuario);
 
 }
