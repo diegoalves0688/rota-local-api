@@ -35,38 +35,17 @@ public class AtracaoServiceImpl implements AtracaoService {
     LocalizacaoRepository localizacaoRepository;
     UsuarioRepository usuarioRepository;
 
+    /**********************************
+     * GET
+     **********************************/
     public List<Atracao> getAtracao(Long usuarioId, Long localizacaoId) {
         List<Atracao> atracoes = atracaoRepository.findByUsuarioIdAndLocalizacaoId(usuarioId, localizacaoId);
-    
+
         if (atracoes.isEmpty()) {
             throw new AtracaoNotFoundException(usuarioId, localizacaoId);
         }
-    
-        return atracoes;
-    }
 
-    @Override
-    public Atracao getAtracaoById(Long atracaoId) {
-        return atracaoRepository.findById(atracaoId).orElse(null);
-    }
-        /**********************************
-     * POST
-     **********************************/
-    @Override
-    public Atracao saveAtracao(Atracao atracao, Long usuarioId, Long localizacaoId) {
-        Usuario usuario = UsuarioServiceImpl.unwrapUsuario(usuarioRepository.findById(usuarioId), usuarioId);
-        Localizacao localizacao = LocalizacaoServiceImpl.unwrapLocalizacao(localizacaoRepository.findById(localizacaoId), localizacaoId);
-        atracao.setUsuario(usuario);
-        atracao.setLocalizacao(localizacao);
-        atracao.setDataRegistro(LocalDateTime.now());
-        return atracaoRepository.save(atracao);
-    }
-    
-    //TODO - updateAtracao
-   
-    @Override
-    public void deleteAtracao(Long usuarioId, Long localizacaoId) {
-        atracaoRepository.deleteByUsuarioIdAndLocalizacaoId(usuarioId, localizacaoId);
+        return atracoes;
     }
 
     @Override
@@ -81,23 +60,60 @@ public class AtracaoServiceImpl implements AtracaoService {
 
     @Override
     public List<Atracao> getAllAtracoes() {
-        return (List<Atracao>)atracaoRepository.findAll();
+        return (List<Atracao>) atracaoRepository.findAll();
     }
 
-    //METODO AUXILIAR
+    @Override
+    public Atracao getAtracaoById(Long atracaoId) {
+        return atracaoRepository.findById(atracaoId).orElse(null);
+    }
+
+    /**********************************
+     * POST
+     **********************************/
+    @Override
+    public Atracao saveAtracao(Atracao atracao, Long usuarioId, Long localizacaoId) {
+        Usuario usuario = UsuarioServiceImpl.unwrapUsuario(usuarioRepository.findById(usuarioId), usuarioId);
+        Localizacao localizacao = LocalizacaoServiceImpl
+                .unwrapLocalizacao(localizacaoRepository.findById(localizacaoId), localizacaoId);
+        atracao.setUsuario(usuario);
+        atracao.setLocalizacao(localizacao);
+        atracao.setDataRegistro(LocalDateTime.now());
+        return atracaoRepository.save(atracao);
+    }
+
+    /**********************************
+     * DELETE
+     **********************************/
+    @Override
+    public void deleteAtracao(Long usuarioId, Long localizacaoId) {
+        atracaoRepository.deleteByUsuarioIdAndLocalizacaoId(usuarioId, localizacaoId);
+    }
+
+    /**********************************
+     * UPDATE
+     **********************************/
+    // TODO - updateAtracao
+
+    /**********************************
+     * AUXILIAR
+     **********************************/
+    // METODO AUXILIAR
     static Atracao unwrapAtracao(Optional<Atracao> entity, Long usuarioId, Long localizacaoId) {
-        if (entity.isPresent()) return entity.get();
-        else throw new AtracaoNotFoundException(usuarioId, localizacaoId);
+        if (entity.isPresent())
+            return entity.get();
+        else
+            throw new AtracaoNotFoundException(usuarioId, localizacaoId);
     }
 
-    //RANKING
+    // RANKING
     @Override
     public List<AtracaoDTO> getAllAtracoesWithRanking() {
         List<Atracao> atracoes = getAllAtracoes();
         List<AtracaoDTO> atracaoDTOList = convertToDTO(atracoes);
         return calculateRanking(atracaoDTOList);
     }
-   
+
     private AtracaoDTO convertToDTO(Atracao atracao) {
         AtracaoDTO atracaoDTO = new AtracaoDTO();
         atracaoDTO.setId(atracao.getId());
@@ -107,14 +123,14 @@ public class AtracaoServiceImpl implements AtracaoService {
         atracaoDTO.setStatus(StatusAtracao.valueOf(atracao.getStatus().name()));
         atracaoDTO.setDataRegistro(atracao.getDataRegistro());
         atracaoDTO.setCategoria(CategoriaAtracao.valueOf(atracao.getCategoria().name()));
-      
-        // CONVERSAO 
+
+        // CONVERSAO
         List<AvaliacaoAtracaoDTO> avaliacaoAtracaoDTOList = atracao.getAvaliacoesAtracoes().stream()
-        .map(this::convertToDTO)
-        .collect(Collectors.toList());
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
         atracaoDTO.setAvaliacoesAtracoes(avaliacaoAtracaoDTOList);
-    
-        // CONVERSAO 
+
+        // CONVERSAO
         Usuario usuario = atracao.getUsuario();
         UsuarioDTO usuarioDTO = new UsuarioDTO();
         usuarioDTO.setId(usuario.getId());
@@ -125,8 +141,8 @@ public class AtracaoServiceImpl implements AtracaoService {
         usuarioDTO.setAtivo(usuario.isAtivo());
         usuarioDTO.setPerfil(usuario.getPerfil());
         atracaoDTO.setUsuario(usuarioDTO);
-    
-        // CONVERSAO 
+
+        // CONVERSAO
         Localizacao localizacao = atracao.getLocalizacao();
         LocalizacaoDTO localizacaoDTO = new LocalizacaoDTO();
         localizacaoDTO.setId(localizacao.getId());
@@ -134,13 +150,13 @@ public class AtracaoServiceImpl implements AtracaoService {
         localizacaoDTO.setEstado(localizacao.getEstado());
         localizacaoDTO.setCidade(localizacao.getCidade());
         atracaoDTO.setLocalizacao(localizacaoDTO);
-    
+
         // CONVERSAO
         List<ImagemDTO> imagemDTOList = atracao.getImagens().stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
         atracaoDTO.setImagens(imagemDTOList);
-       
+
         return atracaoDTO;
     }
 
@@ -151,8 +167,8 @@ public class AtracaoServiceImpl implements AtracaoService {
         avaliacaoAtracaoDTO.setAvaliacaoPositiva(avaliacaoAtracao.isAvaliacaoPositiva());
         return avaliacaoAtracaoDTO;
     }
-    
-    // CONVERSAO 
+
+    // CONVERSAO
     private ImagemDTO convertToDTO(Imagem imagem) {
         ImagemDTO imagemDTO = new ImagemDTO();
         imagemDTO.setId(imagem.getId());
@@ -162,14 +178,14 @@ public class AtracaoServiceImpl implements AtracaoService {
         return imagemDTO;
     }
 
-    //CONVERSAO
+    // CONVERSAO
     private List<AtracaoDTO> convertToDTO(List<Atracao> atracoes) {
         return atracoes.stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }
 
-    //RANKING
+    // RANKING
     @Override
     public AtracaoDTO getAtracaoWithRankingById(Long atracaoId) {
         List<AtracaoDTO> atracoesWithRanking = getAllAtracoesWithRanking();
@@ -181,40 +197,39 @@ public class AtracaoServiceImpl implements AtracaoService {
         return optionalAtracao.orElseThrow(() -> new AtracaoNotFoundException2(atracaoId));
     }
 
-    //RANKING
+    // RANKING
     private List<AtracaoDTO> calculateRanking(List<AtracaoDTO> atracaoDTOList) {
         atracaoDTOList.forEach(atracaoDTO -> {
             long trueCount = atracaoDTO.getAvaliacoesAtracoes().stream()
                     .filter(AvaliacaoAtracaoDTO::isAvaliacaoPositiva)
                     .count();
-    
+
             long falseCount = atracaoDTO.getAvaliacoesAtracoes().size() - trueCount;
-    
+
             atracaoDTO.setAvaliacaoSaldoPontos((int) (trueCount - falseCount));
         });
-    
+
         // ORDENAR
         atracaoDTOList.sort(Comparator.comparingInt(AtracaoDTO::getAvaliacaoSaldoPontos).reversed());
-       
+
         int atracaoRanking = 1;
         for (AtracaoDTO atracaoDTO : atracaoDTOList) {
             atracaoDTO.setAtracaoRanking(atracaoRanking++);
         }
-    
+
         return atracaoDTOList;
     }
-       
-    //RANKING
+
+    // RANKING
     @Override
     public int calculateRankingForAtracao(Atracao atracao) {
-    long trueCount = atracao.getAvaliacoesAtracoes().stream()
-            .filter(AvaliacaoAtracao::isAvaliacaoPositiva)
-            .count();
+        long trueCount = atracao.getAvaliacoesAtracoes().stream()
+                .filter(AvaliacaoAtracao::isAvaliacaoPositiva)
+                .count();
 
-    long falseCount = atracao.getAvaliacoesAtracoes().size() - trueCount;
+        long falseCount = atracao.getAvaliacoesAtracoes().size() - trueCount;
 
-    return (int) (trueCount - falseCount);
+        return (int) (trueCount - falseCount);
     }
 
 }
-

@@ -12,6 +12,7 @@ import com.travel.rotalocal.model.repository.AtracaoRepository;
 import com.travel.rotalocal.model.repository.RecomendacaoAtracaoRepository;
 import com.travel.rotalocal.model.repository.UsuarioRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import lombok.AllArgsConstructor;
@@ -24,6 +25,9 @@ public class RecomendacaoAtracaoServiceImpl implements RecomendacaoAtracaoServic
     AtracaoRepository atracaoRepository;
     UsuarioRepository usuarioRepository;
 
+    /**********************************
+     * GET
+     **********************************/
     @Override
     public List<RecomendacaoAtracao> getUsuarioRecomendacaoAtracao(Long usuarioId) {
         return recomendacaoAtracaoRepository.findByUsuarioId(usuarioId);
@@ -46,6 +50,9 @@ public class RecomendacaoAtracaoServiceImpl implements RecomendacaoAtracaoServic
         return unwrapRecomendacaoAtracao(recomendacaoAtracao, usuarioId, atracaoId);
     }
 
+    /**********************************
+     * SAVE
+     **********************************/
     @Override
     public RecomendacaoAtracao saveRecomendacaoAtracao(RecomendacaoAtracao recomendacaoAtracao, Long usuarioId,
             Long atracaoId) {
@@ -64,33 +71,37 @@ public class RecomendacaoAtracaoServiceImpl implements RecomendacaoAtracaoServic
         }
     }
 
+    /**********************************
+     * DELETE
+     **********************************/
     @Override
     public void deleteRecomendacaoAtracao(Long usuarioId, Long atracaoId) {
         recomendacaoAtracaoRepository.deleteByUsuarioIdAndAtracaoId(usuarioId, atracaoId);
     }
 
-    // TODO - update
+    /**********************************
+     * UPDATE
+     **********************************/
     @Override
     public RecomendacaoAtracao updateRecomendacaoAtracao(RecomendacaoAtracao recomendacaoAtracao) {
-        // Assuming that the 'id' of the 'RecomendacaoAtracao' is not null
         if (recomendacaoAtracao.getId() == null) {
-            throw new IllegalArgumentException("RecomendacaoAtracao nao pode ter id nulo");
+            throw new IllegalArgumentException("Recomendacao Atracao nao pode ter id nulo");
         }
-    
+
         RecomendacaoAtracao existingRecomendacao = recomendacaoAtracaoRepository.findById(recomendacaoAtracao.getId())
                 .orElseThrow(() -> new RecomendacaoAtracaoNotFoundException2(recomendacaoAtracao.getId()));
-    
-        // Check if dataRegistro is present in the request payload and update it
-        if (recomendacaoAtracao.getDataRegistro() != null) {
-            existingRecomendacao.setDataRegistro(recomendacaoAtracao.getDataRegistro());
+
+        if (recomendacaoAtracao.getRecomendacao() != null) {
+            existingRecomendacao.setRecomendacao(recomendacaoAtracao.getRecomendacao());
+            existingRecomendacao.setDataRegistro(LocalDateTime.now());
         }
-    
-        // You can add more fields to update if needed
-    
+
         return recomendacaoAtracaoRepository.save(existingRecomendacao);
     }
-    
 
+    /**********************************
+     * AUXILIAR
+     **********************************/
     // METODO AUXILIAR
     static RecomendacaoAtracao unwrapRecomendacaoAtracao(Optional<RecomendacaoAtracao> entity, Long usuarioId,
             Long atracaoId) {
