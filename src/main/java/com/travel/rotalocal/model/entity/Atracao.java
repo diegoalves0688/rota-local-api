@@ -1,6 +1,9 @@
 package com.travel.rotalocal.model.entity;
 
+import java.time.LocalDateTime;
 import java.util.List;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -36,6 +39,10 @@ public class Atracao {
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
     private StatusAtracao status;
+
+    @CreationTimestamp
+    @Column(name = "data_registro", nullable = false)
+    private LocalDateTime  dataRegistro;
 
     @ManyToOne(optional = false)  
     @JoinColumn(name = "usuario_id", referencedColumnName = "id") 

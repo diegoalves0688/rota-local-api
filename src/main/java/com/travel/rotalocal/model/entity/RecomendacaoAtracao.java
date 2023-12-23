@@ -1,6 +1,9 @@
 package com.travel.rotalocal.model.entity;
 
+import java.time.LocalDateTime;
 import java.util.List;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -23,6 +26,10 @@ public class RecomendacaoAtracao {
 
     @Column(name = "recomendacao", nullable = false)
     private String recomendacao;
+    
+    @CreationTimestamp
+    @Column(name = "data_registro", nullable = false)
+    private LocalDateTime  dataRegistro;
 
     @ManyToOne(optional = false) 
     @JoinColumn(name = "usuario_id", referencedColumnName = "id") 

@@ -1,5 +1,6 @@
 package com.travel.rotalocal.dto;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import com.travel.rotalocal.model.entity.CategoriaAtracao;
@@ -13,10 +14,11 @@ public class AtracaoDTO {
     private boolean ativo;
     private CategoriaAtracao categoria;
     private StatusAtracao status;
+    private LocalDateTime dataRegistro;
     private UsuarioDTO usuario;
     private LocalizacaoDTO localizacao;
     private List<ImagemDTO> imagens;
-    
+
     private List<AvaliacaoAtracaoDTO> avaliacoesAtracoes;
     private int avaliacaoSaldoPontos;
     private int atracaoRanking;
@@ -73,6 +75,14 @@ public class AtracaoDTO {
         this.status = status;
     }
 
+    public LocalDateTime getDataRegistro() {
+        return dataRegistro;
+    }
+
+    public void setDataRegistro(LocalDateTime dataRegistro) {
+        this.dataRegistro = dataRegistro;
+    }
+
     public UsuarioDTO getUsuario() {
         return this.usuario;
     }
@@ -122,4 +132,3 @@ public class AtracaoDTO {
     }
 
 }
-
