@@ -13,6 +13,7 @@ public interface RecomendacaoAtracaoService {
     RecomendacaoAtracao saveRecomendacaoAtracao(RecomendacaoAtracao recomendacaoAtracao, Long usuarioId, Long atracaoId);
     
     //TODO RecomendacaoAtracao updateRecomendacaoAtracao();
+    RecomendacaoAtracao updateRecomendacaoAtracao(RecomendacaoAtracao recomendacaoAtracao);
     
     void deleteRecomendacaoAtracao(Long usuarioId, Long atracaoId);
     
