@@ -30,6 +30,9 @@ public class AtracaoController {
 
     AtracaoService atracaoService;
 
+    /**********************************
+     * GET
+     **********************************/
     // VALIDADO POSTMAN
     @GetMapping
     public ResponseEntity<List<AtracaoDTO>> getAllAtracoesWithRanking(
@@ -48,21 +51,6 @@ public class AtracaoController {
         }
     }
 
-    @PostMapping
-    public ResponseEntity novaAtracao(@RequestBody AtracaoDTO atracaoDTO) {
-
-        Atracao atracao = new Atracao();
-        atracao.setNome(atracaoDTO.getNome());
-        atracao.setDescricao(atracaoDTO.getDescricao());
-        atracao.setAtivo(true);
-        atracao.setCategoria(atracaoDTO.getCategoria());
-        atracao.setStatus(StatusAtracao.PUBLICO);
-        atracao.setDataRegistro(LocalDateTime.now());
-
-        return ResponseEntity.ok(atracaoService.saveAtracao(atracao, atracaoDTO.getUsuario().getId(),
-                atracaoDTO.getLocalizacao().getId()));
-    }
-
     // VALIDADO POSTMAN
     @GetMapping("/{atracaoId}")
     public ResponseEntity<AtracaoDTO> getAtracaoWithRankingById(@PathVariable Long atracaoId) {
@@ -77,7 +65,6 @@ public class AtracaoController {
     }
 
     // VALIDADO POSTMAN
-    // BUG INVESTIGACAO
     @GetMapping("usuario/{usuarioId}/localizacao/{localizacaoId}")
     public ResponseEntity<List<Atracao>> getAtracao(
             @PathVariable Long usuarioId,
@@ -107,6 +94,25 @@ public class AtracaoController {
         return new ResponseEntity<>(atracoes, HttpStatus.OK);
     }
 
+    /**********************************
+     * POST
+     **********************************/
+    // VALIDADO POSTMAN 20231223
+    @PostMapping
+    public ResponseEntity novaAtracao(@RequestBody AtracaoDTO atracaoDTO) {
+
+        Atracao atracao = new Atracao();
+        atracao.setNome(atracaoDTO.getNome());
+        atracao.setDescricao(atracaoDTO.getDescricao());
+        atracao.setAtivo(true);
+        atracao.setCategoria(atracaoDTO.getCategoria());
+        atracao.setStatus(StatusAtracao.PUBLICO);
+        atracao.setDataRegistro(LocalDateTime.now());
+
+        return ResponseEntity.ok(atracaoService.saveAtracao(atracao, atracaoDTO.getUsuario().getId(),
+                atracaoDTO.getLocalizacao().getId()));
+    }
+
     // QUEBRADO - TO BE FIXED
     @PostMapping("usuario/{usuarioId}/localizacao/{localizacaoId}")
     public ResponseEntity<AtracaoDTO> saveAtracao(
@@ -114,13 +120,29 @@ public class AtracaoController {
             @PathVariable Long usuarioId,
             @PathVariable Long localizacaoId) {
 
-        Atracao atracao = converteParaAtracaoEntity(atracaoDTO);
-        Atracao savedAtracao = atracaoService.saveAtracao(atracao, usuarioId, localizacaoId);
+        System.out.println("Usuario: " + atracaoDTO.getUsuario());
+        System.out.println("Localizacao: " + atracaoDTO.getLocalizacao());
 
-        AtracaoDTO savedAtracaoDTO = converteParaAtracaoDTO(savedAtracao);
-        return new ResponseEntity<>(savedAtracaoDTO, HttpStatus.CREATED);
+        if (!usuarioId.equals(atracaoDTO.getUsuario().getId())
+                || !localizacaoId.equals(atracaoDTO.getLocalizacao().getId())) {
+            return ResponseEntity.badRequest().body(null);
+        }
+
+        try {
+            Atracao atracao = converteParaAtracaoEntity(atracaoDTO);
+            Atracao savedAtracao = atracaoService.saveAtracao(atracao, usuarioId, localizacaoId);
+
+            AtracaoDTO savedAtracaoDTO = converteParaAtracaoDTO(savedAtracao);
+            return new ResponseEntity<>(savedAtracaoDTO, HttpStatus.CREATED);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
     }
 
+    /**********************************
+     * DELETE
+     **********************************/
     // TODO - REVER LOGICA DE DEL
     // VALIDADO POSTMAN - VAI DELETAR TUDO DA COMBINACAO [USUARIO + LOCALIZACAO]
     @DeleteMapping("usuario/{usuarioId}/localizacao/{localizacaoId}")
@@ -131,6 +153,14 @@ public class AtracaoController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    /**********************************
+     * UPDATE
+     **********************************/
+    // TODO
+
+    /**********************************
+     * AUXILIAR
+     **********************************/
     // METODO AUXILIAR
     private AtracaoDTO converteParaAtracaoDTO(Atracao atracao) {
         AtracaoDTO atracaoDTO = new AtracaoDTO();
