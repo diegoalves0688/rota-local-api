@@ -16,6 +16,7 @@ import com.travel.rotalocal.model.entity.StatusAtracao;
 import com.travel.rotalocal.model.entity.Usuario;
 import com.travel.rotalocal.service.AtracaoService;
 
+import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -56,6 +57,7 @@ public class AtracaoController {
         atracao.setAtivo(true);
         atracao.setCategoria(atracaoDTO.getCategoria());
         atracao.setStatus(StatusAtracao.PUBLICO);
+        atracao.setDataRegistro(LocalDateTime.now());
 
         return ResponseEntity.ok(atracaoService.saveAtracao(atracao, atracaoDTO.getUsuario().getId(),
                 atracaoDTO.getLocalizacao().getId()));

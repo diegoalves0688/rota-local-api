@@ -14,7 +14,6 @@ import com.travel.rotalocal.model.entity.AvaliacaoAtracao;
 import com.travel.rotalocal.model.entity.CategoriaAtracao;
 import com.travel.rotalocal.model.entity.Imagem;
 import com.travel.rotalocal.model.entity.Localizacao;
-import com.travel.rotalocal.model.entity.PerfilUsuario;
 import com.travel.rotalocal.model.entity.StatusAtracao;
 import com.travel.rotalocal.model.entity.Usuario;
 import com.travel.rotalocal.model.repository.AtracaoRepository;
@@ -22,6 +21,7 @@ import com.travel.rotalocal.model.repository.LocalizacaoRepository;
 import com.travel.rotalocal.model.repository.UsuarioRepository;
 import lombok.AllArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -56,6 +56,7 @@ public class AtracaoServiceImpl implements AtracaoService {
         Localizacao localizacao = LocalizacaoServiceImpl.unwrapLocalizacao(localizacaoRepository.findById(localizacaoId), localizacaoId);
         atracao.setUsuario(usuario);
         atracao.setLocalizacao(localizacao);
+        atracao.setDataRegistro(LocalDateTime.now());
         return atracaoRepository.save(atracao);
     }
     
@@ -102,6 +103,7 @@ public class AtracaoServiceImpl implements AtracaoService {
         atracaoDTO.setDescricao(atracao.getDescricao());
         atracaoDTO.setAtivo(atracao.isAtivo());
         atracaoDTO.setStatus(StatusAtracao.valueOf(atracao.getStatus().name()));
+        atracaoDTO.setDataRegistro(atracao.getDataRegistro());
         atracaoDTO.setCategoria(CategoriaAtracao.valueOf(atracao.getCategoria().name()));
       
         // CONVERSAO 
