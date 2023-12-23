@@ -49,7 +49,9 @@ public class AtracaoServiceImpl implements AtracaoService {
     public Atracao getAtracaoById(Long atracaoId) {
         return atracaoRepository.findById(atracaoId).orElse(null);
     }
-    
+        /**********************************
+     * POST
+     **********************************/
     @Override
     public Atracao saveAtracao(Atracao atracao, Long usuarioId, Long localizacaoId) {
         Usuario usuario = UsuarioServiceImpl.unwrapUsuario(usuarioRepository.findById(usuarioId), usuarioId);

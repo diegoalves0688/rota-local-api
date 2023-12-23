@@ -97,7 +97,7 @@ public class AtracaoController {
     /**********************************
      * POST
      **********************************/
-    // VALIDADO POSTMAN 20231223
+    // VALIDADO POSTMAN 20231223 - TODO add trava
     @PostMapping
     public ResponseEntity novaAtracao(@RequestBody AtracaoDTO atracaoDTO) {
 
