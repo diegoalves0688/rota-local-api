@@ -45,7 +45,7 @@ CREATE TABLE atracao(
    ativo boolean NOT NULL,
    categoria VARCHAR(255) NOT NULL, 
    status VARCHAR(255) NOT NULL, 
-   data_registro date not null,
+   data_registro timestamp not null,
    usuario_id BIGINT,
    localizacao_id BIGINT,
    PRIMARY KEY(id),
@@ -78,7 +78,7 @@ CREATE TABLE avaliacao_atracao(
 CREATE TABLE recomendacao_atracao(
    id BIGINT GENERATED ALWAYS AS IDENTITY,
    recomendacao text NOT NULL,
-   data_registro date not null,
+   data_registro timestamp not null,
    usuario_id BIGINT,
    atracao_id BIGINT,
    PRIMARY KEY(id),
@@ -125,15 +125,15 @@ INSERT INTO public.usuario (nome, email, senha, foto, ativo, perfil)
 VALUES ('mary', 'mary@mail.com', 'senha-123', 'foto-mary', true, 'COLABORADOR');
 
 INSERT INTO public.atracao (nome,descricao,ativo,categoria, status, data_registro, usuario_id, localizacao_id) VALUES
-('Praia das pedrinhas','descricao pedrinhas', true,'PRAIAS' ,'PUBLICO','2023-12-23',1,1),
-('Praia das conchas','descricao conchas', true,'PRAIAS' ,'PUBLICO','2023-12-21',1,1),
-('cristo rendentor','estatua grande e longe', true,'MONUMENTOS' ,'PUBLICO','2023-12-20',2,3);
+('Praia das pedrinhas','descricao pedrinhas', true,'PRAIAS' ,'PUBLICO', current_timestamp,1,1),
+('Praia das conchas','descricao conchas', true,'PRAIAS' ,'PUBLICO', current_timestamp,1,1),
+('cristo rendentor','estatua grande e longe', true,'MONUMENTOS' ,'PUBLICO', current_timestamp,2,3);
 
 INSERT INTO public.avaliacao_atracao (avaliacao_positiva,usuario_id,atracao_id) VALUES
 (true,1,1);
 	
 INSERT INTO public.recomendacao_atracao (recomendacao, data_registro, usuario_id, atracao_id) VALUES
-('recomendacao teste 01 ', '2023-12-23', 1,1);
+('recomendacao teste 01 ', current_timestamp, 1,1);
 
 INSERT INTO public.avaliacao_recomendacao (avaliacao_positiva,usuario_id,recomendacao_id) VALUES
 (true,1,1);
