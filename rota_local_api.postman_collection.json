@@ -189,7 +189,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nome\": \"batcaverna-teste2\",\r\n    \"descricao\": \"cafofo do batman2\",\r\n    \"categoria\": \"MONUMENTOS\",\r\n    \"usuario\": {\r\n        \"id\": 2\r\n    },\r\n    \"localizacao\": {\r\n        \"id\": 11\r\n    }\r\n}",
+							"raw": "{\r\n    \"nome\": \"batcaverna-teste3\",\r\n    \"descricao\": \"cafofo do batman3\",\r\n    \"categoria\": \"MONUMENTOS\",\r\n    \"usuario\": {\r\n        \"id\": 2\r\n    },\r\n    \"localizacao\": {\r\n        \"id\": 12\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -843,7 +843,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/api/recomendacao-atracao/usuario/3/atracao/3",
+							"raw": "localhost:8080/api/recomendacao-atracao/usuario/3/atracao/2",
 							"host": [
 								"localhost"
 							],
@@ -854,7 +854,7 @@
 								"usuario",
 								"3",
 								"atracao",
-								"3"
+								"2"
 							]
 						}
 					},
@@ -901,7 +901,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": 2,\r\n    \"recomendacao\": \"teste update recomendacao HSUA\",\r\n    \"usuario\": {\r\n        \"id\": 2\r\n    },\r\n    \"atracao\": {\r\n        \"id\": 2\r\n    }\r\n}",
+							"raw": "{\r\n    \"id\": 3,\r\n    \"recomendacao\": \"teste update recomendacao HSUA\",\r\n    \"usuario\": {\r\n        \"id\": 2\r\n    },\r\n    \"atracao\": {\r\n        \"id\": 3\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1001,7 +1001,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nome\": \"batman\",\r\n    \"email\": \"batman@gmail.comm\",\r\n    \"senha\": \"batman-123\",\r\n    \"foto\": \"foto-batman\",\r\n    \"ativo\": true,\r\n    \"perfil\": \"COLABORADOR\"\r\n}",
+							"raw": "{\r\n    \"nome\": \"batman\",\r\n    \"email\": \"batmaaan@gmail.coMMMMmm\",\r\n    \"senha\": \"batman-123\",\r\n    \"foto\": \"foto-batman\",\r\n    \"ativo\": true,\r\n    \"perfil\": \"COLABORADOR\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1029,7 +1029,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/api/usuario/5",
+							"raw": "localhost:8080/api/usuario/7",
 							"host": [
 								"localhost"
 							],
@@ -1037,7 +1037,36 @@
 							"path": [
 								"api",
 								"usuario",
-								"5"
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "usuario update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"batmao\",\r\n    \"senha\": \"123456\",\r\n    \"foto\": \"foto-batmao\",\r\n    \"ativo\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/usuario/6",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"usuario",
+								"6"
 							]
 						}
 					},
