@@ -156,7 +156,20 @@ public class AtracaoController {
     /**********************************
      * UPDATE
      **********************************/
-    // TODO
+    // VALIDADO POSTMAN
+    @PutMapping("/{atracaoId}")
+    public ResponseEntity<Atracao> updateAtracao(
+            @PathVariable Long atracaoId,
+            @RequestBody Atracao updatedAtracao) {
+        try {
+            Atracao updatedAtracaoResult = atracaoService.updateAtracao(atracaoId, updatedAtracao);
+            return ResponseEntity.ok(updatedAtracaoResult);
+        } catch (AtracaoNotFoundException ex) {
+            return ResponseEntity.notFound().build();
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
 
     /**********************************
      * AUXILIAR
