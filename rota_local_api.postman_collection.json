@@ -189,7 +189,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nome\": \"batcaverna-teste3\",\r\n    \"descricao\": \"cafofo do batman3\",\r\n    \"categoria\": \"MONUMENTOS\",\r\n    \"usuario\": {\r\n        \"id\": 2\r\n    },\r\n    \"localizacao\": {\r\n        \"id\": 12\r\n    }\r\n}",
+							"raw": "{\r\n    \"nome\": \"batcaverna-testehhhNZZZ\",\r\n    \"descricao\": \"cafofo do batmanhhhhN\",\r\n    \"categoria\": \"TRILHAS\",\r\n    \"usuario\": {\r\n        \"id\": 2\r\n    },\r\n    \"localizacao\": {\r\n        \"id\": 4\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -232,6 +232,35 @@
 								"3",
 								"localizacao",
 								"13"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "atracao update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"TESTE UPDATE PRAIA\",\r\n  \"descricao\": \"ATUALIZADO TEXTO\",\r\n  \"ativo\": true,\r\n  \"categoria\": \"PRAIAS\", \r\n  \"status\": \"PUBLICO\" ,\r\n  \"localizacao\": {\"id\": 3} \r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/atracao/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"atracao",
+								"2"
 							]
 						}
 					},
@@ -320,7 +349,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/api/avaliacao-atracao/usuario/3/atracao/2",
+							"raw": "localhost:8080/api/avaliacao-atracao/usuario/3/atracao/1",
 							"host": [
 								"localhost"
 							],
@@ -331,7 +360,7 @@
 								"usuario",
 								"3",
 								"atracao",
-								"2"
+								"1"
 							]
 						}
 					},
@@ -698,7 +727,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"pais\": \"Brasillll\",\r\n    \"estado\": \"Amazonas\",\r\n    \"cidade\": \"ManaaaauUUs\"\r\n}",
+							"raw": "{\r\n    \"pais\": \"Brasillll\",\r\n    \"estado\": \"Amazonas\",\r\n    \"cidade\": \"MmmmanaaaauUUs\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -835,7 +864,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"recomendacao\": \"blablabalbalab\"\r\n}",
+							"raw": "{\r\n    \"recomendacao\": \"bleblebeleble\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -843,7 +872,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/api/recomendacao-atracao/usuario/3/atracao/2",
+							"raw": "localhost:8080/api/recomendacao-atracao/usuario/3/atracao/4",
 							"host": [
 								"localhost"
 							],
@@ -854,7 +883,7 @@
 								"usuario",
 								"3",
 								"atracao",
-								"2"
+								"4"
 							]
 						}
 					},
@@ -901,7 +930,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": 3,\r\n    \"recomendacao\": \"teste update recomendacao HSUA\",\r\n    \"usuario\": {\r\n        \"id\": 2\r\n    },\r\n    \"atracao\": {\r\n        \"id\": 3\r\n    }\r\n}",
+							"raw": "{\r\n    \"id\": 6,\r\n    \"recomendacao\": \"teste update recomendacao bleble\",\r\n    \"usuario\": {\r\n        \"id\": 3\r\n    },\r\n    \"atracao\": {\r\n        \"id\": 4\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
