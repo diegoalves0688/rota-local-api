@@ -18,30 +18,6 @@ DROP TYPE IF EXISTS status_atracao CASCADE;
 
 
 ------------------------- CRIAR TABELAS -------------------------
-/*
---ENUMS  
--- problema com requisicao de post https://vladmihalcea.com/the-best-way-to-map-an-enum-type-with-jpa-and-hibernate/
-CREATE TYPE perfil_usuario AS ENUM (
-    'COLABORADOR',
-    'ADMINISTRADOR'
-);
-   
-CREATE TYPE categoria_atracao AS ENUM (
-    'PRAIAS',
-    'TRILHAS',
-    'MUSEUS',
-    'RESTAURANTES',
-    'MONUMENTOS',
-    'BOATES',
-    'CACHOEIRAS'
-);
-   
-CREATE TYPE status_atracao AS ENUM (
-    'PUBLICO',
-    'REJEITADO'
-);
-*/
-
 --CLASSES
 CREATE TABLE usuario(
    id BIGINT GENERATED ALWAYS AS IDENTITY,
@@ -50,7 +26,7 @@ CREATE TABLE usuario(
    senha VARCHAR(255) NOT NULL,
    foto VARCHAR(255) NOT NULL,
    ativo boolean NOT NULL,
-   perfil VARCHAR(255) NOT NULL, --perfil perfil_usuario,
+   perfil VARCHAR(255) NOT NULL,
    PRIMARY KEY(id)
 );
 
@@ -67,8 +43,9 @@ CREATE TABLE atracao(
    nome VARCHAR(255) NOT NULL,
    descricao text NOT NULL,
    ativo boolean NOT NULL,
-   categoria VARCHAR(255) NOT NULL, --categoria categoria_atracao,
-   status VARCHAR(255) NOT NULL, --status status_atracao,
+   categoria VARCHAR(255) NOT NULL, 
+   status VARCHAR(255) NOT NULL, 
+   data_registro timestamp not null,
    usuario_id BIGINT,
    localizacao_id BIGINT,
    PRIMARY KEY(id),
@@ -82,10 +59,10 @@ CREATE TABLE imagem(
    nome VARCHAR(255) NOT NULL,
    url_caminho VARCHAR(255) NOT NULL,
    atracao_id BIGINT,
-   usuario_id BIGINT, --alteracao sabado
+   usuario_id BIGINT,
    PRIMARY KEY(id),
    CONSTRAINT fk_atracao FOREIGN KEY(atracao_id) REFERENCES atracao(id),
-   CONSTRAINT fk_usuario FOREIGN KEY(usuario_id) REFERENCES usuario(id) --alteracao sabado
+   CONSTRAINT fk_usuario FOREIGN KEY(usuario_id) REFERENCES usuario(id)
 );
 
 CREATE TABLE avaliacao_atracao(
@@ -101,6 +78,7 @@ CREATE TABLE avaliacao_atracao(
 CREATE TABLE recomendacao_atracao(
    id BIGINT GENERATED ALWAYS AS IDENTITY,
    recomendacao text NOT NULL,
+   data_registro timestamp not null,
    usuario_id BIGINT,
    atracao_id BIGINT,
    PRIMARY KEY(id),
@@ -138,42 +116,31 @@ INSERT INTO public.localizacao (pais,estado,cidade) VALUES
    ,('Brasil', 'Distrito Federal', 'Brasília');
 
 INSERT INTO public.usuario (nome, email, senha, foto, ativo, perfil)
---VALUES ('John', 'john@mail.com', 'senha-123', 'foto-john', true, 'ADMINISTRADOR'::perfil_usuario);
 VALUES ('John', 'john@mail.com', 'senha-123', 'foto-john', true, 'ADMINISTRADOR');
 
 INSERT INTO public.usuario (nome, email, senha, foto, ativo, perfil)
---VALUES ('lud', 'lud@mail.com', 'senha-123', 'foto-lud', true, 'COLABORADOR'::perfil_usuario);
 VALUES ('lud', 'lud@mail.com', 'senha-123', 'foto-lud', true, 'COLABORADOR');
 
 INSERT INTO public.usuario (nome, email, senha, foto, ativo, perfil)
 VALUES ('mary', 'mary@mail.com', 'senha-123', 'foto-mary', true, 'COLABORADOR');
 
-INSERT INTO public.atracao (nome,descricao,ativo,categoria, status, usuario_id, localizacao_id) VALUES
-	 --('Praia das pedrinhas','descricao pedrinhas', true,'PRAIAS'::categoria_atracao ,'PUBLICO'::status_atracao,1,1);
-	 	 ('Praia das pedrinhas','descricao pedrinhas', true,'PRAIAS' ,'PUBLICO',1,1);
-	 
-INSERT INTO public.atracao (nome,descricao,ativo,categoria,status, usuario_id,localizacao_id) VALUES
-	 --('Praia das conchas','descricao conchas', true,'PRAIAS'::categoria_atracao ,'PUBLICO'::status_atracao,1,1);
-	 ('Praia das conchas','descricao conchas', true,'PRAIAS' ,'PUBLICO',1,1);
-
-INSERT INTO public.atracao (nome,descricao,ativo,categoria,status, usuario_id,localizacao_id) VALUES
-	 ('cristo rendentoR','estatua grande e longe', true,'MONUMENTOS' ,'PUBLICO',2,3);
+INSERT INTO public.atracao (nome,descricao,ativo,categoria, status, data_registro, usuario_id, localizacao_id) VALUES
+('Praia das pedrinhas','descricao pedrinhas', true,'PRAIAS' ,'PUBLICO', current_timestamp,1,1),
+('Praia das conchas','descricao conchas', true,'PRAIAS' ,'PUBLICO', current_timestamp,1,1),
+('cristo rendentor','estatua grande e longe', true,'MONUMENTOS' ,'PUBLICO', current_timestamp,2,3);
 
 INSERT INTO public.avaliacao_atracao (avaliacao_positiva,usuario_id,atracao_id) VALUES
-	 (true,1,1);
+(true,1,1);
 	
-INSERT INTO public.recomendacao_atracao (recomendacao,usuario_id,atracao_id) VALUES
-	 ('recomendacao teste 01 ',1,1);
+INSERT INTO public.recomendacao_atracao (recomendacao, data_registro, usuario_id, atracao_id) VALUES
+('recomendacao teste 01 ', current_timestamp, 1,1);
 
 INSERT INTO public.avaliacao_recomendacao (avaliacao_positiva,usuario_id,recomendacao_id) VALUES
-	 (true,1,1);
-
---alterado sabado
-INSERT INTO public.imagem (nome,url_caminho,usuario_id,atracao_id) VALUES
-	 ('foto-2','http://localhost:8080/images/banner.png',1,1);
+(true,1,1);
 
 INSERT INTO public.imagem (nome,url_caminho,usuario_id,atracao_id) VALUES
-	 ('foto-1','http://localhost:8080/images/banner.png',1,2);
+('foto-2','http://localhost:8080/images/banner.png',1,1),
+('foto-1','http://localhost:8080/images/banner.png',1,2);
 	 
 	 
 
@@ -191,7 +158,7 @@ SELECT * FROM USUARIO;
 --3 usuarios john 1 adm , lud 2 colab, mary colab
 
 SELECT * FROM ATRACAO; 
---2 atracaoes da mesma localizacao 1 e de usuario 1 - sao 2 praias
+--2 atracaoes da mesma localizacao 1 e de usuario 1 - sao 2 PRAIIAS
 --1 atracaoes da       localizacao 3 e de usuario 2 - é MONUMENTOS
 
 SELECT * FROM AVALIACAO_ATRACAO;

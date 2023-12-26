@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "bce2fa69-e60b-4c32-bcbc-6d9d97e2c87c",
+		"_postman_id": "3cc93b38-d02a-45a3-ae62-7270eee69738",
 		"name": "projeto-rota",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "31469487"
@@ -59,7 +59,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/api/atracao/4",
+							"raw": "localhost:8080/api/atracao/2",
 							"host": [
 								"localhost"
 							],
@@ -67,7 +67,7 @@
 							"path": [
 								"api",
 								"atracao",
-								"4"
+								"2"
 							]
 						}
 					},
@@ -79,7 +79,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/api/atracao/usuario/4/localizacao/5",
+							"raw": "localhost:8080/api/atracao/usuario/1/localizacao/1",
 							"host": [
 								"localhost"
 							],
@@ -88,9 +88,9 @@
 								"api",
 								"atracao",
 								"usuario",
-								"4",
+								"1",
 								"localizacao",
-								"5"
+								"1"
 							]
 						}
 					},
@@ -102,7 +102,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/api/atracao/usuario/4",
+							"raw": "localhost:8080/api/atracao/usuario/2",
 							"host": [
 								"localhost"
 							],
@@ -111,7 +111,7 @@
 								"api",
 								"atracao",
 								"usuario",
-								"4"
+								"2"
 							]
 						}
 					},
@@ -135,7 +135,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/api/atracao/localizacao/5",
+							"raw": "localhost:8080/api/atracao/localizacao/3",
 							"host": [
 								"localhost"
 							],
@@ -144,7 +144,7 @@
 								"api",
 								"atracao",
 								"localizacao",
-								"5"
+								"3"
 							]
 						}
 					},
@@ -165,7 +165,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/api/atracao/usuario/4/localizacao/2",
+							"raw": "localhost:8080/api/atracao/usuario/3/localizacao/11",
 							"host": [
 								"localhost"
 							],
@@ -174,22 +174,22 @@
 								"api",
 								"atracao",
 								"usuario",
-								"4",
+								"3",
 								"localizacao",
-								"2"
+								"11"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "atracao cadastro",
+					"name": "atracao cadastro FUNFANDO",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nome\": \"batcaverna-teste2\",\r\n    \"descricao\": \"cafofo do batman2\",\r\n    \"ativo\": true,\r\n    \"categoria\": \"MONUMENTOS\",\r\n    \"status\": \"PUBLICO\"\r\n}",
+							"raw": "{\r\n    \"nome\": \"batcaverna-testehhhNZZZ\",\r\n    \"descricao\": \"cafofo do batmanhhhhN\",\r\n    \"categoria\": \"TRILHAS\",\r\n    \"usuario\": {\r\n        \"id\": 2\r\n    },\r\n    \"localizacao\": {\r\n        \"id\": 4\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -197,18 +197,14 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/api/atracao/usuario/4/localizacao/2",
+							"raw": "localhost:8080/api/atracao",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"api",
-								"atracao",
-								"usuario",
-								"4",
-								"localizacao",
-								"2"
+								"atracao"
 							]
 						}
 					},
@@ -236,6 +232,35 @@
 								"3",
 								"localizacao",
 								"13"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "atracao update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"TESTE UPDATE PRAIA\",\r\n  \"descricao\": \"ATUALIZADO TEXTO\",\r\n  \"ativo\": true,\r\n  \"categoria\": \"PRAIAS\", \r\n  \"status\": \"PUBLICO\" ,\r\n  \"localizacao\": {\"id\": 3} \r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/atracao/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"atracao",
+								"2"
 							]
 						}
 					},
@@ -324,7 +349,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/api/avaliacao-atracao/usuario/3/atracao/2",
+							"raw": "localhost:8080/api/avaliacao-atracao/usuario/3/atracao/1",
 							"host": [
 								"localhost"
 							],
@@ -335,7 +360,7 @@
 								"usuario",
 								"3",
 								"atracao",
-								"2"
+								"1"
 							]
 						}
 					},
@@ -394,7 +419,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/api/avaliacao-recomendacao/usuario/3",
+							"raw": "localhost:8080/api/avaliacao-recomendacao/usuario/1",
 							"host": [
 								"localhost"
 							],
@@ -403,7 +428,7 @@
 								"api",
 								"avaliacao-recomendacao",
 								"usuario",
-								"3"
+								"1"
 							]
 						}
 					},
@@ -415,7 +440,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/api/avaliacao-recomendacao/recomendacao/3",
+							"raw": "localhost:8080/api/avaliacao-recomendacao/recomendacao/1",
 							"host": [
 								"localhost"
 							],
@@ -424,7 +449,7 @@
 								"api",
 								"avaliacao-recomendacao",
 								"recomendacao",
-								"3"
+								"1"
 							]
 						}
 					},
@@ -611,7 +636,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/api/imagem/usuario/4/atracao/4",
+							"raw": "localhost:8080/api/imagem/usuario/2/atracao/4",
 							"host": [
 								"localhost"
 							],
@@ -620,7 +645,7 @@
 								"api",
 								"imagem",
 								"usuario",
-								"4",
+								"2",
 								"atracao",
 								"4"
 							]
@@ -702,7 +727,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"pais\": \"Brasillll\",\r\n    \"estado\": \"Amazonas\",\r\n    \"cidade\": \"ManaaaauUUs\"\r\n}",
+							"raw": "{\r\n    \"pais\": \"Brasillll\",\r\n    \"estado\": \"Amazonas\",\r\n    \"cidade\": \"MmmmanaaaauUUs\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -839,7 +864,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"recomendacao\": \"blablabalbalab - batcaverna escura demais\"\r\n}",
+							"raw": "{\r\n    \"recomendacao\": \"bleblebeleble\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -847,7 +872,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/api/recomendacao-atracao/usuario/1/atracao/4",
+							"raw": "localhost:8080/api/recomendacao-atracao/usuario/3/atracao/4",
 							"host": [
 								"localhost"
 							],
@@ -856,7 +881,7 @@
 								"api",
 								"recomendacao-atracao",
 								"usuario",
-								"1",
+								"3",
 								"atracao",
 								"4"
 							]
@@ -882,6 +907,45 @@
 								"1",
 								"atracao",
 								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "recomendacao atracao update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 6,\r\n    \"recomendacao\": \"teste update recomendacao bleble\",\r\n    \"usuario\": {\r\n        \"id\": 3\r\n    },\r\n    \"atracao\": {\r\n        \"id\": 4\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/recomendacao-atracao",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"recomendacao-atracao"
 							]
 						}
 					},
@@ -966,7 +1030,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nome\": \"batman\",\r\n    \"email\": \"batman@gmail.comm\",\r\n    \"senha\": \"batman-123\",\r\n    \"foto\": \"foto-batman\",\r\n    \"ativo\": true,\r\n    \"perfil\": \"COLABORADOR\"\r\n}",
+							"raw": "{\r\n    \"nome\": \"batman\",\r\n    \"email\": \"batmaaan@gmail.coMMMMmm\",\r\n    \"senha\": \"batman-123\",\r\n    \"foto\": \"foto-batman\",\r\n    \"ativo\": true,\r\n    \"perfil\": \"COLABORADOR\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -994,7 +1058,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/api/usuario/5",
+							"raw": "localhost:8080/api/usuario/7",
 							"host": [
 								"localhost"
 							],
@@ -1002,7 +1066,36 @@
 							"path": [
 								"api",
 								"usuario",
-								"5"
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "usuario update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"batmao\",\r\n    \"senha\": \"123456\",\r\n    \"foto\": \"foto-batmao\",\r\n    \"ativo\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/usuario/6",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"usuario",
+								"6"
 							]
 						}
 					},

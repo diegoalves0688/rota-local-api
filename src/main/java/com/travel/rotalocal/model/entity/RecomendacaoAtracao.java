@@ -1,5 +1,6 @@
 package com.travel.rotalocal.model.entity;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -12,9 +13,8 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "recomendacao_atracao",
-       uniqueConstraints = { @UniqueConstraint(columnNames = {"usuario_id", "atracao_id"})},
-       schema = "public")
+@Table(name = "recomendacao_atracao", uniqueConstraints = {
+        @UniqueConstraint(columnNames = { "usuario_id", "atracao_id" }) }, schema = "public")
 public class RecomendacaoAtracao {
 
     @Id
@@ -24,18 +24,24 @@ public class RecomendacaoAtracao {
     @Column(name = "recomendacao", nullable = false)
     private String recomendacao;
 
-    @ManyToOne(optional = false) 
-    @JoinColumn(name = "usuario_id", referencedColumnName = "id") 
+    @Column(name = "data_registro", nullable = false)
+    private LocalDateTime dataRegistro;
+
+    @PrePersist
+    protected void onCreate() {
+        dataRegistro = LocalDateTime.now();
+    }
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "usuario_id", referencedColumnName = "id")
     private Usuario usuario;
 
-    @ManyToOne(optional = false) 
-    @JoinColumn(name = "atracao_id",  referencedColumnName = "id") 
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "atracao_id", referencedColumnName = "id")
     private Atracao atracao;
-    
-    @JsonIgnore 
+
+    @JsonIgnore
     @OneToMany(mappedBy = "recomendacao", cascade = CascadeType.ALL)
     private List<AvaliacaoRecomendacao> avaliacoesRecomendacoes;
 
 }
-
-

@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.travel.rotalocal.exception.EmailAlreadyRegisteredException;
+import com.travel.rotalocal.exception.UsuarioNotFoundException;
 import com.travel.rotalocal.model.entity.Usuario;
 import com.travel.rotalocal.service.UsuarioService;
 
@@ -18,33 +19,27 @@ public class UsuarioController {
 
     private UsuarioService usuarioService;
 
-    //VALIDADO POSTMAN
+    /**********************************
+     * GET
+     **********************************/
+    // VALIDADO POSTMAN
     @GetMapping
     public ResponseEntity<List<Usuario>> getUsuarios() {
         List<Usuario> usuarios = usuarioService.getUsuarios();
         return new ResponseEntity<>(usuarios, HttpStatus.OK);
     }
-    
-    //VALIDADO POSTMAN
+
+    // VALIDADO POSTMAN
     @GetMapping("/{id}")
     public ResponseEntity<Usuario> getUsuario(@PathVariable Long id) {
         Usuario usuario = usuarioService.getUsuario(id);
         return new ResponseEntity<>(usuario, HttpStatus.OK);
     }
 
-    //VALIDADO POSTMAN
-    // BUG era por causa do postgres enum...
-    @PostMapping
-    public ResponseEntity<?> saveUsuario(@RequestBody Usuario usuario) {
-        try {
-            Usuario savedUsuario = usuarioService.saveUsuario(usuario);
-            return new ResponseEntity<>(savedUsuario, HttpStatus.CREATED);
-        } catch (Exception e) {
-            return new ResponseEntity<>("erro ao salvar usuario: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-     //VALIDADO POSTMAN - ENDPOINT COM TRAVA DE EMAIL
+    /**********************************
+     * POST
+     **********************************/
+    // VALIDADO POSTMAN - ENDPOINT COM TRAVA DE EMAIL
     @PostMapping("/cadastro")
     public ResponseEntity<String> registerUsuario(@RequestBody Usuario usuario) {
         try {
@@ -55,11 +50,43 @@ public class UsuarioController {
         }
     }
 
+    // VALIDADO POSTMAN
+    @PostMapping
+    public ResponseEntity<?> saveUsuario(@RequestBody Usuario usuario) {
+        try {
+            Usuario savedUsuario = usuarioService.saveUsuario(usuario);
+            return new ResponseEntity<>(savedUsuario, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>("erro ao salvar usuario: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
-    //VALIDADO POSTMAN
+    /**********************************
+     * DELETE
+     **********************************/
+    // VALIDADO POSTMAN
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUsuario(@PathVariable Long id) {
         usuarioService.deleteUsuario(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    /**********************************
+     * UPDATE
+     **********************************/
+    // VALIDADO POSTMAN
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateUsuario(@PathVariable Long id, @RequestBody Usuario updatedUsuario) {
+        try {
+            Usuario updatedUsuarioResult = usuarioService.updateUsuario(id, updatedUsuario);
+            return new ResponseEntity<>(updatedUsuarioResult, HttpStatus.OK);
+        } catch (UsuarioNotFoundException e) {
+            return new ResponseEntity<>("Usuário não encontrado", HttpStatus.NOT_FOUND);
+        }
+    }
+
+    /**********************************
+     * AUXILIAR
+     **********************************/
+
 }

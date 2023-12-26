@@ -6,14 +6,18 @@ import com.travel.rotalocal.model.entity.RecomendacaoAtracao;
 public interface RecomendacaoAtracaoService {
 
     List<RecomendacaoAtracao> getUsuarioRecomendacaoAtracao(Long usuarioId);
+
     List<RecomendacaoAtracao> getAtracaoRecomendacaoAtracao(Long atracaoId);
+
     List<RecomendacaoAtracao> getAllRecomendacoesAtracao();
+
     RecomendacaoAtracao getRecomendacaoAtracao(Long usuarioId, Long atracaoId);
 
-    RecomendacaoAtracao saveRecomendacaoAtracao(RecomendacaoAtracao recomendacaoAtracao, Long usuarioId, Long atracaoId);
-    
-    //TODO RecomendacaoAtracao updateRecomendacaoAtracao();
-    
+    RecomendacaoAtracao saveRecomendacaoAtracao(RecomendacaoAtracao recomendacaoAtracao, Long usuarioId,
+            Long atracaoId);
+
+    RecomendacaoAtracao updateRecomendacaoAtracao(RecomendacaoAtracao recomendacaoAtracao);
+
     void deleteRecomendacaoAtracao(Long usuarioId, Long atracaoId);
-    
+
 }
