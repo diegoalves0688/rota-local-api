@@ -7,12 +7,15 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.travel.rotalocal.dto.ImagemDTO;
+import com.travel.rotalocal.model.entity.Atracao;
 import com.travel.rotalocal.model.entity.Imagem;
+import com.travel.rotalocal.service.AtracaoService;
 import com.travel.rotalocal.service.ImagemService;
 
 import jakarta.servlet.http.HttpServletRequest;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import lombok.AllArgsConstructor;
 
@@ -25,6 +28,8 @@ public class ImagemController {
     private HttpServletRequest request;
 
     private ImagemService imagemService;
+
+    AtracaoService atracaoService;
 
     /**********************************
      * GET
@@ -71,7 +76,8 @@ public class ImagemController {
 
     //VALIDADO POSTMAN - DÚVIDA: COMO QUE ISSO SERA REFLETIDO NO DB?
     @PostMapping
-    public ResponseEntity handleFileUpload(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity handleFileUpload(@RequestParam("file") MultipartFile file,
+        @RequestParam("usuario") Long usuarioId, @RequestParam("atracao") Long atracaoId) {
 
         String fileName = "";
 
@@ -90,9 +96,18 @@ public class ImagemController {
             }
         }
 
-        imagemService.saveImagens(null, null, null);
+        List<Imagem> imageList = new ArrayList();
+        Imagem imagem = new Imagem();
+        imagem.setNome(file.getOriginalFilename());
+        imagem.setUrlCaminho(fileName);
+        imageList.add(imagem);
+        List<Imagem> imagens = imagemService.saveImagens(imageList, usuarioId, atracaoId);
 
-        return ResponseEntity.ok(new ImagemDTO(fileName));
+        Atracao atracao = atracaoService.getAtracaoById(atracaoId);
+        atracao.setImagens(imagens);
+        atracaoService.updateAtracao(atracaoId, atracao);
+
+        return ResponseEntity.ok(imagens);
     }
 
     /**********************************

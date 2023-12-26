@@ -110,6 +110,8 @@ public class AtracaoServiceImpl implements AtracaoService {
         existingAtracao.setStatus(updatedAtracao.getStatus());
         existingAtracao.setDataRegistro(LocalDateTime.now());
 
+        existingAtracao.setImagens(updatedAtracao.getImagens());
+
         Long updatedLocalizacaoId = updatedAtracao.getLocalizacao().getId();
         Localizacao updatedLocalizacao = localizacaoRepository.findById(updatedLocalizacaoId)
             .orElseThrow(() -> new LocalizacaoNotFoundException(updatedLocalizacaoId));

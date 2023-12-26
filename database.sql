@@ -139,8 +139,9 @@ INSERT INTO public.avaliacao_recomendacao (avaliacao_positiva,usuario_id,recomen
 (true,1,1);
 
 INSERT INTO public.imagem (nome,url_caminho,usuario_id,atracao_id) VALUES
-('foto-2','http://localhost:8080/images/banner.png',1,1),
-('foto-1','http://localhost:8080/images/banner.png',1,2);
+('banner.png','http://localhost:8080/images/banner.png',1,1),
+('banner.png','http://localhost:8080/images/banner.png',1,2),
+('banner.png','http://localhost:8080/images/banner.png',1,3);
 	 
 	 
 
