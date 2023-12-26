@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "3cc93b38-d02a-45a3-ae62-7270eee69738",
+		"_postman_id": "f8de98b2-0f9c-4d4c-b928-1828fe4453cd",
 		"name": "projeto-rota",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "31469487"
+		"_exporter_id": "27022140"
 	},
 	"item": [
 		{
@@ -1096,6 +1096,60 @@
 								"api",
 								"usuario",
 								"6"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "feedback",
+			"item": [
+				{
+					"name": "get feedback",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/feedback/usuario/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"feedback",
+								"usuario",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post feedback",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"usuarioId\": 2,\r\n    \"conteudo\": \"teste de conteudo\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/feedback",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"feedback"
 							]
 						}
 					},
