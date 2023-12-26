@@ -103,10 +103,6 @@ public class ImagemController {
         imageList.add(imagem);
         List<Imagem> imagens = imagemService.saveImagens(imageList, usuarioId, atracaoId);
 
-        Atracao atracao = atracaoService.getAtracaoById(atracaoId);
-        atracao.setImagens(imagens);
-        atracaoService.updateAtracao(atracaoId, atracao);
-
         return ResponseEntity.ok(imagens);
     }
 
