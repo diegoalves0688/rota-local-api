@@ -6,10 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.travel.rotalocal.dto.ImagemDTO;
-import com.travel.rotalocal.model.entity.Atracao;
 import com.travel.rotalocal.model.entity.Imagem;
-import com.travel.rotalocal.service.AtracaoService;
 import com.travel.rotalocal.service.ImagemService;
 
 import jakarta.servlet.http.HttpServletRequest;
