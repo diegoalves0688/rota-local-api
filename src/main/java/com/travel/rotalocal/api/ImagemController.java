@@ -29,8 +29,6 @@ public class ImagemController {
 
     private ImagemService imagemService;
 
-    AtracaoService atracaoService;
-
     /**********************************
      * GET
      **********************************/
