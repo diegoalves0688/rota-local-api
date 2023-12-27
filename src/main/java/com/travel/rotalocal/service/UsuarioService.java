@@ -8,6 +8,8 @@ public interface UsuarioService {
 
     Usuario getUsuario(Long id);
 
+    Usuario getUsuarioByEmail(String email);
+
     List<Usuario> getUsuarios();
 
     Usuario saveUsuario(Usuario usuario);
