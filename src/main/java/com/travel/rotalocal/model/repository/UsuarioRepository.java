@@ -7,4 +7,6 @@ public interface UsuarioRepository extends CrudRepository<Usuario, Long> {
     
     //regra de negocio
     boolean existsByEmail(String email);
+
+    Usuario findByEmail(String email);
 }

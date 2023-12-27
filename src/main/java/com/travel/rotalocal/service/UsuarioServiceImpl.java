@@ -81,4 +81,11 @@ public class UsuarioServiceImpl implements UsuarioService {
         else
             throw new UsuarioNotFoundException(id);
     }
+
+    @Override
+    public Usuario getUsuarioByEmail(String email) {
+        Usuario usuario = usuarioRepository.findByEmail(email);
+
+        return usuario;
+    }
 }
