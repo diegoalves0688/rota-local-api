@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.travel.rotalocal.dto.ImagemDTO;
 import com.travel.rotalocal.model.entity.Imagem;
 import com.travel.rotalocal.service.ImagemService;
 
@@ -100,6 +101,30 @@ public class ImagemController {
 
         return ResponseEntity.ok(imagens);
     }
+
+    @PostMapping("/usuario")
+    public ResponseEntity userFileUpload(@RequestParam("file") MultipartFile file) {
+
+        String fileName = "";
+
+        if (!file.isEmpty()) {
+            try {
+                String uploadsDir = "/images/";
+                String realPathtoUploads = request.getServletContext().getRealPath(uploadsDir);
+                if (!new File(realPathtoUploads).exists()) {
+                    new File(realPathtoUploads).mkdir();
+                }
+                fileName = file.getOriginalFilename();
+                String filePath = realPathtoUploads + fileName;
+                File dest = new File(filePath);
+                file.transferTo(dest);
+            } catch (Exception e) {
+            }
+        }
+
+        return ResponseEntity.ok(new ImagemDTO(fileName));
+    }
+
 
     /**********************************
      * DELETE
