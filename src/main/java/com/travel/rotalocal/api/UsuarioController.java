@@ -4,12 +4,17 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.travel.rotalocal.config.Tokens;
+import com.travel.rotalocal.dto.AuthDTO;
+import com.travel.rotalocal.dto.UsuarioDTO;
 import com.travel.rotalocal.exception.EmailAlreadyRegisteredException;
 import com.travel.rotalocal.exception.UsuarioNotFoundException;
 import com.travel.rotalocal.model.entity.Usuario;
 import com.travel.rotalocal.service.UsuarioService;
 
 import java.util.List;
+import java.util.UUID;
+
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
@@ -80,6 +85,26 @@ public class UsuarioController {
         try {
             Usuario updatedUsuarioResult = usuarioService.updateUsuario(id, updatedUsuario);
             return new ResponseEntity<>(updatedUsuarioResult, HttpStatus.OK);
+        } catch (UsuarioNotFoundException e) {
+            return new ResponseEntity<>("Usuário não encontrado", HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PostMapping("/autenticar")
+    public ResponseEntity<?> autenticarUsuario(@RequestBody UsuarioDTO usuarioDTO) {
+        try {
+            Usuario usuario = usuarioService.getUsuarioByEmail(usuarioDTO.getEmail());
+            if (usuario != null && usuario.getSenha().equals(usuarioDTO.getSenha())) {
+                String token = Tokens.getInstance().tokensList.get(usuario.getId());
+                if (token != null) {
+                    return new ResponseEntity<>(new AuthDTO(usuario.getId(), token), HttpStatus.OK);
+                } else {
+                    String newToken = UUID.randomUUID().toString();
+                    Tokens.getInstance().tokensList.put(usuario.getId(), newToken);
+                    return new ResponseEntity<>(new AuthDTO(usuario.getId(), newToken), HttpStatus.OK);
+                }
+            }
+            return new ResponseEntity<>("Usuário não encontrado", HttpStatus.NOT_FOUND);
         } catch (UsuarioNotFoundException e) {
             return new ResponseEntity<>("Usuário não encontrado", HttpStatus.NOT_FOUND);
         }
