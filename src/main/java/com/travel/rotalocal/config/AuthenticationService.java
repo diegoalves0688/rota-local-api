@@ -13,7 +13,11 @@ public class AuthenticationService {
 
     public static Authentication getAuthentication(HttpServletRequest request) {
         
-        if (request.getRequestURI().equals("/autenticar")) {
+        if (isAllowedMethod(request.getMethod())) {
+            return new ApiKeyAuthentication("", AuthorityUtils.NO_AUTHORITIES);
+        }
+
+        if (isOpenPath(request.getRequestURI())) {
             return new ApiKeyAuthentication("", AuthorityUtils.NO_AUTHORITIES);
         }
 
@@ -29,5 +33,16 @@ public class AuthenticationService {
         }
 
         return new ApiKeyAuthentication(apiKey, AuthorityUtils.NO_AUTHORITIES);
+    }
+
+    private static boolean isAllowedMethod(String method){
+        return method.equals("GET") || method.equals("OPTIONS");
+    }
+
+    private static boolean isOpenPath(String path){
+        return path.equals("/api/usuario/autenticar") ||
+            path.equals("/api/imagem/usuario") ||
+            path.equals("/api/imagem") ||
+            path.equals("/api/usuario");
     }
 }
