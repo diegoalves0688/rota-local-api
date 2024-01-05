@@ -30,6 +30,8 @@ public interface AtracaoService {
     // RANKING
     List<AtracaoDTO> getAllAtracoesWithRanking();
 
+    List<AtracaoDTO> search(String content);
+
     AtracaoDTO getAtracaoWithRankingById(Long atracaoId);
 
     int calculateRankingForAtracao(Atracao atracao);

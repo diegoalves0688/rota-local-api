@@ -17,6 +17,8 @@ public interface AtracaoRepository extends CrudRepository<Atracao, Long> {
 
     List<Atracao> findByUsuarioIdAndLocalizacaoId(Long usuarioId, Long localizacaoId);
 
+    List<Atracao> findByNomeContainingIgnoreCase(String content);
+
     @Transactional
     void deleteByUsuarioIdAndLocalizacaoId(Long usuarioId, Long localizacaoId);
 
