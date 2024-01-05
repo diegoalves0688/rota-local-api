@@ -51,6 +51,22 @@ public class AtracaoController {
         }
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<List<AtracaoDTO>> searchAtracoesWithRanking(@RequestParam(required = false) String content) {
+        try {
+            if (content != null) {
+                List<AtracaoDTO> atracoes = atracaoService.search(content);
+                atracoes.sort(Comparator.comparing(AtracaoDTO::getAtracaoRanking));
+                return ResponseEntity.ok(atracoes);
+            } else {
+                return ResponseEntity.status(204).build();
+            }
+            
+        } catch (Exception e) {
+            return ResponseEntity.status(500).build();
+        }
+    }
+
     // VALIDADO POSTMAN
     @GetMapping("/{atracaoId}")
     public ResponseEntity<AtracaoDTO> getAtracaoWithRankingById(@PathVariable Long atracaoId) {

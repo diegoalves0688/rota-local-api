@@ -13,7 +13,18 @@
 					"name": "atracao  all",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "X-API-KEY",
+								"value": "",
+								"type": "text"
+							},
+							{
+								"key": "X-API-TOKEN",
+								"value": "",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "localhost:8080/api/atracao",
 							"host": [
@@ -32,7 +43,18 @@
 					"name": "atracao all COM FILTRO CATEGORIA",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "X-API-KEY",
+								"value": "",
+								"type": "text"
+							},
+							{
+								"key": "X-API-TOKEN",
+								"value": "",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "localhost:8080/api/atracao?categoria=MONUMENTOS",
 							"host": [
@@ -57,7 +79,18 @@
 					"name": "atracao por id",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "X-API-KEY",
+								"value": "",
+								"type": "text"
+							},
+							{
+								"key": "X-API-TOKEN",
+								"value": "",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "localhost:8080/api/atracao/2",
 							"host": [
@@ -77,7 +110,18 @@
 					"name": "atracao por usuario e localizacao",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "X-API-KEY",
+								"value": "",
+								"type": "text"
+							},
+							{
+								"key": "X-API-TOKEN",
+								"value": "",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "localhost:8080/api/atracao/usuario/1/localizacao/1",
 							"host": [
@@ -100,7 +144,18 @@
 					"name": "atracao por usuario",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "X-API-KEY",
+								"value": "",
+								"type": "text"
+							},
+							{
+								"key": "X-API-TOKEN",
+								"value": "",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "localhost:8080/api/atracao/usuario/2",
 							"host": [
@@ -151,42 +206,21 @@
 					"response": []
 				},
 				{
-					"name": "atracao cadastro QUEBROU - TO BE FIXED",
+					"name": "atracao cadastro",
 					"request": {
 						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"nome\": \"batcaverna-teste2\",\r\n    \"descricao\": \"cafofo do batman2\",\r\n    \"ativo\": true,\r\n    \"categoria\": \"MONUMENTOS\",\r\n    \"status\": \"PUBLICO\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
+						"header": [
+							{
+								"key": "X-API-KEY",
+								"value": "",
+								"type": "text"
+							},
+							{
+								"key": "X-API-TOKEN",
+								"value": "",
+								"type": "text"
 							}
-						},
-						"url": {
-							"raw": "localhost:8080/api/atracao/usuario/3/localizacao/11",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"atracao",
-								"usuario",
-								"3",
-								"localizacao",
-								"11"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "atracao cadastro FUNFANDO",
-					"request": {
-						"method": "POST",
-						"header": [],
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"nome\": \"batcaverna-testehhhNZZZ\",\r\n    \"descricao\": \"cafofo do batmanhhhhN\",\r\n    \"categoria\": \"TRILHAS\",\r\n    \"usuario\": {\r\n        \"id\": 2\r\n    },\r\n    \"localizacao\": {\r\n        \"id\": 4\r\n    }\r\n}",
@@ -261,6 +295,43 @@
 								"api",
 								"atracao",
 								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "atracao search",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-API-KEY",
+								"value": "",
+								"type": "text"
+							},
+							{
+								"key": "X-API-TOKEN",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/api/atracao/search?content=pedrinhas",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"atracao",
+								"search"
+							],
+							"query": [
+								{
+									"key": "content",
+									"value": "pedrinhas"
+								}
 							]
 						}
 					},
@@ -1238,6 +1309,38 @@
 							"path": [
 								"api",
 								"feedback"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "autenticar",
+			"item": [
+				{
+					"name": "autenticar usuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"john@mail.com\",\r\n    \"senha\": \"senha-123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/autenticar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"autenticar"
 							]
 						}
 					},

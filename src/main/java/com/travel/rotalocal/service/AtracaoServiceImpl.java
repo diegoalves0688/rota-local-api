@@ -65,6 +65,11 @@ public class AtracaoServiceImpl implements AtracaoService {
     }
 
     @Override
+    public List<AtracaoDTO> search(String content) {
+        return convertToDTO(atracaoRepository.findByNomeContainingIgnoreCase(content));
+    }
+
+    @Override
     public Atracao getAtracaoById(Long atracaoId) {
         return atracaoRepository.findById(atracaoId).orElse(null);
     }
