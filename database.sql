@@ -119,7 +119,7 @@ INSERT INTO public.localizacao (pais,estado,cidade) VALUES
 INSERT INTO public.usuario (nome, email, senha, foto, ativo, perfil) VALUES 
 ('monica', 'monica@mail.com', 'senha-123', 'http://localhost:8080/images/monica.jpg', true, 'ADMINISTRADOR'),
 ('cebolinha', 'cebolinha@mail.com', 'senha-123', 'http://localhost:8080/images/cebolinha.png', true, 'ADMINISTRADOR'),
-('batman', 'batman@mail.com', 'senha-123', 'http://localhost:8080/images/batman.png', true, 'COLABORADOR'),
+('batman', 'batman@mail.com', 'senha-123', 'http://localhost:8080/images/batman.jpg', true, 'COLABORADOR'),
 ('coringa', 'coringa@mail.com', 'senha-123', 'http://localhost:8080/images/coringa.png', true, 'COLABORADOR'), --4
 ('wolverine', 'wolverine@mail.com', 'senha-123', 'http://localhost:8080/images/wolverine.jpg', true, 'COLABORADOR'),
 ('jean grey', 'jeangrey@mail.com', 'senha-123', 'http://localhost:8080/images/jean-grey.png', true, 'COLABORADOR'),
@@ -221,11 +221,11 @@ INSERT INTO public.avaliacao_recomendacao (avaliacao_positiva,usuario_id,recomen
 (false,5,9);
 
 INSERT INTO public.imagem (nome,url_caminho,usuario_id,atracao_id) VALUES
-('praia-pedrinhas.png','http://localhost:8080/images/praia-pedrinhas.png',1,1),
-('praia-ilha-couves.png','http://localhost:8080/images/praia-ilha-couves.png',1,2),
-('cristo-redentor.png','http://localhost:8080/images/cristo-redentor.png',1,3),
+('praia-pedrinhas.jpg','http://localhost:8080/images/praia-pedrinhas.jpg',1,1),
+('praia-ilha-couves.jpg','http://localhost:8080/images/praia-ilha-couves.jpg',1,2),
+('cristo-redentor.jpg','http://localhost:8080/images/cristo-redentor.jpg',1,3),
 ('batcaverna.png','http://localhost:8080/images/batcaverna.png',3,4),
-('fogo-chao.png','http://localhost:8080/images/fogo-chao.png',5,5),
+('fogo-chao.jpg','http://localhost:8080/images/fogo-chao.jpg',5,5),
 ('masp.jpg','http://localhost:8080/images/masp.jpg',4,6),
 ('cachoeira-buracao.jpg','http://localhost:8080/images/cachoeira-buracao.jpg',6,7),
 ('trilha-rio-boi.jpeg','http://localhost:8080/images/trilha-rio-boi.jpeg',7,8);
@@ -239,4 +239,3 @@ SELECT * FROM IMAGEM;
 SELECT * FROM LOCALIZACAO;
 SELECT * FROM RECOMENDACAO_ATRACAO;
 SELECT * FROM USUARIO;
-
