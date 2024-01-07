@@ -29,6 +29,39 @@ ou
 
 ```git push --set-upstream origin nome-da-minha-branch```
 
+## Como autenticar na api
+
+1° Enviar uma requisição com o usuário e senha para a api:
+
+```
+curl --location 'http://localhost:8080/api/usuario/autenticar' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "email": "mail@mail.com",
+    "senha": "123"
+}'
+```
+
+2° Utilizar o `userId` e o `token` retornados na resposta para autenticar as requisições, passando os valores como headers `X-API-KEY` e `X-API-TOKEN`, como por exemplo:
+ 
+```
+curl --location 'localhost:8080/api/atracao' \
+--header 'X-API-KEY: aqui-vai-o-userId' \
+--header 'X-API-TOKEN: aqui-vai-o-token' \
+--header 'Content-Type: application/json' \
+--data '{
+    "nome": "batcaverna-testehhhNZZZ",
+    "descricao": "cafofo do batmanhhhhN",
+    "categoria": "TRILHAS",
+    "usuario": {
+        "id": 2
+    },
+    "localizacao": {
+        "id": 4
+    }
+}'
+```
+
 ## Collection do Postman
 
 [link](https://github.com/diegoalves0688/rota-local-api/blob/main/rota_local_api.postman_collection.json)
