@@ -117,26 +117,39 @@ INSERT INTO public.localizacao (pais,estado,cidade) VALUES
    ,('Brasil', 'Distrito Federal', 'Brasília');
 
 INSERT INTO public.usuario (nome, email, senha, foto, ativo, perfil) VALUES 
-('monica', 'monica@mail.com', 'senha-123', 'http://localhost:8080/images/monica.jpg', true, 'ADMINISTRADOR'),
+('monica',    'monica@mail.com'   , 'senha-123', 'http://localhost:8080/images/monica.jpg'   , true, 'ADMINISTRADOR'),
 ('cebolinha', 'cebolinha@mail.com', 'senha-123', 'http://localhost:8080/images/cebolinha.png', true, 'ADMINISTRADOR'),
-('batman', 'batman@mail.com', 'senha-123', 'http://localhost:8080/images/batman.jpg', true, 'COLABORADOR'),
-('coringa', 'coringa@mail.com', 'senha-123', 'http://localhost:8080/images/coringa.png', true, 'COLABORADOR'), --4
+('batman',    'batman@mail.com'   , 'senha-123', 'http://localhost:8080/images/batman.jpg'   , true, 'COLABORADOR'),
+('coringa',   'coringa@mail.com'  , 'senha-123', 'http://localhost:8080/images/coringa.png'  , true, 'COLABORADOR'), --4
 ('wolverine', 'wolverine@mail.com', 'senha-123', 'http://localhost:8080/images/wolverine.jpg', true, 'COLABORADOR'),
-('jean grey', 'jeangrey@mail.com', 'senha-123', 'http://localhost:8080/images/jean-grey.png', true, 'COLABORADOR'),
-('ciclope', 'ciclope@mail.com', 'senha-123', 'http://localhost:8080/images/ciclope.png', true, 'COLABORADOR'), --7
+('jean grey', 'jeangrey@mail.com' , 'senha-123', 'http://localhost:8080/images/jean-grey.png', true, 'COLABORADOR'),
+('ciclope',   'ciclope@mail.com'  , 'senha-123', 'http://localhost:8080/images/ciclope.png'  , true, 'COLABORADOR'), --7
 ('arlequina', 'arlequina@mail.com', 'senha-123', 'http://localhost:8080/images/arlequina.png', true, 'COLABORADOR'),
-('pinguim', 'pinguim@mail.com', 'senha-123', 'http://localhost:8080/images/pinguim.png', true, 'COLABORADOR');
+('pinguim',   'pinguim@mail.com'  , 'senha-123', 'http://localhost:8080/images/pinguim.png'  , true, 'COLABORADOR');
 
-INSERT INTO public.atracao (nome,descricao,ativo,categoria, status, data_registro, usuario_id, localizacao_id) VALUES
+INSERT INTO public.atracao (nome, descricao, ativo, categoria, status, data_registro, usuario_id, localizacao_id) VALUES
 ('Praia das pedrinhas','descricao pedrinhas', true,'PRAIAS' ,'PUBLICO', current_timestamp,1,1),
 ('Praia das ilha das couves','praia tranquila e segura', true,'PRAIAS' ,'PUBLICO', current_timestamp,1,2),
 ('cristo rendentor','estatua grande e longe', true,'MONUMENTOS' ,'PUBLICO', current_timestamp,2,3),
 ('batcaverna','cafofo do batman', true, 'MONUMENTOS' ,'PUBLICO', current_timestamp,3,5),
 ('fogo de chao','hora do churrasco', true, 'RESTAURANTES' ,'PUBLICO', current_timestamp,5,7),
 ('masp','museu muito bom ', true, 'MUSEUS' ,'PUBLICO', current_timestamp,4,2),
-('cachoeira do buracao','sensacional, lugar lindo ', true, 'CAHOEIRAS' ,'PUBLICO', current_timestamp,6,8),
+('cachoeira do buracao','sensacional, lugar lindo ', true, 'CACHOEIRAS' ,'PUBLICO', current_timestamp,6,8),
 ('pinguim nightclub','show de bola para dançar, lotado no fds', true, 'BOATES' ,'PUBLICO', current_timestamp,9,12),
 ('trilha do rio do boi', 'trilha maravilhosa!!!', true, 'TRILHAS' ,'PUBLICO', current_timestamp,7,11);
+
+
+INSERT INTO public.imagem (nome,url_caminho,usuario_id,atracao_id) VALUES
+('praia-pedrinhas.jpg','http://localhost:8080/images/praia-pedrinhas.jpg',1,1),
+('praia-ilha-couves.jpg','http://localhost:8080/images/praia-ilha-couves.jpg',1,2),
+('cristo-redentor.jpg','http://localhost:8080/images/cristo-redentor.jpg',2,3),
+('batcaverna.png','http://localhost:8080/images/batcaverna.png',3,4),
+('fogo-chao.jpg','http://localhost:8080/images/fogo-chao.jpg',5,5),
+('masp.jpg','http://localhost:8080/images/masp.jpg',4,6),
+('cachoeira-buracao.jpg','http://localhost:8080/images/cachoeira-buracao.jpg',6,7),
+('boate.jpg','http://localhost:8080/images/boate.jpg',9,8),
+('trilha-rio-boi.jpeg','http://localhost:8080/images/trilha-rio-boi.jpeg',7,9);
+
 
 INSERT INTO public.avaliacao_atracao (avaliacao_positiva,usuario_id,atracao_id) VALUES
 (true,1,1),
@@ -219,23 +232,71 @@ INSERT INTO public.avaliacao_recomendacao (avaliacao_positiva,usuario_id,recomen
 (false,8,8),
 (false,8,8),
 (false,5,9);
-
-INSERT INTO public.imagem (nome,url_caminho,usuario_id,atracao_id) VALUES
-('praia-pedrinhas.jpg','http://localhost:8080/images/praia-pedrinhas.jpg',1,1),
-('praia-ilha-couves.jpg','http://localhost:8080/images/praia-ilha-couves.jpg',1,2),
-('cristo-redentor.jpg','http://localhost:8080/images/cristo-redentor.jpg',1,3),
-('batcaverna.png','http://localhost:8080/images/batcaverna.png',3,4),
-('fogo-chao.jpg','http://localhost:8080/images/fogo-chao.jpg',5,5),
-('masp.jpg','http://localhost:8080/images/masp.jpg',4,6),
-('cachoeira-buracao.jpg','http://localhost:8080/images/cachoeira-buracao.jpg',6,7),
-('trilha-rio-boi.jpeg','http://localhost:8080/images/trilha-rio-boi.jpeg',7,8);
-	 
+ 
 
 ------------------------- VISUALIZAR TABELAS -------------------------
+
+SELECT * FROM USUARIO;
 SELECT * FROM ATRACAO;
-SELECT * FROM AVALIACAO_ATRACAO;
-SELECT * FROM AVALIACAO_RECOMENDACAO;
 SELECT * FROM IMAGEM;
 SELECT * FROM LOCALIZACAO;
+SELECT * FROM AVALIACAO_ATRACAO;
+SELECT * FROM AVALIACAO_RECOMENDACAO;
 SELECT * FROM RECOMENDACAO_ATRACAO;
-SELECT * FROM USUARIO;
+
+------------------------- CHECK IDS  -------------------------
+SELECT 
+  ATR.* 
+, USU.NOME, USU.ID
+, IMA.NOME, IMA.USUARIO_ID
+, LOC.ID
+FROM ATRACAO AS ATR
+LEFT JOIN USUARIO AS USU ON USU.ID = ATR.USUARIO_ID
+LEFT JOIN IMAGEM  AS IMA ON IMA.ATRACAO_ID = ATR.ID
+LEFT JOIN LOCALIZACAO AS LOC ON LOC.ID = ATR.LOCALIZACAO_ID
+WHERE  USU.ID <> ATR.USUARIO_ID OR IMA.ATRACAO_ID <>ATR.ID OR LOC.ID <> ATR.LOCALIZACAO_ID
+
+SELECT 
+  AVA.*
+, USU.ID AS UDI
+, ATR.ID AS AID
+FROM AVALIACAO_ATRACAO AS AVA
+LEFT JOIN USUARIO AS USU ON USU.ID = AVA.USUARIO_ID
+LEFT JOIN ATRACAO AS ATR ON ATR.ID = AVA.ATRACAO_ID
+WHERE  ATR.ID <> AVA.ATRACAO_ID OR USU.ID <> AVA.USUARIO_ID 
+
+SELECT 
+  REC.*
+, USU.ID AS UDI
+, ATR.ID AS AID
+FROM RECOMENDACAO_ATRACAO AS REC
+LEFT JOIN USUARIO AS USU ON USU.ID = REC.USUARIO_ID
+LEFT JOIN ATRACAO AS ATR ON ATR.ID = REC.ATRACAO_ID
+WHERE  ATR.ID <> REC.ATRACAO_ID OR USU.ID <> REC.USUARIO_ID 
+
+SELECT 
+  AVR.*
+, USU.ID AS UDI
+, REC.ID AS RID
+FROM AVALIACAO_RECOMENDACAO AS AVR
+LEFT JOIN USUARIO AS USU ON USU.ID = AVR.USUARIO_ID
+LEFT JOIN RECOMENDACAO_ATRACAO AS REC ON REC.ID = AVR.RECOMENDACAO_ID
+WHERE   USU.ID <> AVR.USUARIO_ID OR REC.ID <> AVR.RECOMENDACAO_ID
+
+
+-- CHECK FINAL
+WITH AVALIACOES AS ( 
+SELECT 
+ATRACAO_ID
+,COUNT(1) AS QTD_AVALIACOES
+,SUM( CASE WHEN AVALIACAO_POSITIVA = TRUE THEN 1 ELSE 0 END) AS QTD_LIKES
+,SUM( CASE WHEN AVALIACAO_POSITIVA <> TRUE THEN 1 ELSE 0 END) AS QTD_DISLIKES
+FROM AVALIACAO_ATRACAO 
+GROUP BY 1
+)
+SELECT *
+FROM ATRACAO AS ATR
+LEFT JOIN USUARIO AS USU ON USU.ID = ATR.USUARIO_ID
+LEFT JOIN IMAGEM  AS IMA ON IMA.ATRACAO_ID = ATR.ID
+LEFT JOIN LOCALIZACAO AS LOC ON LOC.ID = ATR.LOCALIZACAO_ID
+LEFT JOIN AVALIACOES  AS AVA ON AVA.ATRACAO_ID = ATR.ID
