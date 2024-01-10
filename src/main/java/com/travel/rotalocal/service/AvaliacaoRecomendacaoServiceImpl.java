@@ -23,39 +23,20 @@ public class AvaliacaoRecomendacaoServiceImpl implements AvaliacaoRecomendacaoSe
     RecomendacaoAtracaoRepository recomendacaoAtracaoRepository;
     UsuarioRepository usuarioRepository;
 
-    //METODO AUXILIAR
-        static AvaliacaoRecomendacao unwrapAvaliacaoRecomendacao(Optional<AvaliacaoRecomendacao> entity, Long usuarioId, Long atracaoId) {
-        if (entity.isPresent()) return entity.get();
-        else throw new AvaliacaoRecomendacaoNotFoundException(usuarioId, atracaoId);
+    // METODO AUXILIAR
+    static AvaliacaoRecomendacao unwrapAvaliacaoRecomendacao(Optional<AvaliacaoRecomendacao> entity, Long usuarioId,
+            Long atracaoId) {
+        if (entity.isPresent())
+            return entity.get();
+        else
+            throw new AvaliacaoRecomendacaoNotFoundException(usuarioId, atracaoId);
     }
-
 
     @Override
     public AvaliacaoRecomendacao getAvaliacaoRecomendacao(Long usuarioId, Long recomendacaoId) {
-        Optional<AvaliacaoRecomendacao> avaliacaoRecomendacao = avaliacaoRecomendacaoRepository.findByUsuarioIdAndRecomendacaoId(usuarioId, recomendacaoId);
+        Optional<AvaliacaoRecomendacao> avaliacaoRecomendacao = avaliacaoRecomendacaoRepository
+                .findByUsuarioIdAndRecomendacaoId(usuarioId, recomendacaoId);
         return unwrapAvaliacaoRecomendacao(avaliacaoRecomendacao, usuarioId, recomendacaoId);
-    }
-
-    @Override
-    public AvaliacaoRecomendacao saveAvaliacaoRecomendacao(AvaliacaoRecomendacao avaliacaoRecomendacao, Long usuarioId, Long recomendacaoId) {
-    Optional<AvaliacaoRecomendacao> existingAvaliacao = avaliacaoRecomendacaoRepository.findByUsuarioIdAndRecomendacaoId(usuarioId, recomendacaoId);
-        if (existingAvaliacao.isPresent()) {
-        throw new AvaliacaoRecomendacaoDuplicatedException(usuarioId, recomendacaoId);
-
-    } else {
-        Usuario usuario = UsuarioServiceImpl.unwrapUsuario(usuarioRepository.findById(usuarioId), usuarioId);
-        RecomendacaoAtracao recomendacao = RecomendacaoAtracaoServiceImpl.unwrapRecomendacaoAtracao(recomendacaoAtracaoRepository.findById(recomendacaoId), usuarioId, recomendacaoId);
-        avaliacaoRecomendacao.setUsuario(usuario);
-        avaliacaoRecomendacao.setRecomendacao(recomendacao);
-        return avaliacaoRecomendacaoRepository.save(avaliacaoRecomendacao);
-    }
-    }
-    
-    //TODO - update
-
-    @Override
-    public void deleteAvaliacaoRecomendacao(Long usuarioId, Long recomendacaoId) {
-        avaliacaoRecomendacaoRepository.deleteByUsuarioIdAndRecomendacaoId(usuarioId, recomendacaoId);
     }
 
     @Override
@@ -70,8 +51,32 @@ public class AvaliacaoRecomendacaoServiceImpl implements AvaliacaoRecomendacaoSe
 
     @Override
     public List<AvaliacaoRecomendacao> getAllAvaliacoesRecomendacao() {
-        return (List<AvaliacaoRecomendacao>)avaliacaoRecomendacaoRepository.findAll();
+        return (List<AvaliacaoRecomendacao>) avaliacaoRecomendacaoRepository.findAll();
     }
-    
+
+    @Override
+    public AvaliacaoRecomendacao saveAvaliacaoRecomendacao(AvaliacaoRecomendacao avaliacaoRecomendacao, Long usuarioId,
+            Long recomendacaoId) {
+        Optional<AvaliacaoRecomendacao> existingAvaliacao = avaliacaoRecomendacaoRepository
+                .findByUsuarioIdAndRecomendacaoId(usuarioId, recomendacaoId);
+        if (existingAvaliacao.isPresent()) {
+            throw new AvaliacaoRecomendacaoDuplicatedException(usuarioId, recomendacaoId);
+
+        } else {
+            Usuario usuario = UsuarioServiceImpl.unwrapUsuario(usuarioRepository.findById(usuarioId), usuarioId);
+            RecomendacaoAtracao recomendacao = RecomendacaoAtracaoServiceImpl.unwrapRecomendacaoAtracao(
+                    recomendacaoAtracaoRepository.findById(recomendacaoId), usuarioId, recomendacaoId);
+            avaliacaoRecomendacao.setUsuario(usuario);
+            avaliacaoRecomendacao.setRecomendacao(recomendacao);
+            return avaliacaoRecomendacaoRepository.save(avaliacaoRecomendacao);
+        }
+    }
+
+    // TODO - update
+
+    @Override
+    public void deleteAvaliacaoRecomendacao(Long avaliacaoRecomendacaoId) {
+        avaliacaoRecomendacaoRepository.deleteById(avaliacaoRecomendacaoId);
+    }
 
 }

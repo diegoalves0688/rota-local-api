@@ -25,7 +25,7 @@ public interface AtracaoService {
     Atracao updateAtracao(Long atracaoId, Atracao updatedAtracao);
 
     // DELETE
-    void deleteAtracao(Long usuarioId, Long localizacaoId);
+    void deleteAtracao(Long atracaoId);
 
     // RANKING
     List<AtracaoDTO> getAllAtracoesWithRanking();

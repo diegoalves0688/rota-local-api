@@ -23,39 +23,19 @@ public class AvaliacaoAtracaoServiceImpl implements AvaliacaoAtracaoService {
     AtracaoRepository atracaoRepository;
     UsuarioRepository usuarioRepository;
 
-    //METODO AUXILIAR
-        static AvaliacaoAtracao unwrapAvaliacaoAtracao(Optional<AvaliacaoAtracao> entity, Long usuarioId, Long atracaoId) {
-        if (entity.isPresent()) return entity.get();
-        else throw new AvaliacaoAtracaoNotFoundException(usuarioId, atracaoId);
+    // METODO AUXILIAR
+    static AvaliacaoAtracao unwrapAvaliacaoAtracao(Optional<AvaliacaoAtracao> entity, Long usuarioId, Long atracaoId) {
+        if (entity.isPresent())
+            return entity.get();
+        else
+            throw new AvaliacaoAtracaoNotFoundException(usuarioId, atracaoId);
     }
-
 
     @Override
     public AvaliacaoAtracao getAvaliacaoAtracao(Long usuarioId, Long atracaoId) {
-        Optional<AvaliacaoAtracao> avaliacaoAtracao = avaliacaoAtracaoRepository.findByUsuarioIdAndAtracaoId(usuarioId, atracaoId);
+        Optional<AvaliacaoAtracao> avaliacaoAtracao = avaliacaoAtracaoRepository.findByUsuarioIdAndAtracaoId(usuarioId,
+                atracaoId);
         return unwrapAvaliacaoAtracao(avaliacaoAtracao, usuarioId, atracaoId);
-    }
-
-    @Override
-    public AvaliacaoAtracao saveAvaliacaoAtracao(AvaliacaoAtracao avaliacaoAtracao, Long usuarioId, Long atracaoId) {
-        Optional<AvaliacaoAtracao> existingAvaliacao = avaliacaoAtracaoRepository.findByUsuarioIdAndAtracaoId(usuarioId, atracaoId);
-            if (existingAvaliacao.isPresent()) {
-            throw new AvaliacaoAtracaoDuplicatedException(usuarioId, atracaoId);
-
-        } else {
-            Usuario usuario = UsuarioServiceImpl.unwrapUsuario(usuarioRepository.findById(usuarioId), usuarioId);
-            Atracao atracao = AtracaoServiceImpl.unwrapAtracao(atracaoRepository.findById(atracaoId), usuarioId, atracaoId);
-            avaliacaoAtracao.setUsuario(usuario);
-            avaliacaoAtracao.setAtracao(atracao);
-            return avaliacaoAtracaoRepository.save(avaliacaoAtracao);
-        }
-    }
-    
-    //TODO - updateImagem
-
-    @Override
-    public void deleteAvaliacaoAtracao(Long usuarioId, Long atracaoId) {
-        avaliacaoAtracaoRepository.deleteByUsuarioIdAndAtracaoId(usuarioId, atracaoId);
     }
 
     @Override
@@ -70,8 +50,31 @@ public class AvaliacaoAtracaoServiceImpl implements AvaliacaoAtracaoService {
 
     @Override
     public List<AvaliacaoAtracao> getAllAvaliacoesAtracao() {
-        return (List<AvaliacaoAtracao>)avaliacaoAtracaoRepository.findAll();
+        return (List<AvaliacaoAtracao>) avaliacaoAtracaoRepository.findAll();
     }
- 
-}
 
+    @Override
+    public AvaliacaoAtracao saveAvaliacaoAtracao(AvaliacaoAtracao avaliacaoAtracao, Long usuarioId, Long atracaoId) {
+        Optional<AvaliacaoAtracao> existingAvaliacao = avaliacaoAtracaoRepository.findByUsuarioIdAndAtracaoId(usuarioId,
+                atracaoId);
+        if (existingAvaliacao.isPresent()) {
+            throw new AvaliacaoAtracaoDuplicatedException(usuarioId, atracaoId);
+
+        } else {
+            Usuario usuario = UsuarioServiceImpl.unwrapUsuario(usuarioRepository.findById(usuarioId), usuarioId);
+            Atracao atracao = AtracaoServiceImpl.unwrapAtracao(atracaoRepository.findById(atracaoId), usuarioId,
+                    atracaoId);
+            avaliacaoAtracao.setUsuario(usuario);
+            avaliacaoAtracao.setAtracao(atracao);
+            return avaliacaoAtracaoRepository.save(avaliacaoAtracao);
+        }
+    }
+
+    // TODO - updateImagem
+
+    @Override
+    public void deleteAvaliacaoAtracao(Long avaliacaoAtracaoId) {
+        avaliacaoAtracaoRepository.deleteById(avaliacaoAtracaoId);
+    }
+
+}

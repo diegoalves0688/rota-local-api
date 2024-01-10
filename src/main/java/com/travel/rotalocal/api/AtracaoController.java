@@ -61,7 +61,7 @@ public class AtracaoController {
             } else {
                 return ResponseEntity.status(204).build();
             }
-            
+
         } catch (Exception e) {
             return ResponseEntity.status(500).build();
         }
@@ -159,13 +159,10 @@ public class AtracaoController {
     /**********************************
      * DELETE
      **********************************/
-    // TODO - REVER LOGICA DE DEL
-    // VALIDADO POSTMAN - VAI DELETAR TUDO DA COMBINACAO [USUARIO + LOCALIZACAO]
-    @DeleteMapping("usuario/{usuarioId}/localizacao/{localizacaoId}")
-    public ResponseEntity<Void> deleteAtracao(
-            @PathVariable Long usuarioId,
-            @PathVariable Long localizacaoId) {
-        atracaoService.deleteAtracao(usuarioId, localizacaoId);
+    // VALIDADO POSTMAN
+    @DeleteMapping("/{atracaoId}")
+    public ResponseEntity<Void> deleteAtracao(@PathVariable Long atracaoId) {
+        atracaoService.deleteAtracao(atracaoId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 

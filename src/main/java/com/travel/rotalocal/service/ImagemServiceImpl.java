@@ -23,24 +23,39 @@ public class ImagemServiceImpl implements ImagemService {
     AtracaoRepository atracaoRepository;
     UsuarioRepository usuarioRepository;
 
-    //METODO AUXILIAR
-        static Imagem unwrapImagem(Optional<Imagem> entity, Long usuarioId, Long atracaoId) {
-        if (entity.isPresent()) return entity.get();
-        else throw new ImagemNotFoundException(usuarioId, atracaoId);
+    // METODO AUXILIAR
+    static Imagem unwrapImagem(Optional<Imagem> entity, Long usuarioId, Long atracaoId) {
+        if (entity.isPresent())
+            return entity.get();
+        else
+            throw new ImagemNotFoundException(usuarioId, atracaoId);
     }
-
 
     @Override
     public List<Imagem> getImagens(Long usuarioId, Long atracaoId) {
-    List<Imagem> imagens = imagemRepository.findByUsuarioIdAndAtracaoId(usuarioId, atracaoId);
-    return imagens;
+        List<Imagem> imagens = imagemRepository.findByUsuarioIdAndAtracaoId(usuarioId, atracaoId);
+        return imagens;
     }
 
-    @Override 
-    public Imagem getImagem(Long imagemId){
+    @Override
+    public Imagem getImagem(Long imagemId) {
         return imagemRepository.findById(imagemId).orElse(null);
     }
-   
+
+    @Override
+    public List<Imagem> getUsuarioImagens(Long usuarioId) {
+        return imagemRepository.findByUsuarioId(usuarioId);
+    }
+
+    @Override
+    public List<Imagem> getAtracaoImagens(Long atracaoId) {
+        return imagemRepository.findByAtracaoId(atracaoId);
+    }
+
+    @Override
+    public List<Imagem> getAllImagens() {
+        return (List<Imagem>) imagemRepository.findAll();
+    }
 
     @Override
     public List<Imagem> saveImagens(List<Imagem> imagens, Long usuarioId, Long atracaoId) {
@@ -57,27 +72,11 @@ public class ImagemServiceImpl implements ImagemService {
 
         return savedImagens;
     }
-    
-    //TODO - updateImagen
+
+    // TODO - updateImagen
 
     @Override
-    public void deleteImagem(Long usuarioId, Long atracaoId) {
-        imagemRepository.deleteByUsuarioIdAndAtracaoId(usuarioId, atracaoId);
-    }
-
-    @Override
-    public List<Imagem> getUsuarioImagens(Long usuarioId) {
-        return imagemRepository.findByUsuarioId(usuarioId);
-    }
-
-    @Override
-    public List<Imagem> getAtracaoImagens(Long atracaoId) {
-        return imagemRepository.findByAtracaoId(atracaoId);
-    }
-
-    @Override
-    public List<Imagem> getAllImagens() {
-        return (List<Imagem>)imagemRepository.findAll();
+    public void deleteImagem(Long imagemId) {
+        imagemRepository.deleteById(imagemId);
     }
 }
-

@@ -75,8 +75,8 @@ public class RecomendacaoAtracaoServiceImpl implements RecomendacaoAtracaoServic
      * DELETE
      **********************************/
     @Override
-    public void deleteRecomendacaoAtracao(Long usuarioId, Long atracaoId) {
-        recomendacaoAtracaoRepository.deleteByUsuarioIdAndAtracaoId(usuarioId, atracaoId);
+    public void deleteRecomendacaoAtracao(Long recomendacaoAtracaoId) {
+        recomendacaoAtracaoRepository.deleteById(recomendacaoAtracaoId);
     }
 
     /**********************************

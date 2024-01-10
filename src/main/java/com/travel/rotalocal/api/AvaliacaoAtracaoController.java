@@ -15,64 +15,72 @@ import lombok.AllArgsConstructor;
 @RestController
 @RequestMapping("/api/avaliacao-atracao")
 public class AvaliacaoAtracaoController {
-    
+
     private AvaliacaoAtracaoService avaliacaoAtracaoService;
 
-    //VALIDADO POSTMAN
+    /**********************************
+     * GET
+     **********************************/
+    // VALIDADO POSTMAN
     @GetMapping
     public ResponseEntity<List<AvaliacaoAtracao>> getAllAvaliacoesAtracao() {
         List<AvaliacaoAtracao> avaliacoes = avaliacaoAtracaoService.getAllAvaliacoesAtracao();
         return new ResponseEntity<>(avaliacoes, HttpStatus.OK);
     }
 
-    //VALIDADO POSTMAN
+    // VALIDADO POSTMAN
     @GetMapping("usuario/{usuarioId}/atracao/{atracaoId}")
     public ResponseEntity<AvaliacaoAtracao> getAvaliacaoAtracao(
             @PathVariable Long usuarioId,
-            @PathVariable Long atracaoId
-    ) {
+            @PathVariable Long atracaoId) {
         AvaliacaoAtracao avaliacaoAtracao = avaliacaoAtracaoService.getAvaliacaoAtracao(usuarioId, atracaoId);
         return new ResponseEntity<>(avaliacaoAtracao, HttpStatus.OK);
     }
 
-    //VALIDADO POSTMAN
+    // VALIDADO POSTMAN
     @GetMapping("/usuario/{usuarioId}")
     public ResponseEntity<List<AvaliacaoAtracao>> getUsuarioAvaliacaoAtracao(@PathVariable Long usuarioId) {
         List<AvaliacaoAtracao> avaliacoes = avaliacaoAtracaoService.getUsuarioAvaliacaoAtracao(usuarioId);
         return new ResponseEntity<>(avaliacoes, HttpStatus.OK);
     }
 
-    //VALIDADO POSTMAN
+    // VALIDADO POSTMAN
     @GetMapping("/atracao/{atracaoId}")
     public ResponseEntity<List<AvaliacaoAtracao>> getAtracaoAvaliacaoAtracao(@PathVariable Long atracaoId) {
         List<AvaliacaoAtracao> avaliacoes = avaliacaoAtracaoService.getAtracaoAvaliacaoAtracao(atracaoId);
         return new ResponseEntity<>(avaliacoes, HttpStatus.OK);
     }
 
-    //VALIDADO POSTMAN COM TRAVA
+    /**********************************
+     * POST
+     **********************************/
+    // VALIDADO POSTMAN COM TRAVA
     @PostMapping("usuario/{usuarioId}/atracao/{atracaoId}")
     public ResponseEntity<String> saveAvaliacaoAtracao(
             @RequestBody AvaliacaoAtracao avaliacaoAtracao,
             @PathVariable Long usuarioId,
-            @PathVariable Long atracaoId
-    ) {
+            @PathVariable Long atracaoId) {
         try {
-            AvaliacaoAtracao savedAvaliacao = avaliacaoAtracaoService.saveAvaliacaoAtracao(avaliacaoAtracao, usuarioId, atracaoId);
+            AvaliacaoAtracao savedAvaliacao = avaliacaoAtracaoService.saveAvaliacaoAtracao(avaliacaoAtracao, usuarioId,
+                    atracaoId);
             return new ResponseEntity<>("avaliacao registrada com sucesso", HttpStatus.OK);
         } catch (AvaliacaoAtracaoDuplicatedException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
-    
-    //VALIDADO POSTMAN
-    @DeleteMapping("usuario/{usuarioId}/atracao/{atracaoId}")
-    public ResponseEntity<Void> deleteAvaliacaoAtracao(
-            @PathVariable Long usuarioId,
-            @PathVariable Long atracaoId
-    ) {
-        avaliacaoAtracaoService.deleteAvaliacaoAtracao(usuarioId, atracaoId);
+
+    /**********************************
+     * DELETE
+     **********************************/
+    // VALIDADO POSTMAN
+    @DeleteMapping("/{avaliacaoAtracaoId}")
+    public ResponseEntity<Void> deleteAvaliacaoAtracao(@PathVariable Long avaliacaoAtracaoId) {
+        avaliacaoAtracaoService.deleteAvaliacaoAtracao(avaliacaoAtracaoId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    /**********************************
+     * UPDATE - TO DO
+     **********************************/
+
 }
-
-
