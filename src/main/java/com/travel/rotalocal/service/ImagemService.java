@@ -20,7 +20,6 @@ public interface ImagemService {
 
     // TODO - updateImagem
 
-    // void deleteImagem(Long usuarioId, Long atracaoId);
     void deleteImagem(Long imagemId);
 
 }

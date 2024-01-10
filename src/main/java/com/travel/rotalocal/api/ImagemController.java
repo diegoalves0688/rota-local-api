@@ -128,14 +128,7 @@ public class ImagemController {
     /**********************************
      * DELETE
      **********************************/
-    // VALIDADO POSTMAN - vai deletar tudo da combinacao [atracao + usuario]
-    // // TODO - VERIFICAR COMO FICARA ISSO SE A PESSOA POSTA MAIS DE UMA FOTO
-    // @DeleteMapping("/usuario/{usuarioId}/atracao/{atracaoId}")
-    // public ResponseEntity<HttpStatus> deleteImagem(@PathVariable Long usuarioId,
-    // @PathVariable Long atracaoId) {
-    // imagemService.deleteImagem(usuarioId, atracaoId);
-    // return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    // }
+    // VALIDADO POSTMAN
     @DeleteMapping("/{imagemId}")
     public ResponseEntity<HttpStatus> deleteImagem(@PathVariable Long imagemId) {
         imagemService.deleteImagem(imagemId);

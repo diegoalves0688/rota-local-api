@@ -75,10 +75,6 @@ public class ImagemServiceImpl implements ImagemService {
 
     // TODO - updateImagen
 
-    // @Override
-    // public void deleteImagem(Long usuarioId, Long atracaoId) {
-    // imagemRepository.deleteByUsuarioIdAndAtracaoId(usuarioId, atracaoId);
-    // }
     @Override
     public void deleteImagem(Long imagemId) {
         imagemRepository.deleteById(imagemId);
