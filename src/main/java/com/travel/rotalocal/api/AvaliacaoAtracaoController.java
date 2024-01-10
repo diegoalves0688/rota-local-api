@@ -73,11 +73,9 @@ public class AvaliacaoAtracaoController {
      * DELETE
      **********************************/
     // VALIDADO POSTMAN
-    @DeleteMapping("usuario/{usuarioId}/atracao/{atracaoId}")
-    public ResponseEntity<Void> deleteAvaliacaoAtracao(
-            @PathVariable Long usuarioId,
-            @PathVariable Long atracaoId) {
-        avaliacaoAtracaoService.deleteAvaliacaoAtracao(usuarioId, atracaoId);
+    @DeleteMapping("/{avaliacaoAtracaoId}")
+    public ResponseEntity<Void> deleteAvaliacaoAtracao(@PathVariable Long avaliacaoAtracaoId) {
+        avaliacaoAtracaoService.deleteAvaliacaoAtracao(avaliacaoAtracaoId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
