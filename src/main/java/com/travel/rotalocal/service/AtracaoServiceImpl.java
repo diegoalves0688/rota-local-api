@@ -92,8 +92,8 @@ public class AtracaoServiceImpl implements AtracaoService {
      * DELETE
      **********************************/
     @Override
-    public void deleteAtracao(Long usuarioId, Long localizacaoId) {
-        atracaoRepository.deleteByUsuarioIdAndLocalizacaoId(usuarioId, localizacaoId);
+    public void deleteAtracao(Long atracaoId) {
+        atracaoRepository.deleteById(atracaoId);
     }
 
     /**********************************
@@ -117,8 +117,8 @@ public class AtracaoServiceImpl implements AtracaoService {
 
         Long updatedLocalizacaoId = updatedAtracao.getLocalizacao().getId();
         Localizacao updatedLocalizacao = localizacaoRepository.findById(updatedLocalizacaoId)
-            .orElseThrow(() -> new LocalizacaoNotFoundException(updatedLocalizacaoId));
-        
+                .orElseThrow(() -> new LocalizacaoNotFoundException(updatedLocalizacaoId));
+
         existingAtracao.setLocalizacao(updatedLocalizacao);
 
         return atracaoRepository.save(existingAtracao);
