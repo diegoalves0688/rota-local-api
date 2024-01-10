@@ -18,6 +18,6 @@ public interface RecomendacaoAtracaoService {
 
     RecomendacaoAtracao updateRecomendacaoAtracao(RecomendacaoAtracao recomendacaoAtracao);
 
-    void deleteRecomendacaoAtracao(Long usuarioId, Long atracaoId);
+    void deleteRecomendacaoAtracao(Long recomendacaoAtracaoId);
 
 }
