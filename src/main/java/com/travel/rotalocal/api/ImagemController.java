@@ -70,10 +70,10 @@ public class ImagemController {
         return new ResponseEntity<>(savedImagens, HttpStatus.CREATED);
     }
 
-    //VALIDADO POSTMAN - DÚVIDA: COMO QUE ISSO SERA REFLETIDO NO DB?
+    // VALIDADO POSTMAN
     @PostMapping
     public ResponseEntity handleFileUpload(@RequestParam("file") MultipartFile file,
-        @RequestParam("usuario") Long usuarioId, @RequestParam("atracao") Long atracaoId) {
+            @RequestParam("usuario") Long usuarioId, @RequestParam("atracao") Long atracaoId) {
 
         String fileName = "";
 
@@ -125,15 +125,20 @@ public class ImagemController {
         return ResponseEntity.ok(new ImagemDTO(fileName));
     }
 
-
     /**********************************
      * DELETE
      **********************************/
     // VALIDADO POSTMAN - vai deletar tudo da combinacao [atracao + usuario]
-    // TODO - VERIFICAR COMO FICARA ISSO SE A PESSOA POSTA MAIS DE UMA FOTO
-    @DeleteMapping("/usuario/{usuarioId}/atracao/{atracaoId}")
-    public ResponseEntity<HttpStatus> deleteImagem(@PathVariable Long usuarioId, @PathVariable Long atracaoId) {
-        imagemService.deleteImagem(usuarioId, atracaoId);
+    // // TODO - VERIFICAR COMO FICARA ISSO SE A PESSOA POSTA MAIS DE UMA FOTO
+    // @DeleteMapping("/usuario/{usuarioId}/atracao/{atracaoId}")
+    // public ResponseEntity<HttpStatus> deleteImagem(@PathVariable Long usuarioId,
+    // @PathVariable Long atracaoId) {
+    // imagemService.deleteImagem(usuarioId, atracaoId);
+    // return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    // }
+    @DeleteMapping("/{imagemId}")
+    public ResponseEntity<HttpStatus> deleteImagem(@PathVariable Long imagemId) {
+        imagemService.deleteImagem(imagemId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
