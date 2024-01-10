@@ -267,7 +267,7 @@
 					"response": []
 				},
 				{
-					"name": "atracao exclusao - ATUALIZADO",
+					"name": "atracao exclusao por id - ATUALIZADO",
 					"request": {
 						"method": "DELETE",
 						"header": [
@@ -413,7 +413,7 @@
 					"response": []
 				},
 				{
-					"name": "avaliacao de atracao exclusao",
+					"name": "avaliacao de atracao exclusao por id - ATUALIZADO",
 					"request": {
 						"method": "DELETE",
 						"header": [
@@ -424,12 +424,12 @@
 							},
 							{
 								"key": "X-API-TOKEN",
-								"value": "40a90c68-551f-433c-aac7-f41ca1993887",
+								"value": "de48e644-9dca-4513-b423-a8cb87694f2b",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "localhost:8080/api/avaliacao-atracao/usuario/9/atracao/2",
+							"raw": "localhost:8080/api/avaliacao-atracao/1",
 							"host": [
 								"localhost"
 							],
@@ -437,10 +437,7 @@
 							"path": [
 								"api",
 								"avaliacao-atracao",
-								"usuario",
-								"9",
-								"atracao",
-								"2"
+								"1"
 							]
 						}
 					},
@@ -579,7 +576,7 @@
 					"response": []
 				},
 				{
-					"name": "avaliacao recomendacao exclusao",
+					"name": "avaliacao recomendacao exclusao por id - ATUALIZADO",
 					"request": {
 						"method": "DELETE",
 						"header": [
@@ -590,12 +587,12 @@
 							},
 							{
 								"key": "X-API-TOKEN",
-								"value": "7f1a5c5b-a856-4fe7-bcc7-bda994f202eb",
+								"value": "576cb1c1-94c3-4e8b-a3e9-fd1f66af05a9",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "localhost:8080/api/avaliacao-recomendacao/usuario/3/recomendacao/2",
+							"raw": "localhost:8080/api/avaliacao-recomendacao/31",
 							"host": [
 								"localhost"
 							],
@@ -603,10 +600,7 @@
 							"path": [
 								"api",
 								"avaliacao-recomendacao",
-								"usuario",
-								"3",
-								"recomendacao",
-								"2"
+								"31"
 							]
 						}
 					},
@@ -853,7 +847,7 @@
 					"response": []
 				},
 				{
-					"name": "imagem exclusao - ATUALIZADO",
+					"name": "imagem exclusao por id - ATUALIZADO",
 					"request": {
 						"method": "DELETE",
 						"header": [
@@ -967,7 +961,7 @@
 					"response": []
 				},
 				{
-					"name": "localizacao exclusao",
+					"name": "localizacao exclusao por id",
 					"request": {
 						"method": "DELETE",
 						"header": [
@@ -1130,7 +1124,7 @@
 					"response": []
 				},
 				{
-					"name": "recomendacao atracao exclusao",
+					"name": "recomendacao atracao exclusao por id - ATUALIZADO",
 					"request": {
 						"method": "DELETE",
 						"header": [
@@ -1141,12 +1135,12 @@
 							},
 							{
 								"key": "X-API-TOKEN",
-								"value": "40a90c68-551f-433c-aac7-f41ca1993887",
+								"value": "1f14f836-438c-415f-8b83-a0bc821044a1",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "localhost:8080/api/recomendacao-atracao/usuario/3/atracao/4",
+							"raw": "localhost:8080/api/recomendacao-atracao/8",
 							"host": [
 								"localhost"
 							],
@@ -1154,10 +1148,7 @@
 							"path": [
 								"api",
 								"recomendacao-atracao",
-								"usuario",
-								"3",
-								"atracao",
-								"4"
+								"8"
 							]
 						}
 					},
