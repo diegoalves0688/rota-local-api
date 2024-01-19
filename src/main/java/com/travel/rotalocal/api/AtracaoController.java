@@ -184,6 +184,32 @@ public class AtracaoController {
         }
     }
 
+    // STATE
+    @PutMapping("/{atracaoId}/ativar")
+    public ResponseEntity<Void> ativarAtracao(@PathVariable Long atracaoId) {
+        try {
+            atracaoService.ativarAtracao(atracaoId);
+            return ResponseEntity.noContent().build();
+        } catch (AtracaoNotFoundException e) {
+            return ResponseEntity.notFound().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    // STATE
+    @PutMapping("/{atracaoId}/inativar")
+    public ResponseEntity<Void> inativarAtracao(@PathVariable Long atracaoId) {
+        try {
+            atracaoService.inativarAtracao(atracaoId);
+            return ResponseEntity.noContent().build();
+        } catch (AtracaoNotFoundException e) {
+            return ResponseEntity.notFound().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
     /**********************************
      * AUXILIAR
      **********************************/

@@ -6,6 +6,8 @@ import java.util.List;
 import org.hibernate.annotations.CreationTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.travel.rotalocal.model.EstadoAtivo;
+import com.travel.rotalocal.model.EstadoAtracao;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -13,10 +15,9 @@ import lombok.*;
 @Getter
 @Setter
 @AllArgsConstructor
-@NoArgsConstructor
+// @NoArgsConstructor
 @Entity
-@Table(name = "atracao",
-        schema = "public")
+@Table(name = "atracao", schema = "public")
 public class Atracao {
 
     @Id
@@ -42,26 +43,51 @@ public class Atracao {
 
     @CreationTimestamp
     @Column(name = "data_registro", nullable = false)
-    private LocalDateTime  dataRegistro;
+    private LocalDateTime dataRegistro;
 
-    @ManyToOne(optional = false)  
-    @JoinColumn(name = "usuario_id", referencedColumnName = "id") 
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "usuario_id", referencedColumnName = "id")
     private Usuario usuario;
 
-    @ManyToOne(optional = false)  
-    @JoinColumn(name = "localizacao_id", referencedColumnName = "id") 
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "localizacao_id", referencedColumnName = "id")
     private Localizacao localizacao;
 
-    @JsonIgnore 
-    @OneToMany(mappedBy = "atracao", cascade = CascadeType.ALL) 
+    @JsonIgnore
+    @OneToMany(mappedBy = "atracao", cascade = CascadeType.ALL)
     private List<Imagem> imagens;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "atracao", cascade = CascadeType.ALL) 
+    @OneToMany(mappedBy = "atracao", cascade = CascadeType.ALL)
     private List<RecomendacaoAtracao> recomendacoesAtracoes;
 
-    @JsonIgnore 
-    @OneToMany(mappedBy = "atracao", cascade = CascadeType.ALL) 
+    @JsonIgnore
+    @OneToMany(mappedBy = "atracao", cascade = CascadeType.ALL)
     private List<AvaliacaoAtracao> avaliacoesAtracoes;
+
+    // STATE
+    @Transient
+    private EstadoAtracao estadoAtracao;
+
+    public Atracao() {
+        this.ativo = true;
+        this.estadoAtracao = new EstadoAtivo();
+    }
+
+    public void ativar() {
+        estadoAtracao.ativar(this);
+    }
+
+    public void inativar() {
+        estadoAtracao.inativar(this);
+    }
+
+    public void setEstadoAtracao(EstadoAtracao estadoAtracao) {
+        this.estadoAtracao = estadoAtracao;
+    }
+
+    public boolean ativo() {
+        return ativo;
+    }
 
 }

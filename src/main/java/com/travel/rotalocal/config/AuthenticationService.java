@@ -12,7 +12,7 @@ public class AuthenticationService {
     private static final String AUTH_TOKEN_HEADER_NAME = "X-API-TOKEN";
 
     public static Authentication getAuthentication(HttpServletRequest request) {
-        
+
         if (isAllowedMethod(request.getMethod())) {
             return new ApiKeyAuthentication("", AuthorityUtils.NO_AUTHORITIES);
         }
@@ -35,14 +35,14 @@ public class AuthenticationService {
         return new ApiKeyAuthentication(apiKey, AuthorityUtils.NO_AUTHORITIES);
     }
 
-    private static boolean isAllowedMethod(String method){
+    private static boolean isAllowedMethod(String method) {
         return method.equals("GET") || method.equals("OPTIONS");
     }
 
-    private static boolean isOpenPath(String path){
+    private static boolean isOpenPath(String path) {
         return path.equals("/api/usuario/autenticar") ||
-            path.equals("/api/imagem/usuario") ||
-            path.equals("/api/imagem") ||
-            path.equals("/api/usuario");
+                path.equals("/api/imagem/usuario") ||
+                path.equals("/api/imagem") ||
+                path.equals("/api/usuario");
     }
 }

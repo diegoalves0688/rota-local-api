@@ -36,4 +36,9 @@ public interface AtracaoService {
 
     int calculateRankingForAtracao(Atracao atracao);
 
+    // STATE
+    void ativarAtracao(Long atracaoId);
+
+    void inativarAtracao(Long atracaoId);
+
 }
