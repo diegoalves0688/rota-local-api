@@ -185,6 +185,7 @@ public class AtracaoController {
     }
 
     // STATE
+    // VALIDADO POSTMAN
     @PutMapping("/{atracaoId}/ativar")
     public ResponseEntity<Void> ativarAtracao(@PathVariable Long atracaoId) {
         try {
@@ -198,6 +199,7 @@ public class AtracaoController {
     }
 
     // STATE
+    // VALIDADO POSTMAN
     @PutMapping("/{atracaoId}/inativar")
     public ResponseEntity<Void> inativarAtracao(@PathVariable Long atracaoId) {
         try {

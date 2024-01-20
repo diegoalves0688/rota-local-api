@@ -270,6 +270,7 @@ public class AtracaoServiceImpl implements AtracaoService {
                 atracao.getLocalizacao().getId());
     }
 
+    // STATE
     @Override
     public void inativarAtracao(Long atracaoId) {
         Atracao atracao = getAtracaoById(atracaoId);
