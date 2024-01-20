@@ -265,14 +265,15 @@ public class AtracaoServiceImpl implements AtracaoService {
     @Override
     public void ativarAtracao(Long atracaoId) {
         Atracao atracao = getAtracaoById(atracaoId);
-        atracao.ativar();
-        saveAtracao(atracao, atracao.getUsuario().getId(), atracao.getLocalizacao().getId());
+        atracao.ativarAtracao();
+        saveAtracao(atracao, atracao.getUsuario().getId(),
+                atracao.getLocalizacao().getId());
     }
 
     @Override
     public void inativarAtracao(Long atracaoId) {
         Atracao atracao = getAtracaoById(atracaoId);
-        atracao.inativar();
+        atracao.inativarAtracao();
         saveAtracao(atracao, atracao.getUsuario().getId(), atracao.getLocalizacao().getId());
     }
 

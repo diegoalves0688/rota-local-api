@@ -1,29 +1,51 @@
 package com.travel.rotalocal.model;
 
-import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
-import com.fasterxml.jackson.databind.ser.std.StdSerializer;
-import com.travel.rotalocal.model.EstadoAtivo;
+import com.travel.rotalocal.model.entity.Atracao;
+import com.travel.rotalocal.service.AtracaoService;
 
 import java.io.IOException;
 
-public class EstadoAtracaoDeserializer extends StdDeserializer<EstadoAtivo> {
+import org.springframework.beans.factory.annotation.Autowired;
+
+public class EstadoAtracaoDeserializer extends StdDeserializer<EstadoAtracao> {
+
+    @Autowired
+    private AtracaoService atracaoService;
 
     public EstadoAtracaoDeserializer() {
-        super(EstadoAtivo.class);
+        super(EstadoAtracao.class);
     }
 
     @Override
-    public EstadoAtivo deserialize(JsonParser jsonParser, DeserializationContext deserializationContext)
+    public EstadoAtracao deserialize(JsonParser jsonParser, DeserializationContext deserializationContext)
             throws IOException, JsonProcessingException {
         JsonNode node = jsonParser.getCodec().readTree(jsonParser);
-        // Parse the JSON representation and return the appropriate EstadoAtracao
-        // implementation
-        return new EstadoAtivo(); // Adjust the instantiation as needed
+
+        Long atracaoId = extractAtracaoIdFromRequestURI(jsonParser.getCurrentLocation().getSourceRef().toString());
+        Atracao atracao = atracaoService.getAtracaoById(atracaoId);
+
+        String action = extractActionFromRequestURI(jsonParser.getCurrentLocation().getSourceRef().toString());
+        if ("ativar".equals(action)) {
+            atracao.ativarAtracao();
+        } else if ("inativar".equals(action)) {
+            atracao.inativarAtracao();
+        }
+
+        return atracao.getEstadoAtracao();
+    }
+
+    private Long extractAtracaoIdFromRequestURI(String uri) {
+        String[] parts = uri.split("/");
+        return Long.parseLong(parts[parts.length - 2]);
+    }
+
+    private String extractActionFromRequestURI(String uri) {
+        String[] parts = uri.split("/");
+        return parts[parts.length - 1];
     }
 }

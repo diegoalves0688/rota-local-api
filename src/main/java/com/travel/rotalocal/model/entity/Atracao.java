@@ -15,7 +15,6 @@ import lombok.*;
 @Getter
 @Setter
 @AllArgsConstructor
-// @NoArgsConstructor
 @Entity
 @Table(name = "atracao", schema = "public")
 public class Atracao {
@@ -74,12 +73,14 @@ public class Atracao {
         this.estadoAtracao = new EstadoAtivo();
     }
 
-    public void ativar() {
-        estadoAtracao.ativar(this);
+    public void ativarAtracao() {
+        estadoAtracao.ativarAtracao(this);
+        this.ativo = true;
     }
 
-    public void inativar() {
-        estadoAtracao.inativar(this);
+    public void inativarAtracao() {
+        estadoAtracao.inativarAtracao(this);
+        this.ativo = false;
     }
 
     public void setEstadoAtracao(EstadoAtracao estadoAtracao) {

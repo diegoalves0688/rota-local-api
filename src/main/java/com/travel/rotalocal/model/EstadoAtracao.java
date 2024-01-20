@@ -4,7 +4,7 @@ import com.travel.rotalocal.model.entity.Atracao;
 
 public interface EstadoAtracao {
 
-    void ativar(Atracao atracao);
+    void ativarAtracao(Atracao atracao);
 
-    void inativar(Atracao atracao);
+    void inativarAtracao(Atracao atracao);
 }

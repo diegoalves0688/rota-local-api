@@ -18,6 +18,8 @@ public interface AtracaoService {
 
     List<Atracao> getAllAtracoes();
 
+    List<AtracaoDTO> search(String content);
+
     // SAVE
     Atracao saveAtracao(Atracao atracao, Long usuarioId, Long localizacaoId);
 
@@ -29,8 +31,6 @@ public interface AtracaoService {
 
     // RANKING
     List<AtracaoDTO> getAllAtracoesWithRanking();
-
-    List<AtracaoDTO> search(String content);
 
     AtracaoDTO getAtracaoWithRankingById(Long atracaoId);
 
