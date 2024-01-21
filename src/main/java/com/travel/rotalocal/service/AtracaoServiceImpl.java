@@ -261,4 +261,21 @@ public class AtracaoServiceImpl implements AtracaoService {
         return (int) (trueCount - falseCount);
     }
 
+    // STATE
+    @Override
+    public void ativarAtracao(Long atracaoId) {
+        Atracao atracao = getAtracaoById(atracaoId);
+        atracao.ativarAtracao();
+        saveAtracao(atracao, atracao.getUsuario().getId(),
+                atracao.getLocalizacao().getId());
+    }
+
+    // STATE
+    @Override
+    public void inativarAtracao(Long atracaoId) {
+        Atracao atracao = getAtracaoById(atracaoId);
+        atracao.inativarAtracao();
+        saveAtracao(atracao, atracao.getUsuario().getId(), atracao.getLocalizacao().getId());
+    }
+
 }
