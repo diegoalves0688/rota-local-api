@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "9aa0bf43-7017-405e-94ff-d6bf39d9b64f",
+		"_postman_id": "f8de98b2-0f9c-4d4c-b928-1828fe4453cd",
 		"name": "projeto-rota",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "31469487"
+		"_exporter_id": "27022140"
 	},
 	"item": [
 		{
@@ -59,7 +59,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/api/atracao/5",
+							"raw": "localhost:8080/api/atracao/2",
 							"host": [
 								"localhost"
 							],
@@ -67,7 +67,7 @@
 							"path": [
 								"api",
 								"atracao",
-								"5"
+								"2"
 							]
 						}
 					},
@@ -151,6 +151,123 @@
 					"response": []
 				},
 				{
+					"name": "atracao cadastro",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-API-KEY",
+								"value": "1",
+								"type": "text"
+							},
+							{
+								"key": "X-API-TOKEN",
+								"value": "7f1a5c5b-a856-4fe7-bcc7-bda994f202eb",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"batcaverna-testehhhNZZZ\",\r\n    \"descricao\": \"cafofo do batmanhhhhN\",\r\n    \"categoria\": \"TRILHAS\",\r\n    \"usuario\": {\r\n        \"id\": 2\r\n    },\r\n    \"localizacao\": {\r\n        \"id\": 4\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/atracao",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"atracao"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "atracao exclusao",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-API-KEY",
+								"value": "",
+								"type": "text"
+							},
+							{
+								"key": "X-API-TOKEN",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:8080/api/atracao/usuario/3/localizacao/13",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"atracao",
+								"usuario",
+								"3",
+								"localizacao",
+								"13"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "atracao update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-API-KEY",
+								"value": "1",
+								"type": "text"
+							},
+							{
+								"key": "X-API-TOKEN",
+								"value": "7f1a5c5b-a856-4fe7-bcc7-bda994f202eb",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"TESTE UPDATE PRAIA\",\r\n  \"descricao\": \"ATUALIZADO TEXTO\",\r\n  \"ativo\": true,\r\n  \"categoria\": \"PRAIAS\", \r\n  \"status\": \"PUBLICO\" ,\r\n  \"localizacao\": {\"id\": 3} \r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/atracao/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"atracao",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "atracao search",
 					"request": {
 						"method": "GET",
@@ -182,193 +299,6 @@
 									"key": "content",
 									"value": "pedrinhas"
 								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "atracao cadastro",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "X-API-KEY",
-								"value": "1",
-								"type": "text"
-							},
-							{
-								"key": "X-API-TOKEN",
-								"value": "703c614b-0a35-4939-a443-e8238a9af260",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"nome\": \"teste-add-testehhhNZZZyyy\",\r\n    \"descricao\": \"teste a\",\r\n    \"categoria\": \"PRAIAS\",\r\n    \"usuario\": {\r\n        \"id\": 1\r\n    },\r\n    \"localizacao\": {\r\n        \"id\": 11\r\n    }\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:8080/api/atracao",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"atracao"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "atracao update",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "X-API-KEY",
-								"value": "1",
-								"type": "text"
-							},
-							{
-								"key": "X-API-TOKEN",
-								"value": "703c614b-0a35-4939-a443-e8238a9af260",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"nome\": \"TESTE UPDATE \",\r\n  \"descricao\": \"ATUALIZADO TEXTO\",\r\n  \"ativo\": true,\r\n  \"categoria\": \"PRAIAS\", \r\n  \"status\": \"PUBLICO\" ,\r\n  \"localizacao\": {\"id\": 13} \r\n}\r\n",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:8080/api/atracao/10",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"atracao",
-								"10"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "atracao STATE INATIVAR",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "X-API-KEY",
-								"value": "1",
-								"type": "text"
-							},
-							{
-								"key": "X-API-TOKEN",
-								"value": "703c614b-0a35-4939-a443-e8238a9af260",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "localhost:8080/api/atracao/1/inativar",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"atracao",
-								"1",
-								"inativar"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "atracao STATE ATIVAR",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "X-API-KEY",
-								"value": "1",
-								"type": "text"
-							},
-							{
-								"key": "X-API-TOKEN",
-								"value": "703c614b-0a35-4939-a443-e8238a9af260",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:8080/api/atracao/1/ativar",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"atracao",
-								"1",
-								"ativar"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "atracao exclusao por id - ATUALIZADO",
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "X-API-KEY",
-								"value": "1",
-								"type": "text"
-							},
-							{
-								"key": "X-API-TOKEN",
-								"value": "703c614b-0a35-4939-a443-e8238a9af260",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "localhost:8080/api/atracao/10",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"atracao",
-								"10"
 							]
 						}
 					},
@@ -425,7 +355,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/api/avaliacao-atracao/usuario/2/atracao/1",
+							"raw": "localhost:8080/api/avaliacao-atracao/usuario/1/atracao/1",
 							"host": [
 								"localhost"
 							],
@@ -434,7 +364,7 @@
 								"api",
 								"avaliacao-atracao",
 								"usuario",
-								"2",
+								"1",
 								"atracao",
 								"1"
 							]
@@ -449,18 +379,18 @@
 						"header": [
 							{
 								"key": "X-API-KEY",
-								"value": "1",
+								"value": "11",
 								"type": "text"
 							},
 							{
 								"key": "X-API-TOKEN",
-								"value": "703c614b-0a35-4939-a443-e8238a9af260",
+								"value": "5abf405d-f6ff-41c6-b4a9-daaf2369ae7c",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"avaliacao_positiva\": false\r\n}",
+							"raw": "{\r\n    \"avaliacaoPositiva\": true\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -468,7 +398,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/api/avaliacao-atracao/usuario/9/atracao/3",
+							"raw": "localhost:8080/api/avaliacao-atracao/usuario/10/atracao/3",
 							"host": [
 								"localhost"
 							],
@@ -477,7 +407,7 @@
 								"api",
 								"avaliacao-atracao",
 								"usuario",
-								"9",
+								"10",
 								"atracao",
 								"3"
 							]
@@ -486,7 +416,7 @@
 					"response": []
 				},
 				{
-					"name": "avaliacao de atracao exclusao por id - ATUALIZADO",
+					"name": "avaliacao de atracao exclusao",
 					"request": {
 						"method": "DELETE",
 						"header": [
@@ -497,12 +427,12 @@
 							},
 							{
 								"key": "X-API-TOKEN",
-								"value": "703c614b-0a35-4939-a443-e8238a9af260",
+								"value": "7f1a5c5b-a856-4fe7-bcc7-bda994f202eb",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "localhost:8080/api/avaliacao-atracao/1",
+							"raw": "localhost:8080/api/avaliacao-atracao/usuario/2/atracao/4",
 							"host": [
 								"localhost"
 							],
@@ -510,7 +440,10 @@
 							"path": [
 								"api",
 								"avaliacao-atracao",
-								"1"
+								"usuario",
+								"2",
+								"atracao",
+								"4"
 							]
 						}
 					},
@@ -588,7 +521,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/api/avaliacao-recomendacao/usuario/1/recomendacao/5",
+							"raw": "localhost:8080/api/avaliacao-recomendacao/usuario/1/recomendacao/1",
 							"host": [
 								"localhost"
 							],
@@ -599,7 +532,7 @@
 								"usuario",
 								"1",
 								"recomendacao",
-								"5"
+								"1"
 							]
 						}
 					},
@@ -617,7 +550,7 @@
 							},
 							{
 								"key": "X-API-TOKEN",
-								"value": "703c614b-0a35-4939-a443-e8238a9af260",
+								"value": "7f1a5c5b-a856-4fe7-bcc7-bda994f202eb",
 								"type": "text"
 							}
 						],
@@ -631,7 +564,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/api/avaliacao-recomendacao/usuario/3/recomendacao/9",
+							"raw": "localhost:8080/api/avaliacao-recomendacao/usuario/3/recomendacao/1",
 							"host": [
 								"localhost"
 							],
@@ -642,14 +575,14 @@
 								"usuario",
 								"3",
 								"recomendacao",
-								"9"
+								"1"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "avaliacao recomendacao exclusao por id - ATUALIZADO",
+					"name": "avaliacao recomendacao exclusao",
 					"request": {
 						"method": "DELETE",
 						"header": [
@@ -660,12 +593,12 @@
 							},
 							{
 								"key": "X-API-TOKEN",
-								"value": "703c614b-0a35-4939-a443-e8238a9af260",
+								"value": "7f1a5c5b-a856-4fe7-bcc7-bda994f202eb",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "localhost:8080/api/avaliacao-recomendacao/32",
+							"raw": "localhost:8080/api/avaliacao-recomendacao/usuario/3/recomendacao/2",
 							"host": [
 								"localhost"
 							],
@@ -673,7 +606,10 @@
 							"path": [
 								"api",
 								"avaliacao-recomendacao",
-								"32"
+								"usuario",
+								"3",
+								"recomendacao",
+								"2"
 							]
 						}
 					},
@@ -829,7 +765,7 @@
 							},
 							{
 								"key": "X-API-TOKEN",
-								"value": "703c614b-0a35-4939-a443-e8238a9af260",
+								"value": "7f1a5c5b-a856-4fe7-bcc7-bda994f202eb",
 								"type": "text"
 							}
 						],
@@ -855,6 +791,40 @@
 								"2",
 								"atracao",
 								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "imagem exclusao \"tudo\"",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-API-KEY",
+								"value": "1",
+								"type": "text"
+							},
+							{
+								"key": "X-API-TOKEN",
+								"value": "7f1a5c5b-a856-4fe7-bcc7-bda994f202eb",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/api/imagem/usuario/1/atracao/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"imagem",
+								"usuario",
+								"1",
+								"atracao",
+								"2"
 							]
 						}
 					},
@@ -918,37 +888,6 @@
 						}
 					},
 					"response": []
-				},
-				{
-					"name": "imagem exclusao por id - ATUALIZADO",
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "X-API-KEY",
-								"value": "1",
-								"type": "text"
-							},
-							{
-								"key": "X-API-TOKEN",
-								"value": "703c614b-0a35-4939-a443-e8238a9af260",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "localhost:8080/api/imagem/9",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"imagem",
-								"9"
-							]
-						}
-					},
-					"response": []
 				}
 			]
 		},
@@ -1006,13 +945,13 @@
 							},
 							{
 								"key": "X-API-TOKEN",
-								"value": "703c614b-0a35-4939-a443-e8238a9af260",
+								"value": "7f1a5c5b-a856-4fe7-bcc7-bda994f202eb",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"pais\": \"Brasillll\",\r\n    \"estado\": \"Amazonas\",\r\n    \"cidade\": \"MmmmanaaaauUUssSSxxsq\"\r\n}",
+							"raw": "{\r\n    \"pais\": \"Brasillll\",\r\n    \"estado\": \"Amazonas\",\r\n    \"cidade\": \"MmmmanaaaauUUs\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1034,7 +973,7 @@
 					"response": []
 				},
 				{
-					"name": "localizacao exclusao por id",
+					"name": "localizacao exclusao",
 					"request": {
 						"method": "DELETE",
 						"header": [
@@ -1045,12 +984,12 @@
 							},
 							{
 								"key": "X-API-TOKEN",
-								"value": "703c614b-0a35-4939-a443-e8238a9af260",
+								"value": "7f1a5c5b-a856-4fe7-bcc7-bda994f202eb",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "localhost:8080/api/localizacao/15",
+							"raw": "localhost:8080/api/localizacao/16",
 							"host": [
 								"localhost"
 							],
@@ -1058,7 +997,7 @@
 							"path": [
 								"api",
 								"localizacao",
-								"15"
+								"16"
 							]
 						}
 					},
@@ -1094,7 +1033,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/api/recomendacao-atracao/usuario/2",
+							"raw": "localhost:8080/api/recomendacao-atracao/usuario/1",
 							"host": [
 								"localhost"
 							],
@@ -1103,7 +1042,7 @@
 								"api",
 								"recomendacao-atracao",
 								"usuario",
-								"2"
+								"1"
 							]
 						}
 					},
@@ -1136,7 +1075,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/api/recomendacao-atracao/usuario/2/atracao/1",
+							"raw": "localhost:8080/api/recomendacao-atracao/usuario/1/atracao/1",
 							"host": [
 								"localhost"
 							],
@@ -1145,7 +1084,7 @@
 								"api",
 								"recomendacao-atracao",
 								"usuario",
-								"2",
+								"1",
 								"atracao",
 								"1"
 							]
@@ -1165,13 +1104,13 @@
 							},
 							{
 								"key": "X-API-TOKEN",
-								"value": "703c614b-0a35-4939-a443-e8238a9af260",
+								"value": "7f1a5c5b-a856-4fe7-bcc7-bda994f202eb",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"recomendacao\": \"bleblebbliblieleble\"\r\n}",
+							"raw": "{\r\n    \"recomendacao\": \"bleblebeleble\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1191,6 +1130,40 @@
 								"3",
 								"atracao",
 								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "recomendacao atracao exclusao",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-API-KEY",
+								"value": "1",
+								"type": "text"
+							},
+							{
+								"key": "X-API-TOKEN",
+								"value": "7f1a5c5b-a856-4fe7-bcc7-bda994f202eb",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/api/recomendacao-atracao/usuario/1/atracao/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"recomendacao-atracao",
+								"usuario",
+								"1",
+								"atracao",
+								"2"
 							]
 						}
 					},
@@ -1219,13 +1192,13 @@
 							},
 							{
 								"key": "X-API-TOKEN",
-								"value": "703c614b-0a35-4939-a443-e8238a9af260",
+								"value": "7f1a5c5b-a856-4fe7-bcc7-bda994f202eb",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": 10,\r\n    \"recomendacao\": \"teste update recomendacao bleble\",\r\n    \"usuario\": {\r\n        \"id\": 3\r\n    },\r\n    \"atracao\": {\r\n        \"id\": 4\r\n    }\r\n}",
+							"raw": "{\r\n    \"id\": 6,\r\n    \"recomendacao\": \"teste update recomendacao bleble\",\r\n    \"usuario\": {\r\n        \"id\": 3\r\n    },\r\n    \"atracao\": {\r\n        \"id\": 4\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1241,37 +1214,6 @@
 							"path": [
 								"api",
 								"recomendacao-atracao"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "recomendacao atracao exclusao por id - ATUALIZADO",
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "X-API-KEY",
-								"value": "1",
-								"type": "text"
-							},
-							{
-								"key": "X-API-TOKEN",
-								"value": "703c614b-0a35-4939-a443-e8238a9af260",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "localhost:8080/api/recomendacao-atracao/10",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"recomendacao-atracao",
-								"10"
 							]
 						}
 					},
@@ -1372,13 +1314,13 @@
 							},
 							{
 								"key": "X-API-TOKEN",
-								"value": "703c614b-0a35-4939-a443-e8238a9af260",
+								"value": "7f1a5c5b-a856-4fe7-bcc7-bda994f202eb",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nome\": \"teste\",\r\n    \"email\": \"testtEe@gmail.comm\",\r\n    \"senha\": \"teste-123\",\r\n    \"foto\": \"foto-teste\",\r\n    \"ativo\": true,\r\n    \"perfil\": \"COLABORADOR\"\r\n}",
+							"raw": "{\r\n    \"nome\": \"batman\",\r\n    \"email\": \"batmaaan@gmail.coMMMMmm\",\r\n    \"senha\": \"batman-123\",\r\n    \"foto\": \"foto-batman\",\r\n    \"ativo\": true,\r\n    \"perfil\": \"COLABORADOR\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1401,13 +1343,84 @@
 					"response": []
 				},
 				{
+					"name": "usuario exclusao por id",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-API-KEY",
+								"value": "1",
+								"type": "text"
+							},
+							{
+								"key": "X-API-TOKEN",
+								"value": "7f1a5c5b-a856-4fe7-bcc7-bda994f202eb",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/api/usuario/7",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"usuario",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "usuario update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-API-KEY",
+								"value": "",
+								"type": "text"
+							},
+							{
+								"key": "X-API-TOKEN",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"batmao\",\r\n    \"senha\": \"123456\",\r\n    \"foto\": \"foto-batmao\",\r\n    \"ativo\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/usuario/6",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"usuario",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "usuario autenticar",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"monica@mail.com\",\r\n    \"senha\": \"senha-123\"\r\n}",
+							"raw": "{\r\n    \"email\": \"wolv@gmail.com\",\r\n    \"senha\": \"wolv-123\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1424,77 +1437,6 @@
 								"api",
 								"usuario",
 								"autenticar"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "usuario update",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "X-API-KEY",
-								"value": "1",
-								"type": "text"
-							},
-							{
-								"key": "X-API-TOKEN",
-								"value": "703c614b-0a35-4939-a443-e8238a9af260",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"nome\": \"teste-update\",\r\n    \"senha\": \"123up\",\r\n    \"foto\": \"foto-up\",\r\n    \"ativo\": false\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:8080/api/usuario/10",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"usuario",
-								"10"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "usuario exclusao por id",
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "X-API-KEY",
-								"value": "1",
-								"type": "text"
-							},
-							{
-								"key": "X-API-TOKEN",
-								"value": "703c614b-0a35-4939-a443-e8238a9af260",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "localhost:8080/api/usuario/10",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"usuario",
-								"10"
 							]
 						}
 					},
