@@ -157,18 +157,18 @@
 						"header": [
 							{
 								"key": "X-API-KEY",
-								"value": "1",
+								"value": "10",
 								"type": "text"
 							},
 							{
 								"key": "X-API-TOKEN",
-								"value": "7f1a5c5b-a856-4fe7-bcc7-bda994f202eb",
+								"value": "ff14e6a6-19bf-4286-88b8-82deb1778201",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nome\": \"batcaverna-testehhhNZZZ\",\r\n    \"descricao\": \"cafofo do batmanhhhhN\",\r\n    \"categoria\": \"TRILHAS\",\r\n    \"usuario\": {\r\n        \"id\": 2\r\n    },\r\n    \"localizacao\": {\r\n        \"id\": 4\r\n    }\r\n}",
+							"raw": "{\r\n    \"nome\": \"batcaverna-testehhhNZZZ\",\r\n    \"descricao\": \"cafofo do batmanhhhhN\",\r\n    \"categoria\": \"TRILHAS\",\r\n    \"usuario\": {\r\n        \"id\": 10\r\n    },\r\n    \"localizacao\": {\r\n        \"pais\": \"brasil\",\r\n        \"cidade\": \"caxias\",\r\n        \"estado\": \"rio de janeiro\"\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

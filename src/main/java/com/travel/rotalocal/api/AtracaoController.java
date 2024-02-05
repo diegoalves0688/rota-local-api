@@ -15,6 +15,7 @@ import com.travel.rotalocal.model.entity.Localizacao;
 import com.travel.rotalocal.model.entity.StatusAtracao;
 import com.travel.rotalocal.model.entity.Usuario;
 import com.travel.rotalocal.service.AtracaoService;
+import com.travel.rotalocal.service.LocalizacaoService;
 
 import java.time.LocalDateTime;
 import java.util.Comparator;
@@ -29,6 +30,8 @@ import lombok.AllArgsConstructor;
 public class AtracaoController {
 
     AtracaoService atracaoService;
+
+    LocalizacaoService localizacaoService;
 
     /**********************************
      * GET
@@ -125,8 +128,22 @@ public class AtracaoController {
         atracao.setStatus(StatusAtracao.PUBLICO);
         atracao.setDataRegistro(LocalDateTime.now());
 
+        LocalizacaoDTO localizacaoDTO = atracaoDTO.getLocalizacao();
+        Localizacao currentLocalizacao = localizacaoService.getLocalizacaoByPaisEstadoCidade(localizacaoDTO.getPais(),
+         localizacaoDTO.getEstado(), localizacaoDTO.getCidade());
+
+        if (currentLocalizacao == null) {
+            Localizacao localizacao = new Localizacao();
+            localizacao.setPais(localizacaoDTO.getPais());
+            localizacao.setEstado(localizacaoDTO.getEstado());
+            localizacao.setCidade(localizacaoDTO.getCidade());
+            atracao.setLocalizacao(localizacaoService.saveLocalizacao(localizacao));
+        } else {
+            atracao.setLocalizacao(currentLocalizacao);
+        }
+
         return ResponseEntity.ok(atracaoService.saveAtracao(atracao, atracaoDTO.getUsuario().getId(),
-                atracaoDTO.getLocalizacao().getId()));
+                atracao.getLocalizacao().getId()));
     }
 
     // QUEBRADO - TO BE FIXED
