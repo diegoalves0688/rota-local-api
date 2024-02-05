@@ -31,13 +31,13 @@ public class LocalizacaoServiceImpl implements LocalizacaoService {
     }
 
     @Transactional // regra de negocio
-    public void saveLocalizacao(Localizacao localizacao) {
+    public Localizacao saveLocalizacao(Localizacao localizacao) {
         Optional<Localizacao> existingLocalizacao = localizacaoRepository
                 .findByPaisAndEstadoAndCidade(localizacao.getPais(), localizacao.getEstado(), localizacao.getCidade());
         if (existingLocalizacao.isPresent()) {
             throw new DataIntegrityViolationException("esta localizacao ja existe....");
         }
-        localizacaoRepository.save(localizacao);
+        return localizacaoRepository.save(localizacao);
     }
 
     @Override
@@ -49,5 +49,14 @@ public class LocalizacaoServiceImpl implements LocalizacaoService {
     public List<Localizacao> getLocalizacoes() {
         return (List<Localizacao>)localizacaoRepository.findAll();
     }
+
+    @Override
+    public Localizacao getLocalizacaoByPaisEstadoCidade(String pais, String estado, String cidade) {
+        Optional<Localizacao> existingLocalizacao = localizacaoRepository
+                .findByPaisAndEstadoAndCidade(pais, estado, cidade);
+        return existingLocalizacao.isPresent() ? existingLocalizacao.get() : null;
+    }
+
+    
 }
 

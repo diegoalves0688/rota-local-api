@@ -32,4 +32,13 @@ public class Localizacao {
     @JsonIgnore
     @OneToMany(mappedBy = "localizacao", cascade = CascadeType.ALL) 
     private List<Atracao> atracoes;
+
+    public Localizacao(String pais, String estado, String cidade, List<Atracao> atracoes) {
+        this.pais = pais;
+        this.estado = estado;
+        this.cidade = cidade;
+        this.atracoes = atracoes;
+    }
+
+    
 }
