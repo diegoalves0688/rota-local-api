@@ -97,11 +97,11 @@ public class UsuarioController {
             if (usuario != null && usuario.getSenha().equals(usuarioDTO.getSenha())) {
                 String token = Tokens.getInstance().tokensList.get(usuario.getId());
                 if (token != null) {
-                    return new ResponseEntity<>(new AuthDTO(usuario.getId(), token), HttpStatus.OK);
+                    return new ResponseEntity<>(new AuthDTO(usuario.getId(), token, usuario.getPerfil().toString()), HttpStatus.OK);
                 } else {
                     String newToken = UUID.randomUUID().toString();
                     Tokens.getInstance().tokensList.put(usuario.getId(), newToken);
-                    return new ResponseEntity<>(new AuthDTO(usuario.getId(), newToken), HttpStatus.OK);
+                    return new ResponseEntity<>(new AuthDTO(usuario.getId(), newToken, usuario.getPerfil().toString()), HttpStatus.OK);
                 }
             }
             return new ResponseEntity<>("Usuário não encontrado", HttpStatus.NOT_FOUND);
