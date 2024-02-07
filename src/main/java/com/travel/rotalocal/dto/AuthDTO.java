@@ -4,10 +4,12 @@ public class AuthDTO {
     
     private Long userId;
     private String token;
+    private String perfil;
 
-    public AuthDTO(Long userId, String token) {
+    public AuthDTO(Long userId, String token, String perfil) {
         this.userId = userId;
         this.token = token;
+        this.perfil = perfil;
     }
     
     public Long getUserId() {
@@ -21,5 +23,11 @@ public class AuthDTO {
     }
     public void setToken(String token) {
         this.token = token;
+    }
+    public String getPerfil() {
+        return perfil;
+    }
+    public void setPerfil(String perfil) {
+        this.perfil = perfil;
     }
 }
