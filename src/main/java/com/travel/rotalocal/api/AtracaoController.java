@@ -190,10 +190,26 @@ public class AtracaoController {
     @PutMapping("/{atracaoId}")
     public ResponseEntity<Atracao> updateAtracao(
             @PathVariable Long atracaoId,
-            @RequestBody Atracao updatedAtracao) {
+            @RequestBody AtracaoDTO atracaoDTO) {
         try {
-            Atracao updatedAtracaoResult = atracaoService.updateAtracao(atracaoId, updatedAtracao);
-            return ResponseEntity.ok(updatedAtracaoResult);
+            Atracao persisted = atracaoService.getAtracaoById(atracaoId);
+            persisted.setNome(atracaoDTO.getNome());
+            persisted.setDescricao(atracaoDTO.getDescricao());
+            persisted.setCategoria(atracaoDTO.getCategoria());
+
+            Localizacao currentLocalizacao = localizacaoService.getLocalizacaoByPaisEstadoCidade(atracaoDTO.getLocalizacao().getPais(),
+            atracaoDTO.getLocalizacao().getEstado(), atracaoDTO.getLocalizacao().getCidade());
+            if (currentLocalizacao == null) {
+                Localizacao localizacao = new Localizacao();
+                localizacao.setPais(atracaoDTO.getLocalizacao().getPais());
+                localizacao.setEstado(atracaoDTO.getLocalizacao().getEstado());
+                localizacao.setCidade(atracaoDTO.getLocalizacao().getCidade());
+                persisted.setLocalizacao(localizacaoService.saveLocalizacao(localizacao));
+            } else {
+                persisted.setLocalizacao(currentLocalizacao);
+            }
+            
+            return ResponseEntity.ok(atracaoService.updateAtracao(atracaoId, persisted));
         } catch (AtracaoNotFoundException ex) {
             return ResponseEntity.notFound().build();
         } catch (Exception ex) {
