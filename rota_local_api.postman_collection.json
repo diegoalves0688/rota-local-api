@@ -303,6 +303,46 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "atracao update simplificado",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-API-KEY",
+								"value": "1",
+								"type": "text"
+							},
+							{
+								"key": "X-API-TOKEN",
+								"value": "f75a084b-1466-4c83-84f1-7dc11a4dedfa",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"TESTE Masp\",\r\n  \"descricao\": \"ATUALIZADO TEXTO\",\r\n  \"categoria\": \"MUSEUS\",\r\n  \"localizacao\": {\r\n    \"pais\": \"brasil\",\r\n    \"estado\": \"rio de janeiro\",\r\n    \"cidade\": \"caxias\"\r\n    } \r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/atracao/6",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"atracao",
+								"6"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},

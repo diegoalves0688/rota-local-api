@@ -101,27 +101,8 @@ public class AtracaoServiceImpl implements AtracaoService {
      **********************************/
     @Override
     public Atracao updateAtracao(Long atracaoId, Atracao updatedAtracao) {
-        Atracao existingAtracao = getAtracaoById(atracaoId);
 
-        // CAMPOS QUE NAO PODEM SER ATUALIZADOS
-        updatedAtracao.setId(existingAtracao.getId());
-        updatedAtracao.setUsuario(existingAtracao.getUsuario());
-
-        // OK ALTERAR - TODO: VER COMO QUE FICARÁ COM IMAGEM
-        existingAtracao.setNome(updatedAtracao.getNome());
-        existingAtracao.setDescricao(updatedAtracao.getDescricao());
-        existingAtracao.setAtivo(updatedAtracao.isAtivo());
-        existingAtracao.setCategoria(updatedAtracao.getCategoria());
-        existingAtracao.setStatus(updatedAtracao.getStatus());
-        existingAtracao.setDataRegistro(LocalDateTime.now());
-
-        Long updatedLocalizacaoId = updatedAtracao.getLocalizacao().getId();
-        Localizacao updatedLocalizacao = localizacaoRepository.findById(updatedLocalizacaoId)
-                .orElseThrow(() -> new LocalizacaoNotFoundException(updatedLocalizacaoId));
-
-        existingAtracao.setLocalizacao(updatedLocalizacao);
-
-        return atracaoRepository.save(existingAtracao);
+        return atracaoRepository.save(updatedAtracao);
     }
 
     /**********************************
